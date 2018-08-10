@@ -6,19 +6,25 @@ import entidades.*;
 
 public class dataPrueba {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException  {
+		System.out.println("prueba");
+		if(getL(1)==null) {System.out.println("no hay");}
+		else {System.out.println("hay");}
 		
-		getL(1);		
 	}
 	
-	public static void getL(int i) throws SQLException
+	public static Libro getL(int i) throws SQLException, ClassNotFoundException 
 	{
+		
 		Libro l=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
-		
+		String queryString= "SELECT idLibro,titulo FROM libros WHERE idLibro=?;";
+		System.out.println("prueba3");
 		try {
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("select idLibro,titulo from libros where idLibro= ?");
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(queryString);
+			System.out.println("prueba2");
 			stmt.setInt(1,i);
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) 	
@@ -37,24 +43,25 @@ public class dataPrueba {
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			
+			e.printStackTrace();
 		}
 		finally 
 		{
-			if(rs!=null)
-			{
+			
 				try {
+					
+					stmt.close();
 					rs.close();
 				}
 				catch(SQLException e)
 				{
 					e.printStackTrace();
 				}
-			}
+			
 		
 			 
 		}
-		FactoryConexion.getInstancia().releaseConn();
+		return l;
 	
 	}
 

@@ -1,61 +1,60 @@
 package database;
-
 import java.sql.*;
-
-
 
 
 public class FactoryConexion {
 	
-	private String driver="com.mysql.cj.jdbc.Driver";
-	private String host="localhost";
-	private String port="3306";
-	private String user="root";
-	private String password="root";
-	private String db="biblioteca";
-	
-	private static FactoryConexion instancia;
-		
-	private FactoryConexion(){
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public static FactoryConexion getInstancia(){
-		if (FactoryConexion.instancia == null){		
-			FactoryConexion.instancia=new FactoryConexion();
-		}
-		return FactoryConexion.instancia;
-		
-	}
+	private String dbDriver = "com.mysql.cj.jdbc.Driver";
+	private String host = "localhost";
+	private String port = "3306";
+	private String user = "root";
+	private String pass = "root";
+	private String dbType = "mysql";
+	private String db = "biblioteca";
 	
 	private Connection conn;
-	private int cantConn=0;
-	public Connection getConn() throws SQLException{
+	private int cantConn = 0;
+	
+	FactoryConexion() {
+		
 		try {
-			if(conn==null || conn.isClosed()){	
-				conn = DriverManager.getConnection(
-			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password+"&useSSL=false");
-			}
-		} catch (SQLException e) {
-			throw e;
+			Class.forName(dbDriver);
+		} catch (ClassNotFoundException e) {
+			System.out.println(e);
+
 		}
-		cantConn++;
+		
+	}
+	
+	private static FactoryConexion instancia;
+	
+	public static FactoryConexion getInstancia(){
+		if (instancia == null){
+			instancia = new FactoryConexion();
+		}
+		return instancia;
+		}
+	
+	
+	public Connection getConn() throws SQLException{
+		
+		if(conn==null || conn.isClosed()){
+			conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=UTC",user,pass);
+		}
 		return conn;
 	}
 	
-	public void releaseConn() throws SQLException{
-		try {
+	public void releaseConn(){
+		try{
 			cantConn--;
 			if(cantConn==0){
 				conn.close();
 			}
-		} catch (SQLException e) {
-			throw e;
+		} catch (SQLException e){
+			System.out.println(e);
+				
 		}
 	}
+		
 }
+	
