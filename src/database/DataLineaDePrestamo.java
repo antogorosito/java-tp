@@ -1,6 +1,6 @@
 package database;
 
-import entidades.LineaDePrestamo;;
+import entidades.LineaDePrestamo;
 import java.util.ArrayList;
 
 public class DataLineaDePrestamo 
@@ -12,7 +12,7 @@ public class DataLineaDePrestamo
 	
 	public void update(LineaDePrestamo lp) {}
 	
-	public LineaDePrestamo getOne(LineaDePrestamo lp) { }
+	/*public LineaDePrestamo getOne(LineaDePrestamo lp) { }
 	
-	public ArrayList<LineaDePrestamo> getAll() {}
+	public ArrayList<LineaDePrestamo> getAll() {}*/
 }

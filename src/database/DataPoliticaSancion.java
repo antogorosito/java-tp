@@ -12,7 +12,7 @@ public class DataPoliticaSancion
 	
 	public void update(PoliticaSancion ps) {}
 	
-	public PoliticaSancion getOne(PoliticaSancion ps) { }
+/*	public PoliticaSancion getOne(PoliticaSancion ps) { }
 	
-	public ArrayList<PoliticaSancion> getAll() {}
+	public ArrayList<PoliticaSancion> getAll() {}*/
 }

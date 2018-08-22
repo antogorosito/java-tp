@@ -30,7 +30,7 @@ public class CtrlPoliticaPrestamo
 		dpp.update(pp);
 	}
 	
-	public PoliticaPrestamo getOne(PoliticaPrestamo pp)
+/*	public PoliticaPrestamo getOne(PoliticaPrestamo pp)
 	{
 		return dpp.getOne(pp);
 	}
@@ -38,5 +38,5 @@ public class CtrlPoliticaPrestamo
 	public ArrayList<PoliticaPrestamo> getAll()
 	{
 		return dpp.getAll();
-	}
+	}*/
 }

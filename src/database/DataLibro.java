@@ -12,7 +12,7 @@ public class DataLibro
 	
 	public void update(Libro l) {}
 	
-	public Libro getOne(Libro l) {}
+	/*public Libro getOne(Libro l) {}
 	
-	public ArrayList<Libro> getAll() {}
+	public ArrayList<Libro> getAll() {}*/
 }

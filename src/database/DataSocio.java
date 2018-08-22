@@ -11,7 +11,7 @@ public class DataSocio
 	
 	public void update(Socio s) {}
 	
-	public Socio getOne(Socio s) { }
+/*	public Socio getOne(Socio s) { }
 	
-	public ArrayList<Socio> getAll() {}
+	public ArrayList<Socio> getAll() {}*/
 }

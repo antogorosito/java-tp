@@ -30,7 +30,7 @@ public class CtrlSancion
 		ds.update(s);
 	}
 	
-	public Sancion getOne(Sancion s)
+	/*public Sancion getOne(Sancion s)
 	{
 		return ds.getOne(s);
 	}
@@ -38,5 +38,5 @@ public class CtrlSancion
 	public ArrayList<Sancion> getAll()
 	{
 		return ds.getAll();
-	}
+	}*/
 }

@@ -29,7 +29,7 @@ public class CtrlSocio
 		ds.update(s);
 	}
 	
-	public Socio getOne(Socio s)
+	/*public Socio getOne(Socio s)
 	{
 		return ds.getOne(s);
 	}
@@ -37,5 +37,5 @@ public class CtrlSocio
 	public ArrayList<Socio> getAll()
 	{
 		return ds.getAll();
-	}
+	}*/
 }

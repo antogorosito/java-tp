@@ -12,7 +12,7 @@ public class DataPrestamo
 	
 	public void update(Prestamo p) {}
 	
-	public Prestamo getOne(Prestamo p) { }
+/*	public Prestamo getOne(Prestamo p) { }
 	
-	public ArrayList<Prestamo> getAll() {}
+	public ArrayList<Prestamo> getAll() {}*/
 }

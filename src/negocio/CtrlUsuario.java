@@ -29,13 +29,13 @@ public class CtrlUsuario
 		du.update(u);
 	}
 	
-	public Usuario getOne(Usuario u)
+	public Usuario getOne(String u,String c)
 	{
-		return du.getOne(u);
+		return du.getOne(u,c);
 	}
 	
-	public ArrayList<Usuario> getAll()
+	/*public ArrayList<Usuario> getAll()
 	{
 		return du.getAll();
-	}
+	}*/
 }

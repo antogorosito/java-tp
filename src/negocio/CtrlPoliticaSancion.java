@@ -30,7 +30,7 @@ public class CtrlPoliticaSancion
 		dps.update(ps);
 	}
 	
-	public PoliticaSancion getOne(PoliticaSancion ps)
+	/*public PoliticaSancion getOne(PoliticaSancion ps)
 	{
 		return dps.getOne(ps);
 	}
@@ -38,5 +38,5 @@ public class CtrlPoliticaSancion
 	public ArrayList<PoliticaSancion> getAll()
 	{
 		return dps.getAll();
-	}
+	}*/
 }

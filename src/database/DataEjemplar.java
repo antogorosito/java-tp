@@ -13,11 +13,11 @@ public class DataEjemplar
 	
 	public void update(Ejemplar e) {}
 	
-	public Ejemplar getOne(Ejemplar e) { }
+	/*public Ejemplar getOne(Ejemplar e) { }
 	
 	public ArrayList<Ejemplar> getAll() 
 	{
 				
-	}
+	}*/
 	
 }

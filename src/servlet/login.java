@@ -1,11 +1,15 @@
 package servlet;
 
+import java.io.PrintWriter;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import negocio.CtrlUsuario;
+import entidades.Usuario;
 
 /**
  * Servlet implementation class login
@@ -35,7 +39,24 @@ public class login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String u=request.getParameter("usuario");
+		String c=request.getParameter("contraseña");
+		
+		CtrlUsuario cu= new CtrlUsuario();
+		
+		Usuario usuario= cu.getOne(u,c);
+		if(usuario!=null)
+		{
+			request.getRequestDispatcher("menu.jsp").forward(request, response);
+		}
+		else
+		{
+			PrintWriter out= response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			 out.println("alert('Usuario o Contraseña incorrecto');");
+			 out.println("location='login.jsp';");
+			 out.println("</script>");
+		}
 	}
 
 }

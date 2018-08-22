@@ -30,7 +30,7 @@ public class CtrlLibro
 		de.update(l);
 	}
 	
-	public Libro getOne(Libro l)
+	/*public Libro getOne(Libro l)
 	{
 		return de.getOne(l);
 	}
@@ -38,5 +38,5 @@ public class CtrlLibro
 	public ArrayList<Libro> getAll()
 	{
 		return de.getAll();
-	}
+	}*/
 }

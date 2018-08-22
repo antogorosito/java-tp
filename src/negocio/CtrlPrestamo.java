@@ -30,7 +30,7 @@ public class CtrlPrestamo
 		dp.update(p);
 	}
 	
-	public Prestamo getOne(Prestamo p)
+	/*public Prestamo getOne(Prestamo p)
 	{
 		return dp.getOne(p);
 	}
@@ -38,5 +38,5 @@ public class CtrlPrestamo
 	public ArrayList<Prestamo> getAll()
 	{
 		return dp.getAll();
-	}
+	}*/
 }

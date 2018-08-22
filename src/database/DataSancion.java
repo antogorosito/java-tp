@@ -12,7 +12,7 @@ public class DataSancion
 	
 	public void update(Sancion s) {}
 	
-	public Sancion getOne(Sancion s) { }
+/*	public Sancion getOne(Sancion s) { }
 	
-	public ArrayList<Sancion> getAll() {}
+	public ArrayList<Sancion> getAll() {}*/
 }

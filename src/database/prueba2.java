@@ -1,30 +1,30 @@
 package database;
 
-import entidades.Usuario;
-
 import java.sql.*;
-import java.util.ArrayList;
 
-public class DataUsuario
-{
-public void add(Usuario u){}
+import entidades.*;
+public class prueba2 {
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException  {
+		System.out.println("prueba");
+		if(getL("antonella")==null) {System.out.println("no hay");}
+		else {System.out.println("hay");}
+		
+	}
 	
-	public void delete(Usuario u) {}
-	
-	public void update(Usuario u) {}
-	
-	public Usuario getOne(String u, String c) 
+	public static Usuario getL(String i) throws SQLException, ClassNotFoundException 
 	{
+		
 		Usuario l=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
-		String queryString= "SELECT * FROM usuarios WHERE nombreUsuario=?";
+		String queryString= "SELECT * FROM usuarios WHERE nombreUsuario=?;";
 		System.out.println("prueba3");
 		try {
 			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(queryString);
 			System.out.println("prueba2");
-			stmt.setString(1,u);
+			stmt.setString(1,i);
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) 	
 			{
@@ -34,7 +34,10 @@ public void add(Usuario u){}
 				System.out.println("id: " +l.getNombreUsuario());
 				System.out.println("titulo" + l.getContraseña());
 			}
-			
+			else 
+			{
+				System.out.println("la consulta no devuelve nada");
+			}
 			
 			
 		} catch (SQLException e) {
@@ -60,6 +63,4 @@ public void add(Usuario u){}
 		return l;
 	
 	}
-	
-	//public ArrayList<Usuario> getAll() {}
 }

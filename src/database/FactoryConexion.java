@@ -39,7 +39,9 @@ public class FactoryConexion {
 	public Connection getConn() throws SQLException{
 		
 		if(conn==null || conn.isClosed()){
+		
 			conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=UTC",user,pass);
+			
 		}
 		return conn;
 	}

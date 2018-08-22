@@ -30,7 +30,7 @@ public class CtrlLineaDePrestamo
 		de.update(lp);
 	}
 	
-	public LineaDePrestamo getOne(LineaDePrestamo lp)
+/*	public LineaDePrestamo getOne(LineaDePrestamo lp)
 	{
 		return de.getOne(lp);
 	}
@@ -38,5 +38,5 @@ public class CtrlLineaDePrestamo
 	public ArrayList<LineaDePrestamo> getAll()
 	{
 		return de.getAll();
-	}
+	}*/
 }

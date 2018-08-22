@@ -30,7 +30,7 @@ public class CtrlEjemplar
 		de.update(e);
 	}
 	
-	public Ejemplar getOne(Ejemplar e)
+	/*public Ejemplar getOne(Ejemplar e)
 	{
 		return de.getOne(e);
 	}
@@ -38,5 +38,5 @@ public class CtrlEjemplar
 	public ArrayList<Ejemplar> getAll()
 	{
 		return de.getAll();
-	}
+	}*/
 }

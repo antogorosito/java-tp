@@ -12,7 +12,7 @@ public class DataPoliticaPrestamo
 	
 	public void update(PoliticaPrestamo pp) {}
 	
-	public PoliticaPrestamo getOne(PoliticaPrestamo pp) { }
+	/*public PoliticaPrestamo getOne(PoliticaPrestamo pp) { }
 	
-	public ArrayList<PoliticaPrestamo> getAll() {}
+	public ArrayList<PoliticaPrestamo> getAll() {}*/
 }
