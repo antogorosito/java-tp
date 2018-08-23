@@ -1,12 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+    pageEncoding="ISO-8859-1"%><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-</body>
-</html>
+    <title>Consultas</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="style/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="style/jumbotron.css" rel="stylesheet">
+    
+       
+     
+  </head>
+
+  <body>   
+     
+      <div class="header clearfix">
+        
+        <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
+        
+        <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        <a class="nav-link" href="index.html">Cerrar sesion</a>
+        </li>
+        </ul>
+        
+        <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        	<a class="nav-link" href="index.html">Home</a>
+        </li>
+        </ul>
+        
+        <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        	<a class="nav-link" href="menu.jsp">menu</a>
+        </li>
+        </ul>
+      
+        
+      </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">Consulta de libros</h1>    
+      </div>
+    </div>
+    
+  
+    
+     
+
+    <div class="container">
+   
+      <footer>
+        <p>© Trabajo practico java -2018 - Gorosito, Velazquez</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+
+</body></html>

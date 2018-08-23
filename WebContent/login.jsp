@@ -49,9 +49,9 @@
       
     
       <label for="inputUsuario" class="sr-only">Usuario</label>
-      <input type="text" id="inputUsuario" name="usuario" class="form-control"  >
+      <input type="text" id="inputUsuario" name="usuario" class="form-control"  required="required" placeholder="Usuario" style="margin-bottom: 15px">
       <label for="inputContraseña" class="sr-only">Contraseña</label>
-      <input type="password" id="inputContraseña" name="contraseña" class="form-control" >
+      <input type="password" id="inputContraseña" name="contraseña" class="form-control" required="required" placeholder="Contraseña">
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me

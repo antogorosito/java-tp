@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,6 +39,12 @@
         	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
+        
+        <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        	<a class="nav-link" href="menu.jsp">menu</a>
+        </li>
+        </ul>
       
         
       </div>
@@ -51,8 +59,57 @@
      <div class="container">
    
 	<form class="consulta" action="consultas" method="post">
+	
+	<label for="inputUsuario" >Titulo del libro:</label>
+      <input type="text" name="titulo" required="required">
+    <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
+  
 	</form>   
   
+    </div>
+    
+     <div class="container">
+     <% ArrayList<Libro> libros=(ArrayList<Libro>)session.getAttribute("lista");%>
+	<%if (libros !=null){ %>
+ <table class="table">
+ <tr>
+ <th>Id libro</th>
+ <th>Titulo</th>
+ <th>ISBN</th>
+ <th>Nro Edicion</th>
+ <th>Fecha Edicion</th>
+ <th>Cantidad de dias prestamo</th>
+ <th>Id ejemplar</th>
+ 
+ <%
+for(Libro l:libros)
+{
+ %>
+ <tr>
+ 	<td><%= l.getIdLibro() %></td>
+ 	<td><%=l.getTitulo() %></td>
+ 	<td><%=l.getIsbn() %></td>
+ 	<td><%=l.getNroEdicion() %></td>
+ 	<td><%=l.getFechaEdicion() %></td>
+ 	<td><%=l.getCantDiasMaxPrestamo() %></td>
+ 	</tr>
+ 	<%} %>
+ </table>
+  
+	
+	 <%} %>
+	
+	
+	
+    </div>
+    
+    <div class="PRUEBA QUE ANDA">
+    
+	<% String s=(String)session.getAttribute("la");%>
+	<%if (s !=null){ %>
+	 <input name="name" value=<%=s%>>
+	 <%} %>
+    
     </div>
 
     <div class="container">
