@@ -25,11 +25,14 @@ public void add(Usuario u){}
 			stmt.setString(1,u);
 			stmt.setString(2,c);
 			rs=stmt.executeQuery();
-			if(rs!=null && rs.next()) 	
+			if(rs!=null) 	
 			{
-				l=new Usuario();
-				l.setNombreUsuario(rs.getString("nombreUsuario"));
-				l.setContraseña(rs.getString("contraseña"));
+				while(rs.next())
+				{
+					l=new Usuario();
+					l.setNombreUsuario(rs.getString("nombreUsuario"));
+					l.setContraseña(rs.getString("contraseña"));
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

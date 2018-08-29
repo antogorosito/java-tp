@@ -14,6 +14,7 @@ public class CtrlSocio
 		ds=new DataSocio();
 	}
 	
+	
 	public void add(Socio s) 
 	{
 		ds.add(s);
@@ -29,10 +30,10 @@ public class CtrlSocio
 		ds.update(s);
 	}
 	
-	/*public Socio getOne(Socio s)
+	public boolean getOne(String dni)
 	{
-		return ds.getOne(s);
-	}
+		return ds.getOne(dni);
+	}/*
 	
 	public ArrayList<Socio> getAll()
 	{

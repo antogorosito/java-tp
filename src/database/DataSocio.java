@@ -1,6 +1,6 @@
 package database;
 
-import entidades.Socio;
+import entidades.*;
 
 import java.sql.*;
 
@@ -23,9 +23,7 @@ public class DataSocio
 			stmt.setString(5, s.getTelefono());
 			stmt.setString(6, s.getDni());
 			stmt.setBoolean(7, s.getEstado());
-			stmt.execute();
-		
-			
+			stmt.execute();		
 		}
 		catch(SQLException e)
 		{
@@ -44,11 +42,48 @@ public class DataSocio
 		}
 	}
 	
+	
 	public void delete(Socio s) {}
 	
 	public void update(Socio s) {}
 	
-/*	public Socio getOne(Socio s) { }
+	public boolean getOne(String dni) 
+	{
+		boolean rta=false;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE dni=?");
+			stmt.setString(1,dni);
+			rs=stmt.executeQuery();
+			if(rs!=null ) 	
+			{
+				while(rs.next())
+				{
+					rta=true;
+				
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return rta;
+	}
 	
-	public ArrayList<Socio> getAll() {}*/
+/*	public ArrayList<Socio> getAll() {}*/
 }

@@ -15,15 +15,12 @@
 
     <!-- Custom styles for this template -->
     <link href="style/jumbotron.css" rel="stylesheet">
-    
-       
-     
+           
   </head>
 
   <body>   
      
       <div class="header clearfix">
-        
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
         <ul class="nav nav-pills float-right">
@@ -34,10 +31,15 @@
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        	<a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
       
+      	<ul class="nav nav-pills float-right">
+        <li class="nav item">
+        <a class="nav-link" href="menu.jsp">menu</a>
+        </li>
+        </ul>
         
       </div>
 
@@ -49,8 +51,7 @@
     </div>
     
      <div class="container">
-     
-      			 
+           			 
    	<form class="form-alta" action="altaSocio" method="post">
    	
    		<p><label>Nombre:</label>
