@@ -1,11 +1,18 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import negocio.*;
+import entidades.*;
+
 
 /**
  * Servlet implementation class consultas
@@ -36,10 +43,16 @@ public class consultas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String u=request.getParameter("usuario");
-		u=u+"lala";
-		request.getSession().setAttribute("la",u);
+		String t=request.getParameter("titulo");
+		CtrlEjemplar ce=new CtrlEjemplar();
+		ArrayList<Ejemplar> ejemplares=ce.buscar(t);
+		request.getSession().setAttribute("titulo",t);
+		request.getSession().setAttribute("listaejemplares", ejemplares);
+		
 		request.getRequestDispatcher("/consultas.jsp").forward(request, response);
+		
+		
+		
 	}
 
 }

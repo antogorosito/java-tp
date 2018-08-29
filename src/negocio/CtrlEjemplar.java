@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import database.DataEjemplar;
 import entidades.Ejemplar;
+import entidades.Libro;
+
 import java.util.ArrayList;
 
 public class CtrlEjemplar 
@@ -15,6 +17,10 @@ public class CtrlEjemplar
 		de=new DataEjemplar();
 	}
 	
+	public ArrayList<Ejemplar> buscar(String t)
+	{
+		return de.buscar(t);
+	}
 	public void add(Ejemplar e) 
 	{
 		de.add(e);

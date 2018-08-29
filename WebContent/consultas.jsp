@@ -60,8 +60,11 @@
    
 	<form class="consulta" action="consultas" method="post">
 	
-	<label for="inputUsuario" >Titulo del libro:</label>
+	<label>Titulo del libro:</label>
+	<% String titulo= (String)session.getAttribute("titulo"); if(titulo==null){%>
       <input type="text" name="titulo" required="required">
+      <%} else { %>
+        <input type="text" name="titulo" required="required" value=<%=titulo %>><%} %>
     <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
   
 	</form>   
@@ -69,29 +72,23 @@
     </div>
     
      <div class="container">
-     <% ArrayList<Libro> libros=(ArrayList<Libro>)session.getAttribute("lista");%>
-	<%if (libros !=null){ %>
+  
+      <% ArrayList<Ejemplar> ejemplares=(ArrayList<Ejemplar>)session.getAttribute("listaejemplares");%>
+	<%if (ejemplares!=null){ %>
  <table class="table">
  <tr>
- <th>Id libro</th>
- <th>Titulo</th>
- <th>ISBN</th>
- <th>Nro Edicion</th>
- <th>Fecha Edicion</th>
- <th>Cantidad de dias prestamo</th>
+
  <th>Id ejemplar</th>
- 
+ <th>Titulo</th>
+ </tr>
  <%
-for(Libro l:libros)
+for(Ejemplar ee: ejemplares)
 {
  %>
  <tr>
- 	<td><%= l.getIdLibro() %></td>
- 	<td><%=l.getTitulo() %></td>
- 	<td><%=l.getIsbn() %></td>
- 	<td><%=l.getNroEdicion() %></td>
- 	<td><%=l.getFechaEdicion() %></td>
- 	<td><%=l.getCantDiasMaxPrestamo() %></td>
+
+ 	<td><%=ee.getIdEjemplar() %></td>
+ 	<td><%=ee.getLibro().getTitulo() %>
  	</tr>
  	<%} %>
  </table>
@@ -103,14 +100,7 @@ for(Libro l:libros)
 	
     </div>
     
-    <div class="PRUEBA QUE ANDA">
-    
-	<% String s=(String)session.getAttribute("la");%>
-	<%if (s !=null){ %>
-	 <input name="name" value=<%=s%>>
-	 <%} %>
-    
-    </div>
+  
 
     <div class="container">
    

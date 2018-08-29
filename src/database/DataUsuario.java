@@ -18,11 +18,10 @@ public void add(Usuario u){}
 		Usuario l=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
-		String queryString= "SELECT * FROM usuarios WHERE nombreUsuario=? and contraseña=?";
-	
-		try {
-			
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(queryString);
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios WHERE nombreUsuario=? and contraseña=?");
 			stmt.setString(1,u);
 			stmt.setString(2,c);
 			rs=stmt.executeQuery();
@@ -31,30 +30,22 @@ public void add(Usuario u){}
 				l=new Usuario();
 				l.setNombreUsuario(rs.getString("nombreUsuario"));
 				l.setContraseña(rs.getString("contraseña"));
-				
 			}
-			
-			
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally 
 		{
-			
-				try {
-					
-					stmt.close();
-					rs.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			
-		
-			 
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
 		}
 		return l;
 	

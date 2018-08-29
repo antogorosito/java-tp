@@ -9,8 +9,25 @@ public class Socio
 	private String domicilio;
 	private String telefono;
 	private String dni;
-	private String estado;
+	private boolean estado;
 	
+	
+	public Socio() 
+	{
+		
+	}
+	
+	public Socio(String a,String n,String e,String d,String t,String dni)
+	{
+		this.apellido=a;
+		this.nombre=n;
+		this.email=e;
+		this.domicilio=d;
+		this.telefono=t;
+		this.dni=dni;
+		this.estado=true; 
+		
+	}
 	public int getIdSocio() 
 	{
 		return idSocio;
@@ -67,11 +84,11 @@ public class Socio
 	{
 		this.dni = dni;
 	}
-	public String getEstado() 
+	public boolean getEstado() 
 	{
 		return estado;
 	}
-	public void setEstado(String estado) 
+	public void setEstado(boolean estado) 
 	{
 		this.estado = estado;
 	} 

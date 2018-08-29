@@ -15,6 +15,8 @@ public class CtrlLibro
 		de=new DataLibro();
 	}
 	
+	
+	
 	public void add(Libro l) 
 	{
 		de.add(l);

@@ -11,6 +11,7 @@ public class Libro
 	private Date fechaEdicion; 
 	private int cantDiasMaxPrestamo;
 	
+	
 	public int getIdLibro() 
 	{
 		return idLibro;
