@@ -14,8 +14,11 @@ public class CtrlPoliticaPrestamo
 	{
 		dpp=new DataPoliticaPrestamo();
 	}
-	
-	public void add(PoliticaPrestamo pp) 
+	public PoliticaPrestamo getOne()
+	{
+		return dpp.getOne();
+	}
+/*	public void add(PoliticaPrestamo pp) 
 	{
 		dpp.add(pp);
 	}
@@ -30,10 +33,6 @@ public class CtrlPoliticaPrestamo
 		dpp.update(pp);
 	}
 	
-/*	public PoliticaPrestamo getOne(PoliticaPrestamo pp)
-	{
-		return dpp.getOne(pp);
-	}
 	
 	public ArrayList<PoliticaPrestamo> getAll()
 	{

@@ -1,3 +1,4 @@
+<%@page import="com.mysql.cj.Session"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -61,11 +62,14 @@
 	<form class="consulta" action="consultas" method="post">
 	
 	<label>Titulo del libro:</label>
-	<% String titulo= (String)session.getAttribute("titulo"); if(titulo==null){%>
+	<% String titulo= (String)request.getParameter("titulo"); 
+	
+	if(titulo==null){%>
       <input type="text" name="titulo" required="required">
       <%} else { %>
         <input type="text" name="titulo" required="required" value=<%=titulo %>><%} %>
     <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
+  
   
 	</form>   
   
@@ -75,11 +79,16 @@
   
       <% ArrayList<Ejemplar> ejemplares=(ArrayList<Ejemplar>)session.getAttribute("listaejemplares");%>
 	<%if (ejemplares!=null){ %>
- <table class="table">
+ <table class="table" >
  <tr>
 
  <th>Id ejemplar</th>
  <th>Titulo</th>
+ <th>Maximo dias</th>
+ <th>ISBN</th>
+ <th>Nro edicion</th>
+ <th>Fecha edicion</th>
+ 
  </tr>
  <%
 for(Ejemplar ee: ejemplares)
@@ -88,13 +97,17 @@ for(Ejemplar ee: ejemplares)
  <tr>
 
  	<td><%=ee.getIdEjemplar() %></td>
- 	<td><%=ee.getLibro().getTitulo() %>
+ 	<td><%=ee.getLibro().getTitulo() %></td>
+ 	<td><%=ee.getLibro().getCantDiasMaxPrestamo() %></td>
+ 	<td><%=ee.getLibro().getIsbn() %></td>
+ 	<td><%=ee.getLibro().getNroEdicion() %></td>
+ 	<td><%=ee.getLibro().getFechaEdicion() %></td>
  	</tr>
  	<%} %>
  </table>
   
 	
-	 <%} %>
+	 <%}%>
 	
 	
 	

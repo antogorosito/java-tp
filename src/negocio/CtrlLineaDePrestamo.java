@@ -15,11 +15,19 @@ public class CtrlLineaDePrestamo
 		de=new DataLineaDePrestamo();
 	}
 	
+	public boolean getOne(int socio, int ejem)
+	{
+		return de.getOne(socio, ejem);
+	}
 	public void add(LineaDePrestamo lp) 
 	{
 		de.add(lp);
 	}
-	
+	public boolean buscarLinea(LineaDePrestamo lp)
+	{
+		return de.buscarLinea(lp);
+	}
+/*	
 	public void delete(LineaDePrestamo lp)
 	{
 		de.delete(lp);
@@ -30,7 +38,7 @@ public class CtrlLineaDePrestamo
 		de.update(lp);
 	}
 	
-/*	public LineaDePrestamo getOne(LineaDePrestamo lp)
+	public LineaDePrestamo getOne(LineaDePrestamo lp)
 	{
 		return de.getOne(lp);
 	}

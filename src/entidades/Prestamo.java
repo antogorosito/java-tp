@@ -1,7 +1,6 @@
 package entidades;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 
 public class Prestamo 
 {
@@ -11,6 +10,20 @@ public class Prestamo
 	private int diasPrestamo;
 	private Date fechaADevolver;
 	private Socio socio;
+	
+	public Prestamo()
+	{
+		
+	}
+	public Prestamo(Socio s)
+	{
+		this.socio=s;
+
+		java.util.Date d = new java.util.Date();
+		this.fechaPrestamo = new java.sql.Date(d.getTime());
+		this.horaPrestamo=new java.sql.Time(d.getTime());
+		
+	}
 	
 	public int getIdPrestamo() 
 	{

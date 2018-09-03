@@ -6,12 +6,23 @@ public class LineaDePrestamo
 {
 	private int idLineaPrestamo; 
 	private Date fechaDevolucion;
-	private boolean devuelvo;
+	private boolean devuelto;
 	private Sancion sancion;
 	private Socio socio;
 	private Prestamo prestamo;
 	private Ejemplar ejemplar;
 	
+	public LineaDePrestamo()
+	{
+		
+	}
+	public LineaDePrestamo(Socio s, Prestamo p, Ejemplar e)
+	{
+		this.socio=s;
+		this.prestamo=p;
+		this.ejemplar=e;
+		this.devuelto=false;
+	}
 	public int getIdLineaPrestamo() 
 	{
 		return idLineaPrestamo;
@@ -28,13 +39,13 @@ public class LineaDePrestamo
 	{
 		this.fechaDevolucion = fechaDevolucion;
 	}
-	public boolean isDevuelvo() 
+	public boolean getDevuelto() 
 	{
-		return devuelvo;
+		return devuelto;
 	}
-	public void setDevuelvo(boolean devuelvo) 
+	public void setDevuelto(boolean devuelto) 
 	{
-		this.devuelvo = devuelvo;
+		this.devuelto = devuelto;
 	}
 	public Sancion getSancion() 
 	{

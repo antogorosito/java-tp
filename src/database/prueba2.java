@@ -9,7 +9,12 @@ public class prueba2 {
 		System.out.println("prueba");
 		if(getL("antonella")==null) {System.out.println("no hay");}
 		else {System.out.println("hay");}
-		
+
+	/*	java.util.Date d = new java.util.Date();
+		Date fechaPrestamo = new java.sql.Date(d.getTime());
+		Time horaPrestamo=new java.sql.Time(d.getTime());
+		System.out.println("hors:" + horaPrestamo);
+		System.out.println("dia"+fechaPrestamo);	*/	
 	}
 	
 	public static Usuario getL(String i) throws SQLException, ClassNotFoundException 

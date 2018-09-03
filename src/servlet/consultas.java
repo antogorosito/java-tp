@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import negocio.*;
 import entidades.*;
@@ -46,11 +47,22 @@ public class consultas extends HttpServlet {
 		String t=request.getParameter("titulo");
 		CtrlEjemplar ce=new CtrlEjemplar();
 		ArrayList<Ejemplar> ejemplares=ce.buscar(t);
-		request.getSession().setAttribute("titulo",t);
-		request.getSession().setAttribute("listaejemplares", ejemplares);
-		
-		request.getRequestDispatcher("/consultas.jsp").forward(request, response);
-		
+		request.setAttribute("titulo",t);
+		if (ejemplares.isEmpty() == false)
+		{	
+			HttpSession session=request.getSession();
+			session.setAttribute("listaejemplares", ejemplares);	
+			request.getRequestDispatcher("/consultas.jsp").forward(request, response);
+		}
+		else
+		{
+			PrintWriter out= response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('No se encontraron libros con ese titulo');");
+			out.println("location='consultas.jsp';");
+			out.println("</script>");
+		}
+	
 		
 		
 	}

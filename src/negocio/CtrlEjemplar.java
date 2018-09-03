@@ -21,10 +21,15 @@ public class CtrlEjemplar
 	{
 		return de.buscar(t);
 	}
-	public void add(Ejemplar e) 
+	public Ejemplar getOne(int id)
+	{
+		return de.getOne(id);
+	}
+	/*public void add(Ejemplar e) 
 	{
 		de.add(e);
 	}
+	
 	
 	public void delete(Ejemplar e)
 	{
@@ -36,10 +41,7 @@ public class CtrlEjemplar
 		de.update(e);
 	}
 	
-	/*public Ejemplar getOne(Ejemplar e)
-	{
-		return de.getOne(e);
-	}
+
 	
 	public ArrayList<Ejemplar> getAll()
 	{

@@ -14,12 +14,15 @@ public class CtrlPrestamo
 	{
 		dp=new DataPrestamo();
 	}
-	
+	public int obtenerCantidad(int id)
+	{
+		return dp.obtenerCantidad(id);
+	}
 	public void add(Prestamo p) 
 	{
 		dp.add(p);
 	}
-	
+	/*
 	public void delete(Prestamo p)
 	{
 		dp.delete(p);
@@ -30,7 +33,7 @@ public class CtrlPrestamo
 		dp.update(p);
 	}
 	
-	/*public Prestamo getOne(Prestamo p)
+	public Prestamo getOne(Prestamo p)
 	{
 		return dp.getOne(p);
 	}

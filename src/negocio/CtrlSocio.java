@@ -14,13 +14,17 @@ public class CtrlSocio
 		ds=new DataSocio();
 	}
 	
+	public Socio getOne(int id)
+	{
+		return ds.getOne(id);
+	}
 	
 	public void add(Socio s) 
 	{
 		ds.add(s);
 	}
 	
-	public void delete(Socio s)
+/*	public void delete(Socio s)
 	{
 		ds.delete(s);
 	}
@@ -28,7 +32,7 @@ public class CtrlSocio
 	public void update(Socio s)
 	{
 		ds.update(s);
-	}
+	}*/
 	
 	public boolean getOne(String dni)
 	{

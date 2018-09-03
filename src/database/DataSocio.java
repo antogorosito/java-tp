@@ -85,5 +85,49 @@ public class DataSocio
 		return rta;
 	}
 	
+	public Socio getOne(int id)
+	{
+		Socio s=new Socio();
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE idSocio=?");
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null ) 	
+			{
+				while(rs.next())
+				{
+					s.setApellido(rs.getString("apellido"));
+					s.setDni(rs.getString("dni"));
+					s.setDomicilio(rs.getString("domicilio"));
+					s.setEmail(rs.getString("email"));
+					s.setEstado(rs.getBoolean("estado"));
+					s.setIdSocio(rs.getInt("idSocio"));
+					s.setNombre(rs.getString("nombre"));
+					s.setTelefono(rs.getString("telefono"));				
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return s;
+	}
+	
 /*	public ArrayList<Socio> getAll() {}*/
 }
