@@ -104,4 +104,41 @@ public class DataEjemplar
 		}
 		return ee;
 	}
+	
+	public boolean existe(int id)
+	{
+		boolean rta=false;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from libros inner join ejemplares on ejemplares.idLibro=libros.idLibro inner join lineas_de_prestamos on lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar where fechaDevolucion is null and devuelto= false and ejemplares.idEjemplar=?");
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					rta=true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return rta;
+	}
 }

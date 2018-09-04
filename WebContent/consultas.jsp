@@ -77,7 +77,7 @@
     
      <div class="container">
   
-      <% ArrayList<Ejemplar> ejemplares=(ArrayList<Ejemplar>)session.getAttribute("listaejemplares");%>
+      <% ArrayList<Ejemplar> ejemplares=(ArrayList<Ejemplar>)request.getAttribute("listaejemplares");%>
 	<%if (ejemplares!=null){ %>
  <table class="table" >
  <tr>

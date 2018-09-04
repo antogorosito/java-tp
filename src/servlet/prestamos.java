@@ -80,7 +80,7 @@ public class prestamos extends HttpServlet {
 				else
 				{
 					request.getSession().setAttribute("socio",s);
-					request.getRequestDispatcher("/prestamos.jsp").forward(request, response);
+					request.getRequestDispatcher("/agregar.jsp").forward(request, response);
 				}
 			}
 			

@@ -50,8 +50,8 @@ public class consultas extends HttpServlet {
 		request.setAttribute("titulo",t);
 		if (ejemplares.isEmpty() == false)
 		{	
-			HttpSession session=request.getSession();
-			session.setAttribute("listaejemplares", ejemplares);	
+			//HttpSession session=request.getSession();
+			request.setAttribute("listaejemplares", ejemplares);	
 			request.getRequestDispatcher("/consultas.jsp").forward(request, response);
 		}
 		else

@@ -21,8 +21,7 @@
        
      
   </head>
-
-  <body>   
+    <body>   
      
       <div class="header clearfix">
         
@@ -55,15 +54,51 @@
         <h1 class="display-3">Prestamos de libros</h1>    
       </div>
     </div>
-    
+ 
     <div class="container">
-    <form class="form-prestamos" action="prestamos" method="post">
-    <label>Id socio:</label>
-     <input type="number" name="idSocio" required="required">
-      <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
+    <%Socio s=(Socio)session.getAttribute("socio");%>
+    
+    <label>Apellido y nombre: <%=s.getApellido() +" "+ s.getNombre()%></label>
+    
+    <form class="form-bus" action="agregar" method="post">
+    <label>Id ejemplar: </label>
+    <input type="text" name="idEjemplar" required="required">
+    <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Agregar</button>
     </form>
     </div>
-  
+    
+      <div class="container">
+    <% ArrayList<LineaDePrestamo> li=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas");%>
+   
+	<%if (li!=null){ %>
+		 <table class="table" >
+ 		<tr>
+
+			<th>Id ejemplar</th>
+ 			<th>Titulo</th>
+ 			<th>Maximo dias</th>
+ 
+ 		</tr>
+ 		<%for(LineaDePrestamo ll: li){%>
+ 		<tr>
+ 		 <td><%=ll.getEjemplar().getIdEjemplar() %></td>
+ 		 <td><%=ll.getEjemplar().getLibro().getTitulo() %></td>
+ 		 <td><%=ll.getEjemplar().getLibro().getCantDiasMaxPrestamo() %></td>
+	 	</tr>
+ 		<%} %>
+ 		</table>
+ 		<%int dias=(Integer)session.getAttribute("dias"); %>
+ 		<label>Cantidad de dias maximos de prestamo: <%=dias%> </label>
+ 		<%Prestamo ap=(Prestamo)session.getAttribute("prestamo"); %>
+ 		<label>prestamo: <%=ap.getIdPrestamo() %></label>
+ 		
+     	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Guardar</button>
+	<%}  %>
+
+   
+   
+    </div>
+    
      
 
     <div class="container">

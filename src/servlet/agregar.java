@@ -42,7 +42,7 @@ public class agregar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		int id=Integer.parseInt(request.getParameter("idEjemplar"));
 		CtrlEjemplar ce=new CtrlEjemplar();
 		Ejemplar e=ce.getOne(id);
@@ -53,59 +53,83 @@ public class agregar extends HttpServlet {
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Id ejemplar incorrecto');");
-			out.println("location='prestamos.jsp';");
+			out.println("location='agregar.jsp';");
 			out.println("</script>");
 		}
 		else
 		{
-			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-			HttpSession session= request.getSession();
-			Socio s=(Socio)session.getAttribute("socio");
-			
-			boolean rta= clp.getOne(s.getIdSocio(), id);
-			if (rta==true)
+			//buscar si esta en otro prestamo de otra persona sin devolver aun
+			if(ce.existe(id) ==true)
 			{
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Posee otros ejemplares del mismo libro ya prestados');");
-				out.println("location='prestamos.jsp';");
+				out.println("alert('ejemplar no disponible');");
+				out.println("location='agregar.jsp';");
 				out.println("</script>");
 			}
-			else 
+			else
 			{
-				Prestamo p=new Prestamo(s);
-				if (session.getAttribute("prestamo")==null)
-				{
-					/* creo el prestamo*/
-					
-					CtrlPrestamo cp=new CtrlPrestamo();
-					cp.add(p);
-					session.setAttribute("prestamo",p);
-				
-				}
-				/*debo buscar si el libro ya esta en el prestamo y si no esta dsp agregar la linea*/
-				LineaDePrestamo lp= new LineaDePrestamo(s,p,e);
-				boolean resultado=clp.buscarLinea(lp);
-				if(resultado==true)
+				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+				HttpSession session= request.getSession();
+				Socio s=(Socio)session.getAttribute("socio");
+				boolean rta= clp.getOne(s.getIdSocio(), id);
+				if (rta==true)
 				{
 					PrintWriter out= response.getWriter();
 					out.println("<script type=\"text/javascript\">");
-					out.println("alert('ya esta en el prestamo');");
-					out.println("location='prestamos.jsp';");
+					out.println("alert('Posee otros ejemplares del mismo libro ya prestados');");
+					out.println("location='agregar.jsp';");
 					out.println("</script>");
 				}
-				else
+				else 
 				{
-					clp.add(lp);
+					//que cree el prestamo la primera vez y las siguientes solo agregue
+					
+				//VEEEEEEEEEEEEEEEEEEEER
+					
+					Prestamo ap=(Prestamo)session.getAttribute("prestamo");
+					if (ap==null)
+					{
+					/* creo el prestamo*/	
+						Prestamo p=new Prestamo(s);
+						CtrlPrestamo cp=new CtrlPrestamo();
+						cp.add(p);
+						Prestamo pp2=cp.getOne(p);
+						session.setAttribute("prestamo",pp2);				
+					}
+				
+				/*debo buscar si el libro ya esta en el prestamo y si no esta dsp agregar la linea*/
+					
+					CtrlPrestamo cp=new CtrlPrestamo();//ver
+
+					Prestamo pp=cp.getOne(s);//ver
+
+					LineaDePrestamo lp= new LineaDePrestamo(s,pp,e);
+					boolean resultado=clp.buscarLinea(lp);
+					if(resultado==true)
+					{
+						PrintWriter out= response.getWriter();
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('ya esta en el prestamo');");
+						out.println("location='agregar.jsp';");
+						out.println("</script>");
+					}
+					else
+					{
+						clp.add(lp);
 					//devolver TODAS LAS LINEAS DEL PRESTAMO
+						ArrayList<LineaDePrestamo> lineas = clp.getAll(pp);
+						request.setAttribute("lineas", lineas );
+					//	buscar minima cantidad de dias en las lineas de prestamo
+						int dias=clp.minimoDias(pp);
+					
+						request.getSession().setAttribute("dias",dias);
+						request.getRequestDispatcher("/agregar.jsp").forward(request, response);
+					}
 				}
-			
 			}
 			
-			/*ArrayList<Ejemplar> ejemplares=new ArrayList<Ejemplar>();
-			ejemplares.add(e);
-			request.getSession().setAttribute("lista",ejemplares);
-			request.getRequestDispatcher("/prestamos.jsp").forward(request, response);*/
+		
 		}
 		
 	}

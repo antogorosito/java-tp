@@ -105,7 +105,7 @@ public class DataSocio
 					s.setDomicilio(rs.getString("domicilio"));
 					s.setEmail(rs.getString("email"));
 					s.setEstado(rs.getBoolean("estado"));
-					s.setIdSocio(rs.getInt("idSocio"));
+					s.setIdSocio(id);
 					s.setNombre(rs.getString("nombre"));
 					s.setTelefono(rs.getString("telefono"));				
 				}

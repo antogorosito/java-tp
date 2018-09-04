@@ -3,7 +3,7 @@ package negocio;
 import java.util.ArrayList;
 
 import database.DataPrestamo;
-import entidades.Prestamo;
+import entidades.*;
 
 public class CtrlPrestamo 
 {
@@ -22,6 +22,15 @@ public class CtrlPrestamo
 	{
 		dp.add(p);
 	}
+	public Prestamo getOne(Prestamo p)
+	{
+		return dp.getOne(p);
+	}
+	public Prestamo getOne(Socio s)
+	{
+		return dp.getOne(s);
+	}
+	
 	/*
 	public void delete(Prestamo p)
 	{

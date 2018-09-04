@@ -25,6 +25,10 @@ public class CtrlEjemplar
 	{
 		return de.getOne(id);
 	}
+	public boolean existe(int id)
+	{
+		return de.existe(id);
+	}
 	/*public void add(Ejemplar e) 
 	{
 		de.add(e);

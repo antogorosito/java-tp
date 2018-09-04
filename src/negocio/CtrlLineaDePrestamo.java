@@ -2,8 +2,8 @@ package negocio;
 
 import java.util.ArrayList;
 
-import database.DataLineaDePrestamo;
-import entidades.LineaDePrestamo;;
+import database.*;
+import entidades.*;
 
 public class CtrlLineaDePrestamo 
 {
@@ -27,6 +27,18 @@ public class CtrlLineaDePrestamo
 	{
 		return de.buscarLinea(lp);
 	}
+	public ArrayList<LineaDePrestamo> getAll(Prestamo p)
+	{
+		return de.getAll(p);
+	}
+	public int minimoDias(Prestamo p)
+	{
+		return de.minimoDias(p);
+	}
+	public LineaDePrestamo getOne(LineaDePrestamo lp)
+	{
+		return de.getOne(lp);
+	}
 /*	
 	public void delete(LineaDePrestamo lp)
 	{
@@ -43,8 +55,5 @@ public class CtrlLineaDePrestamo
 		return de.getOne(lp);
 	}
 	
-	public ArrayList<LineaDePrestamo> getAll()
-	{
-		return de.getAll();
-	}*/
+	*/
 }
