@@ -55,7 +55,7 @@
         <h1 class="display-3">Prestamos de libros</h1>    
       </div>
     </div>
-    
+    <%session.invalidate(); %>
     <div class="container">
     <form class="form-prestamos" action="prestamos" method="post">
     <label>Id socio:</label>

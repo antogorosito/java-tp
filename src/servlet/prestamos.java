@@ -67,8 +67,9 @@ public class prestamos extends HttpServlet {
 				//buscar cantidad de prestamos de los socios para saber lo del tope
 				CtrlPrestamo cp=new CtrlPrestamo();
 				int cant=cp.obtenerCantidad(id);
+				
 				CtrlPoliticaPrestamo cpp=new CtrlPoliticaPrestamo();
-				PoliticaPrestamo pp=cpp.getOne();
+				PoliticaPrestamo pp=cpp.getOne();// cantidad maxima de libros prestados posibles
 				if(pp.getCantMaxLibrosPend()<=cant)
 				{
 					PrintWriter out= response.getWriter();
@@ -78,7 +79,9 @@ public class prestamos extends HttpServlet {
 					out.println("</script>");
 				}
 				else
-				{
+				{					
+					int c=pp.getCantMaxLibrosPend()-cant;
+					request.getSession().setAttribute("cantPosible",c);
 					request.getSession().setAttribute("socio",s);
 					request.getRequestDispatcher("/agregar.jsp").forward(request, response);
 				}

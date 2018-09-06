@@ -17,9 +17,9 @@ public class DataLineaDePrestamo
 		
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select idEjemplar from ejemplares where idLibro in ( select idLibro from ejemplares where ejemplares.idEjemplar in (select idEjemplar from lineas_de_prestamos where fechaDevolucion is null and devuelto=false and idEjemplar=? and idSocio=?))");
-			stmt.setInt(1,ejem);
-			stmt.setInt(2, socio);
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *  from lineas_de_prestamos where fechaDevolucion is null and devuelto=false and idSocio=? and idEjemplar in(select idEjemplar from ejemplares where idLibro in (select idLibro from ejemplares where idEjemplar=?))");
+			stmt.setInt(1,socio);
+			stmt.setInt(2, ejem);
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{

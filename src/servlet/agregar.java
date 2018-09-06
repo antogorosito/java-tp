@@ -93,19 +93,19 @@ public class agregar extends HttpServlet {
 					/* creo el prestamo*/	
 						Prestamo p=new Prestamo(s);
 						CtrlPrestamo cp=new CtrlPrestamo();
-						cp.add(p);
-						Prestamo pp2=cp.getOne(p);
-						session.setAttribute("prestamo",pp2);				
+						cp.add(p); //agrego el prestamo a la bd
+						Prestamo pp=cp.getOne(p); // obtengo el prestamo, ya que antes no lo tenia con id.
+						session.setAttribute("prestamo",pp);				
 					}
 				
 				/*debo buscar si el libro ya esta en el prestamo y si no esta dsp agregar la linea*/
 					
-					CtrlPrestamo cp=new CtrlPrestamo();//ver
+					CtrlPrestamo cp=new CtrlPrestamo();//ver 
 
-					Prestamo pp=cp.getOne(s);//ver
+					Prestamo pp=cp.getOne(s);//ver // obtengo el prestamo, ya que antes no lo tenia con id.(cdo entro mas de una vez)
 
 					LineaDePrestamo lp= new LineaDePrestamo(s,pp,e);
-					boolean resultado=clp.buscarLinea(lp);
+					boolean resultado=clp.buscarLinea(lp); // me fijo si la linea de prestamo ya existe
 					if(resultado==true)
 					{
 						PrintWriter out= response.getWriter();
@@ -116,15 +116,29 @@ public class agregar extends HttpServlet {
 					}
 					else
 					{
-						clp.add(lp);
-					//devolver TODAS LAS LINEAS DEL PRESTAMO
-						ArrayList<LineaDePrestamo> lineas = clp.getAll(pp);
-						request.setAttribute("lineas", lineas );
-					//	buscar minima cantidad de dias en las lineas de prestamo
-						int dias=clp.minimoDias(pp);
+						int c=(Integer)session.getAttribute("cantPosible"); // fijarse que no se supere la cantidad permitida de libros prestados
+						if(c<=0) 
+						{
+							String msj="No se pueden agregar mas libros";
+							request.getSession().setAttribute("error",msj);
+						}
+						else 
+						{
+							clp.add(lp); // agrego la linea de prestamo a la bd
+							c=c-1;
+							request.getSession().setAttribute("cantPosible",c);
+
+						}	
+							ArrayList<LineaDePrestamo> lineas = clp.getAll(pp);//devolver TODAS LAS LINEAS DEL PRESTAMO
+							request.setAttribute("lineas", lineas );
 					
-						request.getSession().setAttribute("dias",dias);
-						request.getRequestDispatcher("/agregar.jsp").forward(request, response);
+							int dias=clp.minimoDias(pp);//	buscar minima cantidad de dias en las lineas de prestamo
+					
+							request.getSession().setAttribute("dias",dias);
+							request.getRequestDispatcher("/agregar.jsp").forward(request, response);
+						
+				
+						
 					}
 				}
 			}

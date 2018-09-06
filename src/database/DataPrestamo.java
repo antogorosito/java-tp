@@ -116,7 +116,7 @@ public class DataPrestamo
 		}
 		return pp;
 	}
-	public Prestamo getOne(Socio s)
+	public Prestamo getOne(Socio s) 
 	{
 		Prestamo pp=new Prestamo();
 		PreparedStatement stmt=null;
