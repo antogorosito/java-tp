@@ -1,15 +1,23 @@
 package database;
 
 import java.sql.*;
+import java.util.Calendar;
 
 import entidades.*;
 public class prueba2 {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException  {
-		System.out.println("prueba");
+	
+		Calendar cal=Calendar.getInstance();
+		java.util.Date d = new java.util.Date();
+		Date fechaPrestamo = new java.sql.Date(d.getTime());
+		cal.setTime(fechaPrestamo);
+		cal.add(cal.DATE,4);
+		System.out.println(cal.getTime());
+		/*System.out.println("prueba");
 		if(getL("antonella")==null) {System.out.println("no hay");}
 		else {System.out.println("hay");}
-
+*/
 	/*	java.util.Date d = new java.util.Date();
 		Date fechaPrestamo = new java.sql.Date(d.getTime());
 		Time horaPrestamo=new java.sql.Time(d.getTime());

@@ -2,10 +2,9 @@ package database;
 
 import entidades.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+
 
 public class DataPrestamo 
 {
@@ -158,10 +157,80 @@ public class DataPrestamo
 		}
 		return pp;
 	}
+	
+	public Prestamo getOne(int id)
+	{
+		Prestamo pp=new Prestamo();
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from  prestamos where idPrestamo=?");
+
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next() ) 	
+			{
+				pp.setIdPrestamo(rs.getInt("idPrestamo"));
+				pp.setDiasPrestamo(rs.getInt("diasPrestamo"));
+				pp.setFechaADevolver(rs.getDate("fechaADevolver"));
+				pp.setFechaPrestamo(rs.getDate("fechaPrestamo"));
+				pp.setHoraPrestamo(rs.getTime("horaPrestamo"));
+				Socio so=new Socio();
+				so.setIdSocio(rs.getInt("idSocio"));
+				pp.setSocio(so);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return pp;
+	}
+	
+	public void update(Prestamo p,int di)
+	{
+		PreparedStatement stmt=null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update prestamos set diasPrestamo=?,fechaADevolver=? where idPrestamo=?");
+			stmt.setInt(1, di);
+			Date fec=p.getFechaPrestamo();
+			stmt.setDate(2, fec); //ver
+			stmt.setInt(3, p.getIdPrestamo());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
+	
 	/*
 	public void delete(Prestamo p) {}
 	
-	public void update(Prestamo p) {}
 	
 	
 	

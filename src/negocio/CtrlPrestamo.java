@@ -30,17 +30,21 @@ public class CtrlPrestamo
 	{
 		return dp.getOne(s);
 	}
-	
+	public Prestamo getOne(int id)
+	{
+		return dp.getOne(id);
+	}
+	public void update(Prestamo p, int di)
+	{
+		dp.update(p,di);
+	}
 	/*
 	public void delete(Prestamo p)
 	{
 		dp.delete(p);
 	}
 	
-	public void update(Prestamo p)
-	{
-		dp.update(p);
-	}
+	
 	
 	public Prestamo getOne(Prestamo p)
 	{

@@ -17,12 +17,6 @@
 
     <!-- Custom styles for this template -->
     <link href="style/jumbotron.css" rel="stylesheet">
-    
-      <script type="text/javascript">
-    	function submitForm(met) {
-    		document.myForm.action=met;
-        }
-    </script>
      
   </head>
     <body>   
@@ -66,16 +60,18 @@
     
     <form class="form-bus" action="agregar" method="post">
     <label>Id ejemplar: </label>
-    <input type="text" name="idEjemplar" required="required">
-   <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Agregar</button>
+   
+    <input type="text" name="idEjemplar" >
+ 
+
+      
+   <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="op" value="Agregar">Agregar</button>
     <%String msj=(String)session.getAttribute("error");
  		if (msj != null) {%>
  		<label><%=msj %></label>
  		<%}%>
-    </form>
-    </div>
-    
-      <div class="container">
+   
+  
     <% ArrayList<LineaDePrestamo> li=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas");%>
    
 	<%if (li!=null){ %>
@@ -98,11 +94,12 @@
  		
  		<%int dias=(Integer)session.getAttribute("dias"); %>
  		<label>Cantidad de dias maximos de prestamo: </label>
- 		<input type="text" name="diasMaximoPrestamo" value=<%=dias%>> 		
-     	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit">Guardar</button>
+ 		<input type="text" name="diasMaximoPrestamo" value=<%=dias%>> 	
+ 			
+     	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Guardar">Guardar</button>
 	<%}%>
 
-   
+    </form>
    
     </div>
     
