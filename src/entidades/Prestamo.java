@@ -21,8 +21,9 @@ public class Prestamo
 
 		java.util.Date d = new java.util.Date();
 		this.fechaPrestamo = new java.sql.Date(d.getTime());
+	
 		this.horaPrestamo=new java.sql.Time(d.getTime());
-		
+
 	}
 	
 	public int getIdPrestamo() 

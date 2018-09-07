@@ -22,18 +22,7 @@ public class CtrlPrestamo
 	{
 		dp.add(p);
 	}
-	public Prestamo getOne(Prestamo p)
-	{
-		return dp.getOne(p);
-	}
-	public Prestamo getOne(Socio s)
-	{
-		return dp.getOne(s);
-	}
-	public Prestamo getOne(int id)
-	{
-		return dp.getOne(id);
-	}
+	
 	public void update(Prestamo p, int di)
 	{
 		dp.update(p,di);

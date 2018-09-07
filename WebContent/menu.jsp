@@ -51,7 +51,7 @@
      <div class="container">
    <div class="row">
         <div class="col-md-4">
-          <h2>Registros</h2>
+          <h2>Alta socio</h2>
           <p>Realizar el registros de nuevos socios a la biblioteca. </p>
           <p><a class="btn  btn-info" href="altaSocio.jsp" role="button">Ir  </a></p>
         </div>
@@ -61,7 +61,7 @@
           <p><a class="btn btn-info" href="consultas.jsp" role="button">Ir</a></p>
        </div>
         <div class="col-md-4">
-          <h2>Prestamos</h2>
+          <h2>Registrar prestamos</h2>
           <p>Realizar el registro de prestamos de libros a domicilio a los socios.</p>
           <p><a class="btn btn-info" href="prestamos.jsp" role="button">Ir</a></p>
         </div>
@@ -69,7 +69,7 @@
 
        <div class="row">
         <div class="col-md-4">
-          <h2>Devoluciones</h2>
+          <h2>Registrar devoluciones</h2>
           <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. </p>
           <p><a class="btn btn-info" href="devoluciones.jsp" role="button">Ir</a></p>
         </div>

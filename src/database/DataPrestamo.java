@@ -4,6 +4,7 @@ import entidades.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 
 public class DataPrestamo 
@@ -46,15 +47,21 @@ public class DataPrestamo
 	}
 	public void add(Prestamo p)
 	{
+		ResultSet keyResultSet=null;//
 		PreparedStatement stmt=null;
 		try 
 		{
+			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into prestamos(fechaPrestamo,horaPrestamo,diasPrestamo,fechaADevolver,idSocio) values(?,?,null,null,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setDate(1, p.getFechaPrestamo());
 			stmt.setTime(2, p.getHoraPrestamo());
 			stmt.setInt(3,p.getSocio().getIdSocio());
 			stmt.execute();		
-			
+			//obtener el id
+			keyResultSet=stmt.getGeneratedKeys();
+			if(keyResultSet!=null && keyResultSet.next()){
+				p.setIdPrestamo(keyResultSet.getInt(1));
+			}
 		}
 		catch (SQLException e) 
 		{
@@ -72,144 +79,22 @@ public class DataPrestamo
 			} 
 		}
 	}
-	public Prestamo getOne(Prestamo p)
-	{
-		Prestamo pp=new Prestamo();
-		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
-		try 
-		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from  prestamos where fechaPrestamo=? and horaPrestamo=? and idSocio=?");
-			stmt.setDate(1, p.getFechaPrestamo());
-			stmt.setTime(2, p.getHoraPrestamo());
-			stmt.setInt(3, p.getSocio().getIdSocio());
-			rs=stmt.executeQuery();
-			if(rs!=null && rs.next() ) 	
-			{
-				pp.setIdPrestamo(rs.getInt("idPrestamo"));
-				pp.setDiasPrestamo(rs.getInt("diasPrestamo"));
-				pp.setFechaADevolver(rs.getDate("fechaADevolver"));
-				pp.setFechaPrestamo(rs.getDate("fechaPrestamo"));
-				pp.setHoraPrestamo(rs.getTime("horaPrestamo"));
-				Socio s=new Socio();
-				s.setIdSocio(rs.getInt("idSocio"));
-				pp.setSocio(s);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally 
-		{
-			try 
-			{	
-				stmt.close();
-				rs.close();
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			} 
-		}
-		return pp;
-	}
-	public Prestamo getOne(Socio s) 
-	{
-		Prestamo pp=new Prestamo();
-		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
-		try 
-		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from  prestamos where fechaPrestamo=current_date() and idSocio=?");
-
-			stmt.setInt(1,s.getIdSocio());
-			rs=stmt.executeQuery();
-			if(rs!=null && rs.next() ) 	
-			{
-				pp.setIdPrestamo(rs.getInt("idPrestamo"));
-				pp.setDiasPrestamo(rs.getInt("diasPrestamo"));
-				pp.setFechaADevolver(rs.getDate("fechaADevolver"));
-				pp.setFechaPrestamo(rs.getDate("fechaPrestamo"));
-				pp.setHoraPrestamo(rs.getTime("horaPrestamo"));
-				Socio so=new Socio();
-				so.setIdSocio(rs.getInt("idSocio"));
-				pp.setSocio(so);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally 
-		{
-			try 
-			{	
-				stmt.close();
-				rs.close();
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			} 
-		}
-		return pp;
-	}
-	
-	public Prestamo getOne(int id)
-	{
-		Prestamo pp=new Prestamo();
-		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
-		try 
-		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from  prestamos where idPrestamo=?");
-
-			stmt.setInt(1,id);
-			rs=stmt.executeQuery();
-			if(rs!=null && rs.next() ) 	
-			{
-				pp.setIdPrestamo(rs.getInt("idPrestamo"));
-				pp.setDiasPrestamo(rs.getInt("diasPrestamo"));
-				pp.setFechaADevolver(rs.getDate("fechaADevolver"));
-				pp.setFechaPrestamo(rs.getDate("fechaPrestamo"));
-				pp.setHoraPrestamo(rs.getTime("horaPrestamo"));
-				Socio so=new Socio();
-				so.setIdSocio(rs.getInt("idSocio"));
-				pp.setSocio(so);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally 
-		{
-			try 
-			{	
-				stmt.close();
-				rs.close();
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			} 
-		}
-		return pp;
-	}
 	
 	public void update(Prestamo p,int di)
 	{
 		PreparedStatement stmt=null;
 		try {
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update prestamos set diasPrestamo=?,fechaADevolver=? where idPrestamo=?");
-			stmt.setInt(1, di);
-			Date fec=p.getFechaPrestamo();
-			stmt.setDate(2, fec); //ver
+			stmt.setInt(1, di);	
 			stmt.setInt(3, p.getIdPrestamo());
+			
+			GregorianCalendar fecha = new GregorianCalendar();
+			fecha.setTime(p.getFechaPrestamo());
+			fecha.add(fecha.DATE, di);
+			java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+			
+			stmt.setDate(2, sDate);
+			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -228,6 +113,10 @@ public class DataPrestamo
 		}
 	}
 	
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
+	}
 	/*
 	public void delete(Prestamo p) {}
 	
