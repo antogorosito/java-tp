@@ -3,8 +3,7 @@ package negocio;
 import java.util.ArrayList;
 
 import database.DataEjemplar;
-import entidades.Ejemplar;
-import entidades.Libro;
+import entidades.*;
 
 import java.util.ArrayList;
 
@@ -25,10 +24,15 @@ public class CtrlEjemplar
 	{
 		return de.getOne(id);
 	}
-	public boolean existe(int id)
+	public boolean existe(int id, Socio s)
 	{
-		return de.existe(id);
+		return de.existe(id,s);
 	}
+	public boolean existeDevolucion(int id)
+	{
+		return de.existeDevolucion(id);
+	}
+	
 	/*public void add(Ejemplar e) 
 	{
 		de.add(e);

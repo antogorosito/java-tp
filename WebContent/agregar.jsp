@@ -67,12 +67,16 @@
       
    <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="op" value="Agregar">Agregar</button>
     <%String msj=(String)session.getAttribute("error");
+  
  		if (msj != null) {%>
  		<label><%=msj %></label>
  		<%}%>
-   
+ 		
+ 		
   
-    <% ArrayList<LineaDePrestamo> li=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas");%>
+    <% //ArrayList<LineaDePrestamo> li=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas");%>
+    <%ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");%>
+    
    
 	<%if (li!=null){ %>
 		 <table class="table" >

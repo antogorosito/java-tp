@@ -105,7 +105,7 @@ public class DataEjemplar
 		return ee;
 	}
 	
-	public boolean existe(int id)
+	public boolean existe(int id,Socio s)
 	{
 		boolean rta=false;
 		PreparedStatement stmt=null;
@@ -113,7 +113,45 @@ public class DataEjemplar
 		
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from libros inner join ejemplares on ejemplares.idLibro=libros.idLibro inner join lineas_de_prestamos on lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar where fechaDevolucion is null and devuelto= false and ejemplares.idEjemplar=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from libros inner join ejemplares on ejemplares.idLibro=libros.idLibro inner join lineas_de_prestamos on lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar where fechaDevolucion is null and devuelto= false and ejemplares.idEjemplar=? and lineas_de_prestamos.idSocio!=?");
+			stmt.setInt(1,id);
+			stmt.setInt(2,s.getIdSocio());
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					rta=true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return rta;
+	}
+	
+	public boolean existeDevolucion(int id)
+	{
+		boolean rta=false;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select *  from lineas_de_prestamos where fechaDevolucion is null and devuelto=false and idEjemplar=?");
 			stmt.setInt(1,id);
 			rs=stmt.executeQuery();
 			if(rs!=null) 	

@@ -53,9 +53,13 @@ public class agregar extends HttpServlet {
 
 		String op = request.getParameter("op");
 
+		// para que no haya carteles siempre
+		
+	
 		if (op.equals("Agregar")) {
 			if (request.getParameter("idEjemplar") == "") {
-				PrintWriter out = response.getWriter();
+				
+			PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Id vacio');");
 				out.println("location='agregar.jsp';");
@@ -71,7 +75,9 @@ public class agregar extends HttpServlet {
 					out.println("location='agregar.jsp';");
 					out.println("</script>");
 				} else {
-					if (ce.existe(id) == true)// buscar si esta en otro prestamo de otra persona sin devolver aun
+					HttpSession session = request.getSession();
+					Socio s = (Socio) session.getAttribute("socio");
+					if (ce.existe(id,s) == true)// buscar si esta en otro prestamo de otra persona sin devolver aun
 					{
 						PrintWriter out = response.getWriter();
 						out.println("<script type=\"text/javascript\">");
@@ -80,10 +86,10 @@ public class agregar extends HttpServlet {
 						out.println("</script>");
 					} else {
 						CtrlLineaDePrestamo clp = new CtrlLineaDePrestamo();
-						HttpSession session = request.getSession();
-						Socio s = (Socio) session.getAttribute("socio");
+						
 						boolean rta = clp.getOne(s.getIdSocio(), id); // veo si ya tengo otros ejemplares de mismo libro
-						if (rta == true) {
+						if (rta == true) 
+						{
 							PrintWriter out = response.getWriter();
 							out.println("<script type=\"text/javascript\">");
 							out.println("alert('Posee otros ejemplares del mismo libro ya prestados');");
@@ -114,7 +120,8 @@ public class agregar extends HttpServlet {
 
 							LineaDePrestamo lp = new LineaDePrestamo(s, ap, e);
 							boolean resultado = clp.buscarLinea(lp); // me fijo si la linea de prestamo ya existe
-							if (resultado == true) {
+							if (resultado == true) 
+							{
 								PrintWriter out = response.getWriter();
 								out.println("<script type=\"text/javascript\">");
 								out.println("alert('ya esta en el prestamo');");
@@ -132,11 +139,10 @@ public class agregar extends HttpServlet {
 									c = c - 1;
 									request.getSession().setAttribute("cantPosible", c);
 								}
-								ArrayList<LineaDePrestamo> lineas = clp.getAll(ap);// devolver TODAS LAS LINEAS DEL
-																					// PRESTAMO
-								request.setAttribute("lineas", lineas);
-								int dias = clp.minimoDias(ap);// buscar minima cantidad de dias en las lineas de
-																// prestamo
+								ArrayList<LineaDePrestamo> lineas = clp.getAll(ap);// devolver TODAS LAS LINEAS DEL PRESTAMO
+								//request.setAttribute("lineas", lineas);
+								request.getSession().setAttribute("lineas",lineas); // para que me devuelva la lista aun con los carteles uso el session antes use la linea anterior
+								int dias = clp.minimoDias(ap);// buscar minima cantidad de dias en las lineas deprestamo
 								request.getSession().setAttribute("dias", dias);
 								request.getRequestDispatcher("/agregar.jsp").forward(request, response);
 							}
@@ -144,6 +150,8 @@ public class agregar extends HttpServlet {
 					}
 				}
 			} //
+		
+			
 		}
 
 		if (op.equals("Guardar")) {
