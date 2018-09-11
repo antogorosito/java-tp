@@ -55,15 +55,37 @@
         <h1 class="display-3">Devolución de libros</h1>    
       </div>
     </div>
-      <%session.invalidate(); %>
+ 
       <div class="container">
-      <form class="form-bus" action="devoluciones" method="post">
-   		<label>Id ejemplar: </label>
-       	<input type="text" name="idEjemplar" >
-       	 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Buscar">Buscar</button>
-    </form>
-    
   
+    
+   <%LineaDePrestamo li= (LineaDePrestamo)session.getAttribute("lineaPre");
+       if(li!=null){
+    	   Socio s=(Socio)request.getAttribute("socio");
+       String socio= s.getApellido() +" "+ s.getNombre();%>
+       
+        <table class="table" >
+ 		<tr>
+			<th>Id ejemplar</th>
+			<th>Titulo</th>
+			<th>Socio</th>
+ 		</tr>
+ 		
+ 		<tr>
+ 		 <td><%=li.getEjemplar().getIdEjemplar()%></td>
+ 		 <td><%=li.getEjemplar().getLibro().getTitulo()%></td>
+ 		 <td><%=socio%></td>	 
+ 		</tr>
+ 		
+ 		</table>
+ 			<form class="form-signin" action="devuelto" method="post">
+ 		
+ 	
+ 		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Registrar">Registrar</button>
+ 		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Volver">Volver atras</button>
+ 		 </form>
+		<%} %>
+		
       </div>
 
     

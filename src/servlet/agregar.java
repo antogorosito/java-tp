@@ -159,12 +159,13 @@ public class agregar extends HttpServlet {
 			int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
 			int min=(Integer)session.getAttribute("dias");
 			Prestamo pre = (Prestamo) session.getAttribute("prestamo");
+			
 			CtrlPrestamo cp=new CtrlPrestamo();
 			if(di>min)
 			{
 				cp.update(pre, min);
 
-				PrintWriter out = response.getWriter();
+			PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Se ha guardado el prestamo por el minimo de dias establecido');");
 				out.println("location='menu.jsp';");

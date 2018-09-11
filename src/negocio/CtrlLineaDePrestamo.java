@@ -39,16 +39,21 @@ public class CtrlLineaDePrestamo
 	{
 		return de.getOne(lp);
 	}
+	public LineaDePrestamo getOne(int id)
+	{
+		return de.getOne(id);
+	}
+	public void update(LineaDePrestamo lp)
+	{
+		de.update(lp);
+	}
 /*	
 	public void delete(LineaDePrestamo lp)
 	{
 		de.delete(lp);
 	}
 	
-	public void update(LineaDePrestamo lp)
-	{
-		de.update(lp);
-	}
+	
 	
 	public LineaDePrestamo getOne(LineaDePrestamo lp)
 	{

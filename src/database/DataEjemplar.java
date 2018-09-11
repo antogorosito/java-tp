@@ -143,40 +143,5 @@ public class DataEjemplar
 		return rta;
 	}
 	
-	public boolean existeDevolucion(int id)
-	{
-		boolean rta=false;
-		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
-		try 
-		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select *  from lineas_de_prestamos where fechaDevolucion is null and devuelto=false and idEjemplar=?");
-			stmt.setInt(1,id);
-			rs=stmt.executeQuery();
-			if(rs!=null) 	
-			{
-				while(rs.next())
-				{
-					rta=true;
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally 
-		{
-			try 
-			{	
-				stmt.close();
-				rs.close();
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			} 
-		}
-		return rta;
-	}
+	
 }

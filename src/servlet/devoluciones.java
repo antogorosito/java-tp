@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entidades.Ejemplar;
-import negocio.CtrlEjemplar;
+import entidades.*;
+import negocio.*;
 
 /**
  * Servlet implementation class devoluciones
@@ -68,9 +69,9 @@ public class devoluciones extends HttpServlet {
 				} 
 				else 
 				{
-					
-					boolean rta= ce.existeDevolucion(id);//me fijo si esta pendiente de devolucion
-					if (rta==false)
+					CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+					LineaDePrestamo lp=clp.getOne(id);//me fijo si esta pendiente de devolucion
+					if (lp == null)
 					{
 						PrintWriter out = response.getWriter();
 						out.println("<script type=\"text/javascript\">");
@@ -80,11 +81,15 @@ public class devoluciones extends HttpServlet {
 					}
 					else
 					{
+						
 						HttpSession session = request.getSession();
-						session.setAttribute("ejemplar",id);
 						
+						CtrlSocio cs=new CtrlSocio();
+						Socio s=cs.getOne(lp.getSocio().getIdSocio());
+						request.setAttribute("socio",s);	
 						
-						
+						session.setAttribute("lineaPre",lp);
+						request.getRequestDispatcher("/devuelto.jsp").forward(request, response);
 					}
 				}
 			}

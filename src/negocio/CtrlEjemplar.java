@@ -28,10 +28,7 @@ public class CtrlEjemplar
 	{
 		return de.existe(id,s);
 	}
-	public boolean existeDevolucion(int id)
-	{
-		return de.existeDevolucion(id);
-	}
+
 	
 	/*public void add(Ejemplar e) 
 	{

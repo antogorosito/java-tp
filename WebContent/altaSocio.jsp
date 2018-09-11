@@ -55,19 +55,19 @@
    	<form class="form-alta" action="altaSocio" method="post">
    	
    		<p><label>Nombre:</label>
-   		<input name="nombre"type="text" id="nombre"></p>
+   		<input name="nombre"type="text"></p>
    		
    		<p><label>Apellido:</label>
-   		<input name="apellido"type="text" id="apellido"></p>
+   		<input name="apellido"type="text" ></p>
    		
    		<p><label>Email:</label>
-   		<input name="email"type="email" id="email"></p>
+   		<input name="email"type="email" ></p>
    		
    			<p><label>Domicilio:</label>
-   		<input name="domicilio"type="text" id="domicilio"></p>
+   		<input name="domicilio"type="text"></p>
    		
    			<p><label>Telefono:</label>
-   		<input name="telefono"type="text" id="telefono"></p>
+   		<input name="telefono"type="text"></p>
    		
    			<p><label>Dni:</label>
    		<input name="dni"type="text" id="dni"></p>

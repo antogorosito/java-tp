@@ -244,11 +244,75 @@ public class DataLineaDePrestamo
 		}
 		return ldp;
 	}
-/*	public void delete(LineaDePrestamo lp) {}
 	
+	public LineaDePrestamo getOne(int id)
+	{
+		LineaDePrestamo lp=null;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idLineaPrestamo,lineas_de_prestamos.idSocio,ejemplares.idEjemplar,prestamos.idPrestamo,fechaPrestamo,diasPrestamo,fechaADevolver,titulo  from lineas_de_prestamos inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo inner join ejemplares on lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar inner join libros on libros.idLibro=ejemplares.idLibro where fechaDevolucion is null and devuelto=false and lineas_de_prestamos.idEjemplar=?");
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					lp=new LineaDePrestamo();
+								
+					lp.setIdLineaPrestamo(rs.getInt("idLineaPrestamo"));
+					Ejemplar ej=new Ejemplar();
+					ej.setIdEjemplar(rs.getInt("ejemplares.idEjemplar"));
+					Libro l=new Libro();
+					l.setTitulo(rs.getString("titulo"));
+					ej.setLibro(l);
+					lp.setEjemplar(ej);
+					Socio so=new Socio();
+					so.setIdSocio(rs.getInt("lineas_de_prestamos.idSocio"));
+					lp.setSocio(so);
+					Prestamo pr=new Prestamo();
+					pr.setIdPrestamo(rs.getInt("prestamos.idPrestamo"));
+					pr.setDiasPrestamo(rs.getInt("diasPrestamo"));
+					pr.setFechaADevolver(rs.getDate("fechaADevolver"));
+				//ver fecha
+					System.out.println("fec dsp de traer");
+					System.out.println(pr.getFechaADevolver());
+				
+					pr.setFechaPrestamo(rs.getDate("fechaPrestamo"));
+				
+					System.out.println("fec prestamo");
+					System.out.println(pr.getFechaPrestamo());
+					
+					lp.setPrestamo(pr);
+				
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return lp;
+	}
 	public void update(LineaDePrestamo lp) {}
 	
-    public LineaDePrestamo getOne(LineaDePrestamo lp) { }
+/*	public void delete(LineaDePrestamo lp) {}
+	
+
+   
 	
 	*/
 }

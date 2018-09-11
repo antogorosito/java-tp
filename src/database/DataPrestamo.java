@@ -84,6 +84,8 @@ public class DataPrestamo
 	{
 		PreparedStatement stmt=null;
 		try {
+		
+			
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update prestamos set diasPrestamo=?,fechaADevolver=? where idPrestamo=?");
 			stmt.setInt(1, di);	
 			stmt.setInt(3, p.getIdPrestamo());
@@ -92,6 +94,7 @@ public class DataPrestamo
 			fecha.setTime(p.getFechaPrestamo());
 			fecha.add(fecha.DATE, di);
 			java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+			
 			
 			stmt.setDate(2, sDate);
 			
