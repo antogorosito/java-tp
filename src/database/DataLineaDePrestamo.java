@@ -276,14 +276,10 @@ public class DataLineaDePrestamo
 					pr.setIdPrestamo(rs.getInt("prestamos.idPrestamo"));
 					pr.setDiasPrestamo(rs.getInt("diasPrestamo"));
 					pr.setFechaADevolver(rs.getDate("fechaADevolver"));
-				//ver fecha
-					System.out.println("fec dsp de traer");
-					System.out.println(pr.getFechaADevolver());
+			
 				
 					pr.setFechaPrestamo(rs.getDate("fechaPrestamo"));
 				
-					System.out.println("fec prestamo");
-					System.out.println(pr.getFechaPrestamo());
 					
 					lp.setPrestamo(pr);
 				

@@ -40,7 +40,7 @@ public class FactoryConexion {
 		
 		if(conn==null || conn.isClosed()){
 		
-			conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=UTC",user,pass);
+			conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=America/Argentina/Buenos_Aires",user,pass);
 			
 		}
 		return conn;

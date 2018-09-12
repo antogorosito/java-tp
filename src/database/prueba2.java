@@ -1,19 +1,26 @@
 package database;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import entidades.*;
 public class prueba2 {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException  {
+		//Calendar cal=Calendar.getInstance();
+		//java.util.Date d = new java.util.Date();
+		//Date fechaActual = new java.sql.Date(d.getTime());
+//		cal.setTime(fechaActual);
+	//	System.out.println(cal.getTime());
 	
-		Calendar cal=Calendar.getInstance();
+		GregorianCalendar fecha = new GregorianCalendar();
 		java.util.Date d = new java.util.Date();
-		Date fechaPrestamo = new java.sql.Date(d.getTime());
-		cal.setTime(fechaPrestamo);
-		cal.add(cal.DATE,4);
-		System.out.println(cal.getTime());
+		Date fechaActual = new java.sql.Date(d.getTime());
+		System.out.println(fechaActual);
+	
+		
 		/*System.out.println("prueba");
 		if(getL("antonella")==null) {System.out.println("no hay");}
 		else {System.out.println("hay");}
@@ -75,5 +82,9 @@ public class prueba2 {
 		}
 		return l;
 	
+	}
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
 	}
 }
