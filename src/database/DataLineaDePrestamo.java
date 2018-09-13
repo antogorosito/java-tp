@@ -5,7 +5,11 @@ import entidades.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class DataLineaDePrestamo 
 {
@@ -303,8 +307,46 @@ public class DataLineaDePrestamo
 		}
 		return lp;
 	}
-	public void update(LineaDePrestamo lp) {}
-	
+	public void update(LineaDePrestamo lp,Sancion s) throws ParseException 
+	{
+		PreparedStatement stmt=null;
+		try {
+		
+			
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update lineas_de_prestamos set fechaDevolucion=?,devuelto=?, idSancion=? where idPrestamo=?");
+		
+			
+			//fecha actual
+			java.util.Date fecha = new  java.util.Date();
+			DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+			String fechaActu=Formato.format(fecha);
+			java.sql.Date sDate=convertUtilToSql(Formato.parse(fechaActu));
+			
+			stmt.setDate(1,sDate);	
+			stmt.setBoolean(2, true);
+			stmt.setInt(3, s.getIdSancion());
+			stmt.setInt(4, lp.getPrestamo().getIdPrestamo());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
+	}
 /*	public void delete(LineaDePrestamo lp) {}
 	
 

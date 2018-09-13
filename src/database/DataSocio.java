@@ -3,7 +3,7 @@ package database;
 import entidades.*;
 
 import java.sql.*;
-
+import java.util.GregorianCalendar;
 
 import database.FactoryConexion;
 
@@ -42,10 +42,6 @@ public class DataSocio
 		}
 	}
 	
-	
-	public void delete(Socio s) {}
-	
-	public void update(Socio s) {}
 	
 	public boolean getOne(String dni) 
 	{
@@ -129,5 +125,33 @@ public class DataSocio
 		return s;
 	}
 	
-/*	public ArrayList<Socio> getAll() {}*/
+	public void update(Socio s,boolean est) 
+	{
+		PreparedStatement stmt=null;
+		try {
+		
+			
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update socios set estado=? where idSocio=?");
+			stmt.setBoolean(1, est);	
+			stmt.setInt(2,s.getIdSocio());
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
+/*	public ArrayList<Socio> getAll() {}
+ * 	public void delete(Socio s) {}*/
 }

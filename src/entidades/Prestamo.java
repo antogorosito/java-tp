@@ -1,6 +1,9 @@
 package entidades;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Prestamo 
 {
@@ -15,15 +18,41 @@ public class Prestamo
 	{
 		
 	}
-	public Prestamo(Socio s)
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
+	}
+	private static java.sql.Time convertUtil2ToSql(java.util.Date uTime) {
+		java.sql.Time sDate = new java.sql.Time(uTime.getTime());
+		return sDate;
+	}
+	public Prestamo(Socio s) 
 	{
 		this.socio=s;
+//ANTES USABA ESTO, PERO PARA QUE TENGA LOGICA CON LA FORMA EN QUE COMPARO EN DEVUELTO LO CAMBIO
+	//	java.util.Date d = new java.util.Date();
+		//this.fechaPrestamo = new java.sql.Date(d.getTime());
+	//	this.horaPrestamo=new java.sql.Time(d.getTime());
 
-		java.util.Date d = new java.util.Date();
-		this.fechaPrestamo = new java.sql.Date(d.getTime());
-	
-		this.horaPrestamo=new java.sql.Time(d.getTime());
-
+		 java.util.Date fecha = new  java.util.Date();
+		 DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+		  DateFormat Formato1 = new SimpleDateFormat("HH:mm:ss");
+		  String fechaActu=Formato.format(fecha);
+		  String horaActu=Formato1.format(fecha);
+		try {
+			this.fechaPrestamo=convertUtilToSql(Formato.parse(fechaActu));
+			this.horaPrestamo=convertUtil2ToSql(Formato1.parse(horaActu));
+		} catch (ParseException e) {
+		
+			e.printStackTrace();
+		}
+		
+		System.out.println(fechaActu);
+		System.out.println(horaActu);
+		
+		
+		
+		
 	}
 	
 	public int getIdPrestamo() 

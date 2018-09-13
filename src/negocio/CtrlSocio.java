@@ -23,16 +23,16 @@ public class CtrlSocio
 	{
 		ds.add(s);
 	}
-	
+	public void update(Socio s,boolean est)
+	{
+		ds.update(s,est);
+	}
 /*	public void delete(Socio s)
 	{
 		ds.delete(s);
 	}
 	
-	public void update(Socio s)
-	{
-		ds.update(s);
-	}*/
+	*/
 	
 	public boolean getOne(String dni)
 	{

@@ -1,5 +1,6 @@
 package negocio;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import database.*;
@@ -43,9 +44,9 @@ public class CtrlLineaDePrestamo
 	{
 		return de.getOne(id);
 	}
-	public void update(LineaDePrestamo lp)
+	public void update(LineaDePrestamo lp,Sancion s) throws ParseException
 	{
-		de.update(lp);
+		de.update(lp,s);
 	}
 /*	
 	public void delete(LineaDePrestamo lp)

@@ -14,8 +14,12 @@ public class CtrlPoliticaSancion
 	{
 		dps=new DataPoliticaSancion();
 	}
+	public PoliticaSancion getOne(int diasDif)
+	{
+		return dps.getOne(diasDif);
+	}
 	
-	public void add(PoliticaSancion ps) 
+/*	public void add(PoliticaSancion ps) 
 	{
 		dps.add(ps);
 	}
@@ -30,10 +34,7 @@ public class CtrlPoliticaSancion
 		dps.update(ps);
 	}
 	
-	/*public PoliticaSancion getOne(PoliticaSancion ps)
-	{
-		return dps.getOne(ps);
-	}
+	
 	
 	public ArrayList<PoliticaSancion> getAll()
 	{

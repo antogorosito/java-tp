@@ -2,6 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.*;
 import javax.servlet.ServletException;
@@ -53,42 +56,58 @@ public class devuelto extends HttpServlet {
 			// sino cambiar tmb estado del socio
 			
 			
-			java.util.Date d = new java.util.Date();
-			Date fechaActual = new java.sql.Date(d.getTime());
-			//int dd=fechaActual.compareTo(l.getPrestamo().getFechaADevolver());
-			//System.out.println(dd);
-			//si la fecha a devolver es mayor a la actual, devuelve menos a 0, si son iguale devuelve 0. si la actual es mayor a la de devolver devuelve mayor a 0
+			 java.util.Date fecha = new  java.util.Date();
+			 DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+			 String fechaActu=Formato.format(fecha);
+		 	String fechadev=Formato.format(l.getPrestamo().getFechaADevolver());
 			
-			//otra forma
-			if(fechaActual.before(l.getPrestamo().getFechaADevolver())) //actual es anterior a la de devolucion
-			{
-				System.out.println("puede devolver");
-				System.out.println("fecha actual");
-				System.out.println(fechaActual);
-				System.out.println("fecha a devolver");
-				System.out.println(l.getPrestamo().getFechaADevolver());
+		     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		     try {
+				java.util.Date date1 = sdf.parse(fechaActu);
+				java.util.Date date2=sdf.parse(fechadev);
+				// devuelve <0 si actual es menor a devolver
+				//devuelve 0 si son iguales
+				//devuelve >0 si actual es mayor a devolver
+				if (date1.compareTo(date2) < 0 || date1.compareTo(date2)==0 )
+				{
+		            System.out.println("puede devolver");
+		            
+		        	Sancion sanc=null;//asi reutilizo el mismo metodo 
+					clp.update(l,sanc);
+				
+		        }else if (date1.compareTo(date2) > 0) {
+		            System.out.println("sancionar");
+		            //diferencia entre la fecha que habia que devolverla y hoy
+		            int diasDif=(int)((date1.getTime()-date2.getTime())/86400000); 
+		            		
+		            
+		            CtrlSocio cs=new CtrlSocio();
+		            boolean est=false;
+		            Socio s=l.getSocio();
+		            cs.update(s, est);
+		            
+		            //obtengo tiempo de sancino
+		            CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
+		            PoliticaSancion ps=cps.getOne(diasDif);
+		            
+		            
+		            
+		            
+		            
+		            
+		            
+		            
+		        }  
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
 			}
-			else if  (fechaActual.after(l.getPrestamo().getFechaADevolver())) // actual es dsp de la de devolucion
-			{
-				System.out.println("no puede devolver");
-				System.out.println("fecha actual");
-				System.out.println(fechaActual);
-				System.out.println("fecha a devolver");
-				System.out.println(l.getPrestamo().getFechaADevolver());
-			}
-			else if(fechaActual.equals(l.getPrestamo().getFechaADevolver()))//iguales
-			{
-				System.out.println("puede devolver");
-				System.out.println("fecha actual");
-				System.out.println(fechaActual);
-				System.out.println("fecha a devolver");
-				System.out.println(l.getPrestamo().getFechaADevolver());
-			}
+		     finally 
+		     {
+		    		request.getRequestDispatcher("/devoluciones.jsp").forward(request, response);
+		     }
 		
-			
-			
-			//clp.update(l);
-			request.getRequestDispatcher("/devoluciones.jsp").forward(request, response);
+		
 			
 		}//fin if
 		
