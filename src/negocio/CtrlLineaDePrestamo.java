@@ -48,6 +48,10 @@ public class CtrlLineaDePrestamo
 	{
 		de.update(lp,s);
 	}
+	public void update(LineaDePrestamo lp) throws ParseException
+	{
+		de.update(lp);
+	}
 /*	
 	public void delete(LineaDePrestamo lp)
 	{

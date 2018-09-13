@@ -29,9 +29,16 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
+        <%Usuario u=(Usuario)session.getAttribute("usuario");
+    		if (u!=null){%>
         <ul class="nav nav-pills float-right">
         <li class="nav item">
         <a class="nav-link" href="index.html">Cerrar sesion</a>
+        </li>
+        </ul>
+          <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        	<a class="nav-link" href="menu.jsp">Menu</a>
         </li>
         </ul>
         
@@ -40,12 +47,14 @@
         	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
+        <%}else{ %>
         
-        <ul class="nav nav-pills float-right">
+       <ul class="nav nav-pills float-right">
         <li class="nav item">
-        	<a class="nav-link" href="menu.jsp">menu</a>
+        	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
+        <%} %>
       
         
       </div>

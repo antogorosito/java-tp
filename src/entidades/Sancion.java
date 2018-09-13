@@ -1,13 +1,48 @@
 package entidades;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class Sancion
 {
 	private int idSancion;
 	private Date fechaSancion;
-	private int diasSancion; 
+	private Date fechaSancionHasta;
 	private Socio socio;
+	
+	public Sancion(){}
+	
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
+	}
+	
+	public Sancion(int d,Socio s) 
+	{
+		java.util.Date fecha=new java.util.Date();
+		DateFormat Formato=new SimpleDateFormat("yyyy-MM-dd");
+		String fechaAct=Formato.format(fecha);
+		try {
+			this.fechaSancion=convertUtilToSql(Formato.parse(fechaAct));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		GregorianCalendar fechaa = new GregorianCalendar();
+		fechaa.setTime(this.fechaSancion);
+		fechaa.add(fechaa.DATE, d);
+		java.sql.Date sDate = convertUtilToSql(fechaa.getTime());
+		
+		
+		
+		this.fechaSancionHasta=sDate;
+		this.socio=s;
+	}
 	
 	public int getIdSancion() 
 	{
@@ -25,13 +60,13 @@ public class Sancion
 	{
 		this.fechaSancion = fechaSancion;
 	}
-	public int getDiasSancion() 
+	public void setFechaSancionHasta(Date fechaSancionHasta)
 	{
-		return diasSancion;
+		this.fechaSancionHasta=fechaSancionHasta;
 	}
-	public void setDiasSancion(int diasSancion) 
+	public Date getFechaSancionHasta()
 	{
-		this.diasSancion = diasSancion;
+		return fechaSancionHasta;
 	}
 	public Socio getSocio() 
 	{

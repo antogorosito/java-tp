@@ -10,7 +10,7 @@ public class CtrlSancion
 
 	private DataSancion ds;
 	
-	public CtrlSancion()
+		public CtrlSancion()
 	{
 		ds=new DataSancion();
 	}
@@ -19,7 +19,7 @@ public class CtrlSancion
 	{
 		ds.add(s);
 	}
-	
+/*	
 	public void delete(Sancion s)
 	{
 		ds.delete(s);
@@ -30,7 +30,7 @@ public class CtrlSancion
 		ds.update(s);
 	}
 	
-	/*public Sancion getOne(Sancion s)
+	public Sancion getOne(Sancion s)
 	{
 		return ds.getOne(s);
 	}

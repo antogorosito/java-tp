@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import entidades.Socio;
 import negocio.CtrlSocio;
@@ -67,6 +68,7 @@ public class altaSocio extends HttpServlet {
 			out.println("alert('Ya existe un socio con el dni');");//FALTA MOSTRAR EL ID DE SOCIO
 			out.println("location='altaSocio.jsp';");
 			out.println("</script>");
+			
 		}
 		
 		

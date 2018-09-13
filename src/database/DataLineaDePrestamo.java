@@ -313,7 +313,7 @@ public class DataLineaDePrestamo
 		try {
 		
 			
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update lineas_de_prestamos set fechaDevolucion=?,devuelto=?, idSancion=? where idPrestamo=?");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update lineas_de_prestamos set fechaDevolucion=?,devuelto=?, idSancion=? where idEjemplar=?");
 		
 			
 			//fecha actual
@@ -324,8 +324,51 @@ public class DataLineaDePrestamo
 			
 			stmt.setDate(1,sDate);	
 			stmt.setBoolean(2, true);
-			stmt.setInt(3, s.getIdSancion());
-			stmt.setInt(4, lp.getPrestamo().getIdPrestamo());
+			if (s ==null)
+			{
+				stmt.setInt(3, 0);
+			}
+			else
+			{
+				stmt.setInt(3, s.getIdSancion());
+				}
+			stmt.setInt(4, lp.getEjemplar().getIdEjemplar());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
+	public void update(LineaDePrestamo lp) throws ParseException 
+	{
+		PreparedStatement stmt=null;
+		try {
+		
+			
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update lineas_de_prestamos set fechaDevolucion=?,devuelto=? where idEjemplar=?");
+		
+			
+			//fecha actual
+			java.util.Date fecha = new  java.util.Date();
+			DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+			String fechaActu=Formato.format(fecha);
+			java.sql.Date sDate=convertUtilToSql(Formato.parse(fechaActu));
+			
+			stmt.setDate(1,sDate);	
+			stmt.setBoolean(2, true);
+			
+			stmt.setInt(3,lp.getEjemplar().getIdEjemplar());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			

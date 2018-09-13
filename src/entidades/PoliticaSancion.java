@@ -1,14 +1,13 @@
 package entidades;
 
-import java.sql.Date;
 
 public class PoliticaSancion 
 {
 	private int idPoliticaSancion;
-	private Date diasDeAtrasoDesde;
-	private Date diasDeAtrasoHasta;
-	private Date diasDeSancion;
-	private PoliticaPrestamo politica;
+	private int diasDeAtrasoDesde;
+	private int diasDeAtrasoHasta;
+	private int diasDeSancion;
+
 	
 	public int getIdPoliticaSancion() 
 	{
@@ -18,38 +17,31 @@ public class PoliticaSancion
 	{
 		this.idPoliticaSancion = idPoliticaSancion;
 	}
-	public Date getDiasDeAtrasoDesde() 
+	public int getDiasDeAtrasoDesde() 
 	{
 		return diasDeAtrasoDesde;
 	}
-	public void setDiasDeAtrasoDesde(Date diasDeAtrasoDesde) 
+	public void setDiasDeAtrasoDesde(int diasDeAtrasoDesde) 
 	{
 		this.diasDeAtrasoDesde = diasDeAtrasoDesde;
 	}
-	public Date getDiasDeAtrasoHasta() 
+	public int getDiasDeAtrasoHasta() 
 	{
 		return diasDeAtrasoHasta;
 	}
-	public void setDiasDeAtrasoHasta(Date diasDeAtrasoHasta) 
+	public void setDiasDeAtrasoHasta(int diasDeAtrasoHasta) 
 	{
 		this.diasDeAtrasoHasta = diasDeAtrasoHasta;
 	}
-	public Date getDiasDeSancion() 
+	public int getDiasDeSancion() 
 	{
 		return diasDeSancion;
 	}
-	public void setDiasDeSancion(Date diasDeSancion) 
+	public void setDiasDeSancion(int diasDeSancion) 
 	{
 		this.diasDeSancion = diasDeSancion;
 	}
-	public PoliticaPrestamo getPolitica() 
-	{
-		return politica;
-	}
-	public void setPolitica(PoliticaPrestamo politica) 
-	{
-		this.politica = politica;
-	} 
+
 	
 	
 }

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -70,33 +71,39 @@ public class devuelto extends HttpServlet {
 				//devuelve >0 si actual es mayor a devolver
 				if (date1.compareTo(date2) < 0 || date1.compareTo(date2)==0 )
 				{
-		            System.out.println("puede devolver");
-		            
-		        	Sancion sanc=null;//asi reutilizo el mismo metodo 
-					clp.update(l,sanc);
-				
+		           	
+					clp.update(l);
+					
+					PrintWriter out = response.getWriter();
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Se registro la devolucion');");
+						out.println("location='devoluciones.jsp';");
+						out.println("</script>");
 		        }else if (date1.compareTo(date2) > 0) {
-		            System.out.println("sancionar");
+		         
 		            //diferencia entre la fecha que habia que devolverla y hoy
 		            int diasDif=(int)((date1.getTime()-date2.getTime())/86400000); 
 		            		
 		            
 		            CtrlSocio cs=new CtrlSocio();
-		            boolean est=false;
+		            boolean est=false;//inhabilito
 		            Socio s=l.getSocio();
 		            cs.update(s, est);
 		            
 		            //obtengo tiempo de sancino
 		            CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
 		            PoliticaSancion ps=cps.getOne(diasDif);
+		            CtrlSancion css=new CtrlSancion();
 		            
-		            
-		            
-		            
-		            
-		            
-		            
-		            
+		            Sancion sa=new Sancion(ps.getDiasDeSancion(),l.getSocio());
+		            css.add(sa);
+		            clp.update(l,sa);
+
+		        	PrintWriter out = response.getWriter();
+					out.println("<script type=\"text/javascript\">");
+					out.println("alert('Se registro la devolucion,inhabilitacion y sancion al socio');");
+					out.println("location='devoluciones.jsp';");
+					out.println("</script>");
 		        }  
 			} catch (ParseException e) {
 				

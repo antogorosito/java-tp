@@ -17,14 +17,18 @@ public class DataPoliticaSancion
 		
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from politica_sanciones where");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from politica_sanciones where ? between diasDeAtrasoDesde and diasDeAtrasoHasta");
+			stmt.setInt(1,diasDif);
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
 				while(rs.next())
 				{
 					p=new PoliticaSancion();
-					
+					p.setDiasDeAtrasoDesde(rs.getInt("diasDeAtrasoDesde"));
+					p.setDiasDeAtrasoHasta(rs.getInt("diasDeAtrasoHasta"));
+					p.setDiasDeSancion(rs.getInt("diasDeSancion"));
+					p.setIdPoliticaSancion(rs.getInt("idPoliticaSancion"));
 				}
 			}
 		} catch (SQLException e) {

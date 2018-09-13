@@ -48,10 +48,10 @@
    <form class="form-signin" action="login" method="post">
       
     
-      <label for="inputUsuario" class="sr-only">Usuario</label>
-      <input type="text" id="inputUsuario" name="usuario" class="form-control"  required="required" placeholder="Usuario" style="margin-bottom: 15px">
-      <label for="inputContraseña" class="sr-only">Contraseña</label>
-      <input type="password" id="inputContraseña" name="contraseña" class="form-control" required="required" placeholder="Contraseña">
+      <label >Usuario</label>
+      <input type="text"  name="usuario" class="form-control"  required="required"  style="margin-bottom: 15px">
+      <label >Contraseña</label>
+      <input type="password"  name="contraseña" class="form-control" required="required">
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
