@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import entidades.Socio;
 import negocio.CtrlSocio;
@@ -62,9 +63,13 @@ public class altaSocio extends HttpServlet {
 		}
 		else 
 		{
+			//Socio s= new Socio();
+			//int id=s.getIdSocio();
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Ya existe un socio con el dni');");//FALTA MOSTRAR EL ID DE SOCIO
+			//out.printf("alert('Numero de socio: ');" ,id);//con este no me muestra el id
+			//JOptionPane.showMessageDialog(null,"Numero de socio es: " +id,"Socio",JOptionPane.INFORMATION_MESSAGE); // este nunca me termine de cargar asiq no se si funciona
 			out.println("location='altaSocio.jsp';");
 			out.println("</script>");
 		}
