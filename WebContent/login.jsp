@@ -50,8 +50,8 @@
     
       <label >Usuario</label>
       <input type="text"  name="usuario" class="form-control"  required="required"  style="margin-bottom: 15px">
-      <label >Contraseña</label>
-      <input type="password"  name="contraseña" class="form-control" required="required">
+      <label >Clave</label>
+      <input type="password"  name="clave" class="form-control" required="required">
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me

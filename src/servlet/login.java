@@ -41,7 +41,7 @@ public class login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String u=request.getParameter("usuario");
-		String c=request.getParameter("contraseña");
+		String c=request.getParameter("clave");
 		
 		CtrlUsuario cu= new CtrlUsuario();
 		
@@ -56,7 +56,7 @@ public class login extends HttpServlet {
 		{
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
-			 out.println("alert('Usuario o Contraseña incorrecto');");
+			 out.println("alert('Usuario o Clave incorrecto');");
 			 out.println("location='login.jsp';");
 			 out.println("</script>");
 		}

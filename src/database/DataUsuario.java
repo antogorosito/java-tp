@@ -21,7 +21,7 @@ public void add(Usuario u){}
 		
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios WHERE nombreUsuario=? and contraseña=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios WHERE nombreUsuario=? and clave=?");
 			stmt.setString(1,u);
 			stmt.setString(2,c);
 			rs=stmt.executeQuery();
@@ -31,7 +31,7 @@ public void add(Usuario u){}
 				{
 					l=new Usuario();
 					l.setNombreUsuario(rs.getString("nombreUsuario"));
-					l.setContraseña(rs.getString("contraseña"));
+					l.setClave(rs.getString("clave"));
 				}
 			}
 		} catch (SQLException e) {
