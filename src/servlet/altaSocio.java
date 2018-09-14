@@ -49,8 +49,8 @@ public class altaSocio extends HttpServlet {
 		String dni=request.getParameter("dni");
 		
 		CtrlSocio cs=new CtrlSocio();
-		boolean  rta=cs.getOne(dni);
-		if(rta==false)
+		Socio  s=cs.getOne(dni);
+		if(s==null)
 		{
 		Socio socio=new Socio(a,n,e,d,t,dni);
 		cs.add(socio);
@@ -63,13 +63,12 @@ public class altaSocio extends HttpServlet {
 		}
 		else 
 		{
-			//Socio s= new Socio();
-			//int id=s.getIdSocio();
+			/*JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+	        JOptionPane.showMessageDialog(null, "EL id de socio es: " + s.getIdSocio());*/
+			
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Ya existe un socio con el dni');");//FALTA MOSTRAR EL ID DE SOCIO
-			//out.printf("alert('Numero de socio: ');" ,id);//con este no me muestra el id
-			//JOptionPane.showMessageDialog(null,"Numero de socio es: " +id,"Socio",JOptionPane.INFORMATION_MESSAGE); // este nunca me termine de cargar asiq no se si funciona
 			out.println("location='altaSocio.jsp';");
 			out.println("</script>");
 			

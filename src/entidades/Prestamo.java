@@ -47,8 +47,7 @@ public class Prestamo
 			e.printStackTrace();
 		}
 		
-		System.out.println(fechaActu);
-		System.out.println(horaActu);
+		
 		
 		
 		

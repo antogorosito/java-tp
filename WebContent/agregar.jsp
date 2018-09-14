@@ -68,7 +68,7 @@
     <%String msj=(String)session.getAttribute("error");
   
  		if (msj != null) {%>
- 		<label><%=msj %></label>
+ 		<label style="color:red;"><%=msj %></label>
  		<%}%>
  		
  		

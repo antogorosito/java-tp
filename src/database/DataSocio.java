@@ -11,6 +11,7 @@ public class DataSocio
 {
 	public void add(Socio s)   
 	{
+		ResultSet keyResultSet=null;//
 		PreparedStatement stmt=null;
 	
 		try
@@ -23,7 +24,13 @@ public class DataSocio
 			stmt.setString(5, s.getTelefono());
 			stmt.setString(6, s.getDni());
 			stmt.setBoolean(7, s.getEstado());
-			stmt.execute();		
+			stmt.execute();
+			//obtener el id
+			keyResultSet=stmt.getGeneratedKeys();
+			if(keyResultSet!=null && keyResultSet.next()){
+				s.setIdSocio(keyResultSet.getInt(1));
+			
+			}
 		}
 		catch(SQLException e)
 		{
@@ -43,9 +50,9 @@ public class DataSocio
 	}
 	
 	
-	public boolean getOne(String dni) 
+	public Socio getOne(String dni) 
 	{
-		boolean rta=false;
+		/*boolean rta=false;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
 		
@@ -78,17 +85,59 @@ public class DataSocio
 				e.printStackTrace();
 			} 
 		}
-		return rta;
-	}
-	
-	public Socio getOne(int id)
-	{
-		Socio s=new Socio();
+		return rta;*/
+		Socio s=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
 		
 		try 
 		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE dni=?");
+			stmt.setString(1,dni);
+			rs=stmt.executeQuery();
+			if(rs!=null ) 	
+			{
+				while(rs.next())
+				{
+					s=new Socio();
+					s.setApellido(rs.getString("apellido"));
+					s.setDni(rs.getString("dni"));
+					s.setDomicilio(rs.getString("domicilio"));
+					s.setEmail(rs.getString("email"));
+					s.setEstado(rs.getBoolean("estado"));
+					s.setIdSocio(rs.getInt("idSocio"));
+					s.setNombre(rs.getString("nombre"));
+					s.setTelefono(rs.getString("telefono"));				
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return s;
+	}
+	
+	public Socio getOne(int id)
+	{
+		Socio s=null;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE idSocio=?");
 			stmt.setInt(1,id);
 			rs=stmt.executeQuery();
@@ -96,6 +145,7 @@ public class DataSocio
 			{
 				while(rs.next())
 				{
+					s=new Socio();
 					s.setApellido(rs.getString("apellido"));
 					s.setDni(rs.getString("dni"));
 					s.setDomicilio(rs.getString("domicilio"));
@@ -152,6 +202,8 @@ public class DataSocio
 			} 
 		}
 	}
+	
+	
 /*	public ArrayList<Socio> getAll() {}
  * 	public void delete(Socio s) {}*/
 }

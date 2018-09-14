@@ -109,11 +109,7 @@ public class devuelto extends HttpServlet {
 				
 				e.printStackTrace();
 			}
-		     finally 
-		     {
-		    		request.getRequestDispatcher("/devoluciones.jsp").forward(request, response);
-		     }
-		
+		 
 		
 			
 		}//fin if

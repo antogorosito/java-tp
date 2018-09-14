@@ -34,7 +34,7 @@ public class CtrlSocio
 	
 	*/
 	
-	public boolean getOne(String dni)
+	public Socio getOne(String dni)
 	{
 		return ds.getOne(dni);
 	}/*
