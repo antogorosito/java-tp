@@ -28,7 +28,7 @@
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
+        <a class="nav-link" href="...">Cerrar sesion</a>
         </li>
         </ul>
         
@@ -78,7 +78,11 @@
           <p>Realizar la modificacion del estado de los socios que hayan devuelvo libros fuera de termino. </p>
           <p><a class="btn btn-info" href="inhablitaciones.jsp" role="button">Ir</a></p>
        </div>
-        
+         <div class="col-md-4">
+          <h2>Informes</h2>
+          <p>Imprimir los respectivos informes. </p>
+          <p><a class="btn btn-info" href="informes.jsp" role="button">Ir</a></p>
+        </div>
       </div> 
   
     </div>
