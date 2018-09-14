@@ -14,17 +14,17 @@ public class prueba2 {
 		//Date fechaActual = new java.sql.Date(d.getTime());
 //		cal.setTime(fechaActual);
 	//	System.out.println(cal.getTime());
-	
+	/*
 		GregorianCalendar fecha = new GregorianCalendar();
 		java.util.Date d = new java.util.Date();
 		Date fechaActual = new java.sql.Date(d.getTime());
 		System.out.println(fechaActual);
-	
+	*/
 		
-		/*System.out.println("prueba");
+		System.out.println("prueba");
 		if(getL("antonella")==null) {System.out.println("no hay");}
 		else {System.out.println("hay");}
-*/
+
 	/*	java.util.Date d = new java.util.Date();
 		Date fechaPrestamo = new java.sql.Date(d.getTime());
 		Time horaPrestamo=new java.sql.Time(d.getTime());
@@ -50,9 +50,9 @@ public class prueba2 {
 			{
 				l=new Usuario();
 				l.setNombreUsuario(rs.getString("nombreUsuario"));
-				l.setContraseña(rs.getString("contraseña"));
+				l.setClave(rs.getString("clave"));
 				System.out.println("id: " +l.getNombreUsuario());
-				System.out.println("titulo" + l.getContraseña());
+				System.out.println("titulo" + l.getClave());
 			}
 			else 
 			{

@@ -3,7 +3,7 @@ package entidades;
 public class Usuario
 {
 	private String nombreUsuario;
-	private String contraseña;
+	private String clave;
 	
 	public String getNombreUsuario()  
 	{
@@ -13,13 +13,13 @@ public class Usuario
 	{
 		this.nombreUsuario = nombreUsuario;
 	}
-	public String getContraseña() 
+	public String getClave() 
 	{
-		return contraseña;
+		return clave;
 	}
-	public void setContraseña(String contraseña) 
+	public void setClave(String clave) 
 	{
-		this.contraseña = contraseña;
+		this.clave = clave;
 	} 
 	
 	
