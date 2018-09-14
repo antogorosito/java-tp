@@ -1,5 +1,6 @@
 package database;
-import java.sql.*;
+import java.sql.*;// me permite cambiar de ocnecctor al usar java.sql.connection
+
 
 
 public class FactoryConexion {
@@ -7,8 +8,8 @@ public class FactoryConexion {
 	private String dbDriver = "com.mysql.cj.jdbc.Driver";
 	private String host = "localhost";
 	private String port = "3306";
-	private String user = "root";
-	private String pass = "root";
+	private String user = "javatp";
+	private String pass = "java2018";
 	private String dbType = "mysql";
 	private String db = "biblioteca";
 	
@@ -18,7 +19,7 @@ public class FactoryConexion {
 	FactoryConexion() {
 		
 		try {
-			Class.forName(dbDriver);
+			Class.forName(dbDriver);// crear una nueva clase de driver 
 		} catch (ClassNotFoundException e) {
 			System.out.println(e);
 
@@ -45,6 +46,18 @@ public class FactoryConexion {
 		}
 		return conn;
 	}
+/*	public Connection getConn() {
+		
+		Connection conn=null;
+		try{
+		
+			conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=America/Argentina/Buenos_Aires",user,pass);
+			
+		}
+		catch(SQLException){e.printStackTrace();}
+		return conn;
+	}
+	*/
 	
 	public void releaseConn(){
 		try{

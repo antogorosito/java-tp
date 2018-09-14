@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
+
 import entidades.*;
 public class prueba2 {
 
@@ -36,17 +38,19 @@ public class prueba2 {
 	{
 		
 		Usuario l=null;
-		PreparedStatement stmt=null;
-		ResultSet rs= null; 
+		PreparedStatement stmt=null;//
+		
+		ResultSet rs= null; // conj de resultado
 		String queryString= "SELECT * FROM usuarios WHERE nombreUsuario=?;";
 		System.out.println("prueba3");
 		try {
-			
+			//stmt)=conn.cratestatement();
+			//rs=stmt.executequery(...);
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(queryString);
 			System.out.println("prueba2");
 			stmt.setString(1,i);
-			rs=stmt.executeQuery();
-			if(rs!=null && rs.next()) 	
+			rs=stmt.executeQuery();//executequery espera un Select. excute solo acepta cualquiera
+			if(rs!=null && rs.next()) 	// next se fija si hay un elemento siguiene. y si existe devuelve true y se para en el primer elemento.  y asi etc.
 			{
 				l=new Usuario();
 				l.setNombreUsuario(rs.getString("nombreUsuario"));
@@ -64,6 +68,7 @@ public class prueba2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		/* try{if(rs!=null){rs.close();} if (stmt!=null)stmt.close() if(conn!=null && !!conn.isclosed())conn.close();}catch()...*/
 		finally 
 		{
 			
