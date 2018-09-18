@@ -9,7 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+
 
 public class DataLineaDePrestamo 
 {
@@ -53,6 +53,7 @@ public class DataLineaDePrestamo
 	public void add(LineaDePrestamo lp)
 	{
 		PreparedStatement stmt=null;
+		ResultSet keyResultSet=null;
 		try 
 		{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into lineas_de_prestamos(fechaDevolucion,devuelto,idSancion,idSocio,idPrestamo,idEjemplar) values(null,?,null,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
@@ -61,7 +62,12 @@ public class DataLineaDePrestamo
 			stmt.setInt(3, lp.getPrestamo().getIdPrestamo());
 			stmt.setInt(4, lp.getEjemplar().getIdEjemplar());
 			stmt.execute();		
-			
+			//obtener el id
+			keyResultSet=stmt.getGeneratedKeys();
+			if(keyResultSet!=null && keyResultSet.next())
+			{
+				lp.setIdLineaPrestamo(keyResultSet.getInt(1));
+			}
 		}
 		catch (SQLException e) 
 		{

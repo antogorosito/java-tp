@@ -51,10 +51,7 @@ public class agregar extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String op = request.getParameter("op");
-
-		// para que no haya carteles siempre
-		
+		String op = request.getParameter("op");	
 	
 		if (op.equals("Agregar")) {
 			if (request.getParameter("idEjemplar") == "") {
@@ -68,7 +65,7 @@ public class agregar extends HttpServlet {
 				int id = Integer.parseInt(request.getParameter("idEjemplar"));
 				CtrlEjemplar ce = new CtrlEjemplar();
 				Ejemplar e = ce.getOne(id); // veo si existe el id
-				if (e == null || e.getIdEjemplar() == 0) {
+				if (e == null) {
 					PrintWriter out = response.getWriter();
 					out.println("<script type=\"text/javascript\">");
 					out.println("alert('Id ejemplar incorrecto');");

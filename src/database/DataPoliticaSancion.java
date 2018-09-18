@@ -5,11 +5,10 @@ import entidades.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DataPoliticaSancion 
 {
-	public PoliticaSancion getOne(int diasDif) //ARREGLAR
+	public PoliticaSancion getOne(int diasDif) 
 	{
 		PoliticaSancion p=null;
 		PreparedStatement stmt=null;

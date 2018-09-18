@@ -1,10 +1,7 @@
 package database;
 
 import entidades.*;
-
 import java.sql.*;
-import java.util.GregorianCalendar;
-
 import database.FactoryConexion;
 
 public class DataSocio 
@@ -52,40 +49,7 @@ public class DataSocio
 	
 	public Socio getOne(String dni) 
 	{
-		/*boolean rta=false;
-		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
-		try 
-		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE dni=?");
-			stmt.setString(1,dni);
-			rs=stmt.executeQuery();
-			if(rs!=null ) 	
-			{
-				while(rs.next())
-				{
-					rta=true;
-				
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally 
-		{
-			try 
-			{	
-				stmt.close();
-				rs.close();
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-			} 
-		}
-		return rta;*/
+	
 		Socio s=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 

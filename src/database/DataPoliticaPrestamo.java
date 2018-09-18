@@ -12,7 +12,7 @@ public class DataPoliticaPrestamo
 
 	public PoliticaPrestamo getOne()
 	{
-		PoliticaPrestamo p=new PoliticaPrestamo();
+		PoliticaPrestamo p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
 		
@@ -24,6 +24,7 @@ public class DataPoliticaPrestamo
 			{
 				while(rs.next())
 				{
+					p=new PoliticaPrestamo();
 					p.setCantMaxLibrosPend(rs.getInt("cantMaxLibrosPend"));
 					p.setIdPoliticaPrestamo(rs.getInt("idPoliticaPrestamo"));
 				}

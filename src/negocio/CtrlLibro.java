@@ -15,7 +15,7 @@ public class CtrlLibro
 		de=new DataLibro();
 	}
 	
-	
+	/*
 	
 	public void add(Libro l) 
 	{
@@ -32,7 +32,7 @@ public class CtrlLibro
 		de.update(l);
 	}
 	
-	/*public Libro getOne(Libro l)
+	public Libro getOne(Libro l)
 	{
 		return de.getOne(l);
 	}

@@ -7,11 +7,7 @@ import java.sql.*;
 
 public class DataUsuario
 {
-public void add(Usuario u){}
-	
-	public void delete(Usuario u) {}
-	
-	public void update(Usuario u) {}
+
 	
 	public Usuario getOne(String u, String c) 
 	{
@@ -54,5 +50,10 @@ public void add(Usuario u){}
 	
 	}
 	
-	//public ArrayList<Usuario> getAll() {}
+	/*public ArrayList<Usuario> getAll() {}
+	public void add(Usuario u){}
+	
+	public void delete(Usuario u) {}
+	
+	public void update(Usuario u) {}*/
 }

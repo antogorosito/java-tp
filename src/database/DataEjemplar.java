@@ -17,7 +17,7 @@ public class DataEjemplar
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
-		ArrayList<Ejemplar> ejemplares=new ArrayList<Ejemplar>();
+		ArrayList<Ejemplar> ejemplares=null;
 		try 
 		{
 			
@@ -29,6 +29,7 @@ public class DataEjemplar
 			{
 				while(rs.next())
 				{
+					ejemplares=new ArrayList<Ejemplar>();
 					Ejemplar e=new Ejemplar();
 					e.setIdEjemplar(rs.getInt("idEjemplar"));	
 					Libro l =new Libro();
@@ -66,7 +67,7 @@ public class DataEjemplar
 	
 	public Ejemplar getOne(int id)
 	{
-		Ejemplar ee=new Ejemplar();
+		Ejemplar ee=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
 		
@@ -79,6 +80,7 @@ public class DataEjemplar
 			{
 				while(rs.next())
 				{
+					ee=new Ejemplar();
 					ee.setIdEjemplar(id);
 					Libro l=new Libro();
 					l.setCantDiasMaxPrestamo(rs.getInt("cantDiasMaxPrestamo"));

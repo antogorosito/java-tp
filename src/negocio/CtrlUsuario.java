@@ -14,7 +14,18 @@ public class CtrlUsuario
 		du=new DataUsuario();
 	}
 	
-	public void add(Usuario u) 
+
+	
+	public Usuario getOne(String u,String c)
+	{
+		return du.getOne(u,c);
+	}
+	
+	/*public ArrayList<Usuario> getAll()
+	{
+		return du.getAll();
+	}
+		public void add(Usuario u) 
 	{
 		du.add(u);
 	}
@@ -27,15 +38,5 @@ public class CtrlUsuario
 	public void update(Usuario u)
 	{
 		du.update(u);
-	}
-	
-	public Usuario getOne(String u,String c)
-	{
-		return du.getOne(u,c);
-	}
-	
-	/*public ArrayList<Usuario> getAll()
-	{
-		return du.getAll();
 	}*/
 }
