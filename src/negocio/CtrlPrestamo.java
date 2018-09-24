@@ -27,13 +27,13 @@ public class CtrlPrestamo
 	{
 		dp.update(p,di);
 	}
-	/*
+	
 	public void delete(Prestamo p)
 	{
 		dp.delete(p);
 	}
 	
-	
+	/*
 	
 	public Prestamo getOne(Prestamo p)
 	{

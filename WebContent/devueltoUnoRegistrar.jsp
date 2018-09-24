@@ -28,22 +28,7 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-         <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
-        </li>
-        </ul>
-          <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="menu.jsp">Menu</a>
-        </li>
-        </ul>
-        
-        <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="index.html">Home</a>
-        </li>
-        </ul>
+  
         
       </div>
 
@@ -53,16 +38,14 @@
         <h1 class="display-3">Devolución de libros</h1>    
       </div>
     </div>
- 
+     
       <div class="container">
-  
-    
-   <%LineaDePrestamo li= (LineaDePrestamo)session.getAttribute("lineaPre");
-       if(li!=null){
-    	   Socio s=(Socio)request.getAttribute("socio");
-       String socio= s.getApellido() +" "+ s.getNombre();%>
-       
-        <table class="table" >
+      <form class="form-bus" action="devueltoUnoRegistrar" method="post">
+                
+      
+      <%LineaDePrestamo lp=(LineaDePrestamo)session.getAttribute("lineaPre"); 
+      if(lp!=null){%>
+      <table class="table" >
  		<tr>
 			<th>Id ejemplar</th>
 			<th>Titulo</th>
@@ -70,23 +53,22 @@
  		</tr>
  		
  		<tr>
- 		 <td><%=li.getEjemplar().getIdEjemplar()%></td>
- 		 <td><%=li.getEjemplar().getLibro().getTitulo()%></td>
- 		 <td><%=socio%></td>	 
+ 		 <td><%=lp.getEjemplar().getIdEjemplar()%></td>
+ 		 <td><%=lp.getEjemplar().getLibro().getTitulo()%></td>
+ 		 <td><%=lp.getSocio().getApellido()+" "+ lp.getSocio().getNombre()%></td>	 
  		</tr>
  		
  		</table>
- 			<form class="form-signin" action="devuelto" method="post">
- 		
- 	
- 		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Registrar">Registrar</button>
- 		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Volver">Volver atras</button>
- 		 </form>
-		<%} %>
-		
-      </div>
+       
 
-    
+
+		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Registrar">Registrar</button>
+ 		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Cancelar">Cancelar</button>
+
+    <%} %>
+    </form>
+      </div>
+      
       <div class="container">
    
       <footer>

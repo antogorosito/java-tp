@@ -25,23 +25,7 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-         <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
-        </li>
-        </ul>
-          <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="menu.jsp">Menu</a>
-        </li>
-        </ul>
         
-        <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="index.html">Home</a>
-        </li>
-        </ul>
-      
         
       </div>
 
@@ -51,12 +35,12 @@
         <h1 class="display-3">Prestamos de libros</h1>    
       </div>
     </div>
- 
+
     <div class="container">
     <%Socio s=(Socio)session.getAttribute("socio");%>
-    
+ 
     <label>Apellido y nombre: <%=s.getApellido() +" "+ s.getNombre()%></label>
-    
+   
     <form class="form-bus" action="agregar" method="post">
     <label>Id ejemplar: </label>
    
@@ -100,6 +84,7 @@
  		<input type="text" name="diasMaximoPrestamo" value=<%=dias%>> 	
  			
      	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Guardar">Guardar</button>
+     	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
 	<%}%>
 
     </form>

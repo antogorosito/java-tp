@@ -5,6 +5,8 @@ import java.sql.*;
 import java.util.GregorianCalendar;
 
 
+
+
 public class DataPrestamo 
 {
 	
@@ -118,11 +120,35 @@ public class DataPrestamo
 		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
 		return sDate;
 	}
+	
+	public void delete(Prestamo p) 
+	{
+		PreparedStatement stmt=null;
+		try 
+		{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("delete from prestamos where idPrestamo=?");
+			stmt.setInt(1, p.getIdPrestamo());
+			stmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
+	
+	
 	/*
-	public void delete(Prestamo p) {}
-	
-	
-	
 	
 	public ArrayList<Prestamo> getAll() {}*/
 }

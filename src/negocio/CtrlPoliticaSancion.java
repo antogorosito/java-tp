@@ -18,6 +18,10 @@ public class CtrlPoliticaSancion
 	{
 		return dps.getOne(diasDif);
 	}
+	public PoliticaSancion getMax()
+	{
+		return dps.getMax();
+	}
 	
 /*	public void add(PoliticaSancion ps) 
 	{

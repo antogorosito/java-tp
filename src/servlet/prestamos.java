@@ -82,7 +82,7 @@ public class prestamos extends HttpServlet {
 				{					
 					int c=pp.getCantMaxLibrosPend()-cant;
 					request.getSession().setAttribute("cantPosible",c);
-					request.getSession().setAttribute("socio",s);
+					request.getSession().setAttribute("socio",s);				
 					request.getRequestDispatcher("/agregar.jsp").forward(request, response);
 				}
 			}

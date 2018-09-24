@@ -28,18 +28,15 @@ public class Sancion
 		try {
 			this.fechaSancion=convertUtilToSql(Formato.parse(fechaAct));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
 		
-	
 		GregorianCalendar fechaa = new GregorianCalendar();
 		fechaa.setTime(this.fechaSancion);
 		fechaa.add(fechaa.DATE, d);
 		java.sql.Date sDate = convertUtilToSql(fechaa.getTime());
-		
-		
-		
+			
 		this.fechaSancionHasta=sDate;
 		this.socio=s;
 	}

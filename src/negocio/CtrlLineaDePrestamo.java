@@ -52,13 +52,13 @@ public class CtrlLineaDePrestamo
 	{
 		de.update(lp);
 	}
-/*	
+	
 	public void delete(LineaDePrestamo lp)
 	{
 		de.delete(lp);
 	}
 	
-	
+	/*
 	
 	public LineaDePrestamo getOne(LineaDePrestamo lp)
 	{

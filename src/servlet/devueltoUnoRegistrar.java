@@ -2,12 +2,10 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-import java.util.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,20 +13,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entidades.*;
-import negocio.*;
+import entidades.LineaDePrestamo;
+import entidades.PoliticaSancion;
+import entidades.Sancion;
+import entidades.Socio;
+import negocio.CtrlLineaDePrestamo;
+import negocio.CtrlPoliticaSancion;
+import negocio.CtrlSancion;
+import negocio.CtrlSocio;
 
 /**
- * Servlet implementation class devuelto
+ * Servlet implementation class devueltoUnoRegistrar
  */
-@WebServlet({ "/devuelto", "/Devuelto" })
-public class devuelto extends HttpServlet {
+@WebServlet("/devueltoUnoRegistrar")
+public class devueltoUnoRegistrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public devuelto() {
+    public devueltoUnoRegistrar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,11 +50,12 @@ public class devuelto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		String op = request.getParameter("opci");
 		if(op.equals("Registrar"))
 		{
 			HttpSession session = request.getSession();
-		
+			
 			LineaDePrestamo l=(LineaDePrestamo)session.getAttribute("lineaPre");
 			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
 			//verificar lo de la fecha si esta ok cambio solo la linea 
@@ -93,8 +98,12 @@ public class devuelto extends HttpServlet {
 		            //obtengo tiempo de sancino
 		            CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
 		            PoliticaSancion ps=cps.getOne(diasDif);
+		            if(ps==null) // por si son mas dias de atraso que los que tienen la bd, lo sanciono por el maximo de dias cargado.
+		            {
+		            	ps=cps.getMax();
+		            }
 		            CtrlSancion css=new CtrlSancion();
-		            
+  
 		            Sancion sa=new Sancion(ps.getDiasDeSancion(),l.getSocio());
 		            css.add(sa);
 		            clp.update(l,sa);
@@ -108,16 +117,13 @@ public class devuelto extends HttpServlet {
 			} catch (ParseException e) {
 				
 				e.printStackTrace();
-			}
-		 
-		
-			
-		}//fin if
-		
-		if(op.equals("Volver"))
+			}		
+
+		}
+		if(op.equals("Cancelar"))
 		{
 			request.getRequestDispatcher("/devoluciones.jsp").forward(request, response);
-		}//fin if
+		}
 	}
 
 }

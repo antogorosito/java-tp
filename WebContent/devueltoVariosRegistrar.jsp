@@ -28,22 +28,7 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-     <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
-        </li>
-        </ul>
-          <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="menu.jsp">Menu</a>
-        </li>
-        </ul>
-        
-        <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="index.html">Home</a>
-        </li>
-        </ul>
+  
         
       </div>
 
@@ -55,16 +40,36 @@
     </div>
      
       <div class="container">
-      <form class="form-bus" action="devoluciones" method="post">
-      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Uno">Un ejemplar</button>
-      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Varios">Varios ejemplares</button>
-      	
-      </form>
-    
-  
-      </div>
+      <form class="form-bus" action="devueltoVariosRegistrar" method="post">
+                
+      
+      <%ArrayList<LineaDePrestamo> lineasPrestamo=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas"); 
+      if(lineasPrestamo!=null){%>
+      <table class="table" >
+ 		<tr>
+			<th>Id ejemplar</th>
+			<th>Titulo</th>
+			<th>Socio</th>
+ 		</tr>
+ 		
+ 		<tr><%for(LineaDePrestamo lp:lineasPrestamo){ %>
+ 		 <td><%=lp.getEjemplar().getIdEjemplar()%></td>
+ 		 <td><%=lp.getEjemplar().getLibro().getTitulo()%></td>
+ 		 <td><%=lp.getSocio().getApellido()+ " " + lp.getSocio().getNombre()%></td>	 
+ 		
+ 		</tr>
+ 		 <%} %>
+ 		</table>
+       
 
-    
+
+		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opcion" value="Registrar">Registrar</button>
+ 		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opcion" value="Cancelar">Cancelar</button>
+
+    <%} %>
+    </form>
+      </div>
+      
       <div class="container">
    
       <footer>

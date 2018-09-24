@@ -48,6 +48,45 @@ public class DataPoliticaSancion
 		}
 		return p;
 	}
+	
+	public PoliticaSancion getMax() 
+	{
+		PoliticaSancion p=null;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select max(diasDeSancion) as maximo from politica_sanciones");
+			
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					p=new PoliticaSancion();
+					p.setDiasDeSancion(rs.getInt("maximo"));
+			
+				}
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return p;
+	}
 	/*	public void add(PoliticaSancion ps){}
 	
 	public void delete(PoliticaSancion ps) {}

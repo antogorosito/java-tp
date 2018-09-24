@@ -263,7 +263,7 @@ public class DataLineaDePrestamo
 		
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idLineaPrestamo,lineas_de_prestamos.idSocio,ejemplares.idEjemplar,prestamos.idPrestamo,fechaPrestamo,diasPrestamo,fechaADevolver,titulo  from lineas_de_prestamos inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo inner join ejemplares on lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar inner join libros on libros.idLibro=ejemplares.idLibro where fechaDevolucion is null and devuelto=false and lineas_de_prestamos.idEjemplar=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idLineaPrestamo,socios.idSocio,socios.apellido,socios.nombre,ejemplares.idEjemplar,prestamos.idPrestamo,fechaPrestamo,diasPrestamo,fechaADevolver,titulo  from lineas_de_prestamos inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo inner join ejemplares on lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar inner join libros on libros.idLibro=ejemplares.idLibro inner join socios on socios.idSocio=lineas_de_prestamos.idSocio where fechaDevolucion is null and devuelto=false and lineas_de_prestamos.idEjemplar=?");
 			stmt.setInt(1,id);
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
@@ -280,7 +280,9 @@ public class DataLineaDePrestamo
 					ej.setLibro(l);
 					lp.setEjemplar(ej);
 					Socio so=new Socio();
-					so.setIdSocio(rs.getInt("lineas_de_prestamos.idSocio"));
+					so.setIdSocio(rs.getInt("socios.idSocio"));
+					so.setApellido(rs.getString("socios.apellido"));
+					so.setNombre(rs.getString("socios.nombre"));
 					lp.setSocio(so);
 					Prestamo pr=new Prestamo();
 					pr.setIdPrestamo(rs.getInt("prestamos.idPrestamo"));
@@ -396,10 +398,31 @@ public class DataLineaDePrestamo
 		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
 		return sDate;
 	}
-/*	public void delete(LineaDePrestamo lp) {}
+	public void delete(LineaDePrestamo lp) 
+	{
+		PreparedStatement stmt=null;
+		try 
+		{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("delete from lineas_de_prestamos where idLineaPrestamo=?");
+			stmt.setInt(1, lp.getIdLineaPrestamo());
+			stmt.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();				
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
 	
 
-   
-	
-	*/
 }

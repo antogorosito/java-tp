@@ -54,6 +54,7 @@ public class agregar extends HttpServlet {
 		String op = request.getParameter("op");	
 	
 		if (op.equals("Agregar")) {
+			
 			if (request.getParameter("idEjemplar") == "") {
 				
 			PrintWriter out = response.getWriter();
@@ -178,11 +179,25 @@ public class agregar extends HttpServlet {
 				out.println("location='menu.jsp';");
 				out.println("</script>");
 			}
-			
-			
+			session.setAttribute("prestamo",null);
+			session.setAttribute("lineas",null);
 	
-			session.invalidate();
-
+		}
+		if(op.equals("Cancelar"))
+		{	
+			HttpSession session = request.getSession();
+			CtrlLineaDePrestamo clp= new CtrlLineaDePrestamo();
+			ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");
+			for(LineaDePrestamo ll:li) 
+			{
+				clp.delete(ll);
+			}
+			CtrlPrestamo cp = new CtrlPrestamo();
+			Prestamo ap = (Prestamo) session.getAttribute("prestamo");
+			cp.delete(ap);
+			session.setAttribute("prestamo",null);
+			session.setAttribute("lineas",null);
+			request.getRequestDispatcher("/prestamos.jsp").forward(request, response);
 		}
 
 	}
