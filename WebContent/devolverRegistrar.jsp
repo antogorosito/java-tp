@@ -17,34 +17,15 @@
 
     <!-- Custom styles for this template -->
     <link href="style/jumbotron.css" rel="stylesheet">
-    
-       
      
   </head>
-
-  <body>   
+    <body>   
      
       <div class="header clearfix">
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-       <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
-        </li>
-        </ul>
-          <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="menu.jsp">Menu</a>
-        </li>
-        </ul>
         
-        <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="index.html">Home</a>
-        </li>
-        </ul>
-      
         
       </div>
 
@@ -54,18 +35,47 @@
         <h1 class="display-3">Prestamos de libros</h1>    
       </div>
     </div>
-   
 
-    <label></label>
     <div class="container">
-    <form class="form-prestamos" action="prestamos" method="post">
-    <label>Id socio:</label>
-     <input type="number" name="idSocio" required="required">
-      <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
-      
+   
+    <%Socio s=(Socio)request.getAttribute("socio"); %>
+    <label>Apellido y nombre: <%=s.getApellido()%>  <%=s.getNombre() %></label>
+   
+    <form class="form-bus" action="devolverRegistrar" method="post">
+        
+  		 <%ArrayList<LineaDePrestamo>lineas=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas"); %>
+ 	
+    
+   
+	<%if (lineas!=null){ %>
+		 <table class="table" >
+ 		<tr>
+		
+			<th>Id ejemplar</th>
+ 			<th>Titulo</th>
+ 			<th>linea</th>
+ 			
+ 
+ 		</tr>
+ 		<%for(LineaDePrestamo ll: lineas){%>
+ 		<tr>
+ 		 <td><%=ll.getEjemplar().getIdEjemplar() %></td>
+ 		 <td><%=ll.getEjemplar().getLibro().getTitulo() %></td>
+ 		 <td><input type="checkbox" name="chk" value=<%=ll.getIdLineaPrestamo() %>></td>
+	 	</tr>
+ 		<%} %>
+ 		</table>
+ 		
+ 		
+ 			
+     	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
+     	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
+	<%}%>
+
     </form>
+   
     </div>
-  
+    
      
 
     <div class="container">

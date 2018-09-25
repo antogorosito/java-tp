@@ -40,6 +40,7 @@ public class Sancion
 		this.fechaSancionHasta=sDate;
 		this.socio=s;
 	}
+
 	
 	public int getIdSancion() 
 	{

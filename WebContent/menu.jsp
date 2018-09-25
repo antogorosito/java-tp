@@ -73,18 +73,27 @@
           <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. </p>
           <p><a class="btn btn-info" href="devoluciones.jsp" role="button">Ir</a></p>
         </div>
+         <div class="col-md-4">
+          <h2>Registrar devoluciones OPCION 2 </h2>
+          <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. </p>
+          <p><a class="btn btn-info" href="devolver.jsp" role="button">Ir</a></p>
+        </div>
         <div class="col-md-4">
           <h2>Inhabilitaciones</h2>
           <p>Realizar la modificacion del estado de los socios que hayan devuelvo libros fuera de termino. </p>
           <p><a class="btn btn-info" href="inhablitaciones.jsp" role="button">Ir</a></p>
        </div>
+     
+      </div> 
+   
+   <div class="row">
+      
          <div class="col-md-4">
           <h2>Informes</h2>
           <p>Imprimir los respectivos informes. </p>
           <p><a class="btn btn-info" href="informes.jsp" role="button">Ir</a></p>
         </div>
       </div> 
-  
     </div>
 
     <div class="container">

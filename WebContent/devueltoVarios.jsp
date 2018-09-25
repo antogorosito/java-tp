@@ -41,7 +41,7 @@
      
       <div class="container">
       <form class="form-bus" action="devueltoVarios" method="post">
-      	<label>Id ejemplar:</label>
+    <label>Id ejemplar:</label>
       	<%if(request.getAttribute("id1")!=null) {%>
       	<input type="text" name="idEjemplar1" value=<%=request.getAttribute("id1") %>>
       	<%}else{ %>
@@ -71,6 +71,7 @@
       	<%}else{ %>
       	<input type="text" name="idEjemplar5">
       	<%} %>
+      	
       	
       	 <%String msj=(String)request.getAttribute("error");
   

@@ -36,10 +36,7 @@ public class CtrlLineaDePrestamo
 	{
 		return de.minimoDias(p);
 	}
-	public LineaDePrestamo getOne(LineaDePrestamo lp)
-	{
-		return de.getOne(lp);
-	}
+
 	public LineaDePrestamo getOne(int id)
 	{
 		return de.getOne(id);
@@ -58,12 +55,13 @@ public class CtrlLineaDePrestamo
 		de.delete(lp);
 	}
 	
-	/*
-	
-	public LineaDePrestamo getOne(LineaDePrestamo lp)
+	public ArrayList<LineaDePrestamo> getAll(int id)
 	{
-		return de.getOne(lp);
+		return de.getAll(id);
 	}
 	
-	*/
+	public LineaDePrestamo obtener(int id)
+	{
+		return de.obtener(id);
+	}
 }
