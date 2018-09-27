@@ -6,6 +6,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,7 +68,7 @@ public class devueltoVariosRegistrar extends HttpServlet {
 			
 			
 		
-			ArrayList<LineaDePrestamo> ll=new ArrayList<LineaDePrestamo>();// para guardar las lineas con sancion
+			List<LineaDePrestamo> ll=new ArrayList<LineaDePrestamo>();// para guardar las lineas con sancion
 		
 			for(LineaDePrestamo l:lineasPrestamos)
 			{
@@ -102,10 +105,7 @@ public class devueltoVariosRegistrar extends HttpServlet {
 				            }
 				    
 				            ll.add(l);
-				      //      CtrlSancion css=new CtrlSancion();
-				        //    Sancion sa=new Sancion(ps.getDiasDeSancion(),l.getSocio());
-				          //  css.add(sa);
-				            //clp.update(l,sa);
+				 
 
 				        //msj
 				        }  
@@ -118,7 +118,8 @@ public class devueltoVariosRegistrar extends HttpServlet {
 			
 		// CREAR LA SANCION, DEPENDE DEL NRO DE PRESTAMO
 			//los ejemplares del mismo prestamo, tienen misma sancion
-			
+
+	
 		for(LineaDePrestamo li:ll)
 		{
 			

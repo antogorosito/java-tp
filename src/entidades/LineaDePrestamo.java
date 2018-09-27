@@ -80,5 +80,4 @@ public class LineaDePrestamo
 		this.ejemplar = ejemplar;
 	}
 	
-	
 }

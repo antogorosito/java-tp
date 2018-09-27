@@ -99,8 +99,12 @@ public class devolverRegistrar extends HttpServlet {
 			            }
 			            CtrlSancion css=new CtrlSancion();
 	  
-			            Sancion sa=new Sancion(ps.getDiasDeSancion(),ll.getSocio());
+			            Sancion sa=css.getOne(ll);
+			            if(sa==null)
+			            {
+			            sa=new Sancion(ps.getDiasDeSancion(),ll.getSocio());
 			            css.add(sa);
+			            }
 			            clp.update(ll,sa);
 
 			       //msj

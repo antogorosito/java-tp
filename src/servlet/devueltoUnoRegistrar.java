@@ -103,9 +103,13 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		            	ps=cps.getMax();
 		            }
 		            CtrlSancion css=new CtrlSancion();
-  
-		            Sancion sa=new Sancion(ps.getDiasDeSancion(),l.getSocio());
+		            Sancion sa=css.getOne(l);
+		            if(sa==null)
+		            {
+		            sa=new Sancion(ps.getDiasDeSancion(),l.getSocio());
 		            css.add(sa);
+		            }
+		            
 		            clp.update(l,sa);
 
 		        	PrintWriter out = response.getWriter();

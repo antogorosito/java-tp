@@ -3,7 +3,7 @@ package negocio;
 import java.util.ArrayList;
 
 import database.DataSancion;
-import entidades.Sancion;
+import entidades.*;
 
 public class CtrlSancion 
 {
@@ -19,6 +19,11 @@ public class CtrlSancion
 	{
 		ds.add(s);
 	}
+	public Sancion getOne(LineaDePrestamo l)
+	{
+		return ds.getOne(l);
+	}
+	
 /*	
 	public void delete(Sancion s)
 	{
@@ -30,10 +35,6 @@ public class CtrlSancion
 		ds.update(s);
 	}
 	
-	public Sancion getOne(Sancion s)
-	{
-		return ds.getOne(s);
-	}
 	
 	public ArrayList<Sancion> getAll()
 	{

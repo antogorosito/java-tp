@@ -1,6 +1,6 @@
 package database;
 
-import entidades.Sancion;
+import entidades.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,12 +45,55 @@ public class DataSancion
 			} 
 		}
 	}
-	
+	public Sancion getOne(LineaDePrestamo l)
+	{
+		Sancion s=null;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select sanciones.* from sanciones inner join lineas_de_prestamos on lineas_de_prestamos.idSancion=sanciones.idSancion where lineas_de_prestamos.idPrestamo=? and sanciones.fechaSancion=current_date()");
+			stmt.setInt(1,l.getPrestamo().getIdPrestamo());
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					s=new Sancion();
+								
+				s.setIdSancion(rs.getInt("idSancion"));
+				s.setFechaSancion(rs.getDate("fechaSancion"));
+				s.setFechaSancionHasta(rs.getDate("fechaSancionHasta"));
+				Socio ss=new Socio();
+				ss.setIdSocio(rs.getInt("idSocio"));
+				s.setSocio(ss);
+				
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return s;
+	}
 	/*	public void delete(Sancion s) {}
 	
 	public void update(Sancion s) {}
 	
-	public Sancion getOne(Sancion s) { }
+	
 	
 	public ArrayList<Sancion> getAll() {}*/
 }
