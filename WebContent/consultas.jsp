@@ -33,7 +33,7 @@
     		if (u!=null){%>
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
+        <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
         </ul>
           <ul class="nav nav-pills float-right">

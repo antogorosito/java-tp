@@ -1,28 +1,23 @@
 package servlet;
 
 import java.io.IOException;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-
 
 /**
- * Servlet implementation class devoluciones
+ * Servlet implementation class estado
  */
-@WebServlet({ "/devoluciones", "/Devoluciones" })
-public class devoluciones extends HttpServlet {
+@WebServlet("/estado")
+public class estado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public devoluciones() {
+    public estado() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,21 +33,9 @@ public class devoluciones extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		String op = request.getParameter("opc");		
-		if(op.equals("Uno"))
-		{
-			request.getRequestDispatcher("/devueltoUno.jsp").forward(request, response);
-		}
-		if(op.equals("Varios"))
-		{
-			
-			request.getRequestDispatcher("/devueltoVarios.jsp").forward(request, response);
-		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
-		
-		
-	
 
 }

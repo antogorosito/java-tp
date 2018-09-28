@@ -1,3 +1,4 @@
+<%@page import="negocio.CtrlSocio"%>
 <%@page import="com.mysql.cj.Session"%>
 <%@page import="entidades.*" %>
 <%@page import="java.util.ArrayList" %>
@@ -9,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Prestamo de libros</title>
+    <title>Estado de socios</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -17,18 +18,15 @@
 
     <!-- Custom styles for this template -->
     <link href="style/jumbotron.css" rel="stylesheet">
-    
-       
      
   </head>
-
-  <body>   
+    <body>   
      
       <div class="header clearfix">
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-       <ul class="nav nav-pills float-right">
+            <ul class="nav nav-pills float-right">
         <li class="nav item">
         <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
@@ -44,29 +42,68 @@
         	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
-      
         
       </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Prestamos de libros</h1>    
+        <h1 class="display-3">Estado de socios</h1>    
       </div>
     </div>
-   
 
-    <label></label>
     <div class="container">
-    <form class="form-prestamos" action="prestamos" method="post">
-    <label>Id socio:</label>
-     <input type="number" name="idSocio" required="required">
-      <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
-      
-    </form>
-    </div>
+    
+   <label> SOCIOS A INHABILITAR:</label>
+   <table class="table">
+   	<tr>
+		<th>ID socio</th>
+ 		<th>Nombre y apellido</th>
+ 		<th>Seleccionar</th>
+ 	</tr>
+ 	<%CtrlSocio cs=new CtrlSocio();
+ 	ArrayList<Socio> sociosInhabilitar = cs.getAllAInhabilitar();
+ 	if(sociosInhabilitar!=null){
+ 	for(Socio s:sociosInhabilitar){%>
+   <tr>
+   	<td><%=s.getIdSocio() %></td>
+ 	<td><%=s.getNombre() +" "+s.getApellido() %></td>
+ 	<td><input type="checkbox" name="chk" checked="checked" value=<%=s.getIdSocio() %>></td>
+  </tr>   <%} }%>
   
-     
+
+   </table>
+   <form class="form-bus" action="estado" method="post">
+  	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
+  </form>
+   
+    </div>
+    
+         <div class="container">
+    
+   <label> SOCIOS A HABILITAR:</label>
+   <table class="table">
+   	<tr>
+		<th>ID socio</th>
+ 		<th>Nombre y apellido</th>
+ 		<th>Seleccionar</th>
+ 	</tr>
+ 	<%	ArrayList<Socio> sociosHabilitar = cs.getAllAHabilitar();
+ 	if(sociosHabilitar!=null){
+ 	for(Socio so:sociosHabilitar){%>
+   <tr>
+   	<td><%=so.getIdSocio() %></td>
+ 	<td><%=so.getNombre() +" "+so.getApellido() %></td>
+ 	<td><input type="checkbox" name="chk" checked="checked" value=<%=so.getIdSocio() %>></td>
+  </tr>   <%} }%>
+  
+
+   </table>
+   <form class="form-bus" action="estado" method="post">
+  	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
+  </form>
+   
+    </div>
 
     <div class="container">
    

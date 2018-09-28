@@ -1,37 +1,55 @@
 package database;
 
 import java.sql.*;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import com.sun.org.apache.bcel.internal.generic.Select;
-
 import entidades.*;
+import negocio.CtrlLineaDePrestamo;
 public class prueba2 {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException  {
-		//Calendar cal=Calendar.getInstance();
-		//java.util.Date d = new java.util.Date();
-		//Date fechaActual = new java.sql.Date(d.getTime());
-//		cal.setTime(fechaActual);
-	//	System.out.println(cal.getTime());
-	/*
-		GregorianCalendar fecha = new GregorianCalendar();
-		java.util.Date d = new java.util.Date();
-		Date fechaActual = new java.sql.Date(d.getTime());
-		System.out.println(fechaActual);
-	*/
+	
 		
-		System.out.println("prueba");
+	/*	System.out.println("prueba");
 		if(getL("antonella")==null) {System.out.println("no hay");}
-		else {System.out.println("hay");}
+		else {System.out.println("hay");}*/
+	
+		java.util.Date fecha = new  java.util.Date();
+		System.out.println("fec util");
+		System.out.println(fecha);
+		 DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
+		 String fechaActu=Formato.format(fecha);
+			System.out.println("fec actual");
+			System.out.println(fechaActu);
+			
+			 CtrlLineaDePrestamo cl=new CtrlLineaDePrestamo();
+			 int i=17;
+			 LineaDePrestamo l=cl.obtener(i);
+		
+		String fechadev=Formato.format(l.getPrestamo().getFechaADevolver());
 
-	/*	java.util.Date d = new java.util.Date();
-		Date fechaPrestamo = new java.sql.Date(d.getTime());
-		Time horaPrestamo=new java.sql.Time(d.getTime());
-		System.out.println("hors:" + horaPrestamo);
-		System.out.println("dia"+fechaPrestamo);	*/	
+		System.out.println("fec dev");System.out.println(fechadev);
+		int rta=fechaActu.compareTo(fechadev);
+		System.out.println("comparacion");System.out.println(rta);
+		
+	
+		
+	/*    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    java.util.Date date1;
+		try {
+			date1 = sdf.parse(fechaActu);
+		
+		java.util.Date date2=sdf.parse(fechadev);
+		System.out.println("actrual"); System.out.println(date1);
+		System.out.println("dev");System.out.println(date2);
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	
 	}
 	
 	public static Usuario getL(String i) throws SQLException, ClassNotFoundException 

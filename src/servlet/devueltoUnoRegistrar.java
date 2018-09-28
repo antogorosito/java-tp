@@ -13,14 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entidades.LineaDePrestamo;
-import entidades.PoliticaSancion;
-import entidades.Sancion;
-import entidades.Socio;
-import negocio.CtrlLineaDePrestamo;
-import negocio.CtrlPoliticaSancion;
-import negocio.CtrlSancion;
-import negocio.CtrlSocio;
+import entidades.*;
+import negocio.*;
 
 /**
  * Servlet implementation class devueltoUnoRegistrar
@@ -82,7 +76,7 @@ public class devueltoUnoRegistrar extends HttpServlet {
 					PrintWriter out = response.getWriter();
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('Se registro la devolucion');");
-						out.println("location='devoluciones.jsp';");
+						out.println("location='devueltoUno.jsp';");
 						out.println("</script>");
 		        }else if (date1.compareTo(date2) > 0) {
 		         
@@ -115,7 +109,7 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		        	PrintWriter out = response.getWriter();
 					out.println("<script type=\"text/javascript\">");
 					out.println("alert('Se registro la devolucion,inhabilitacion y sancion al socio');");
-					out.println("location='devoluciones.jsp';");
+					out.println("location='devueltoUno.jsp';");
 					out.println("</script>");
 		        }  
 			} catch (ParseException e) {
@@ -126,7 +120,7 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		}
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/devoluciones.jsp").forward(request, response);
+			request.getRequestDispatcher("/devueltoUno.jsp").forward(request, response);
 		}
 	}
 

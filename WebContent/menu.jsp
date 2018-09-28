@@ -28,7 +28,7 @@
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        <a class="nav-link" href="...">Cerrar sesion</a>
+        <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
         </ul>
         
@@ -70,18 +70,19 @@
        <div class="row">
         <div class="col-md-4">
           <h2>Registrar devoluciones</h2>
-          <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. </p>
-          <p><a class="btn btn-info" href="devoluciones.jsp" role="button">Ir</a></p>
+          <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID EJEMPLAR</p>
+          <p><a class="btn btn-info" href="devueltoUno.jsp" role="button">Ir</a></p>
         </div>
          <div class="col-md-4">
-          <h2>Registrar devoluciones OPCION 2 </h2>
-          <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. </p>
+          <h2>Registrar devoluciones </h2>
+          <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID SOCIO</p>
+         
           <p><a class="btn btn-info" href="devolver.jsp" role="button">Ir</a></p>
         </div>
         <div class="col-md-4">
-          <h2>Inhabilitaciones</h2>
-          <p>Realizar la modificacion del estado de los socios que hayan devuelvo libros fuera de termino. </p>
-          <p><a class="btn btn-info" href="inhablitaciones.jsp" role="button">Ir</a></p>
+          <h2>Estado </h2>
+          <p>Realizar la modificacion del estado de los socios. </p>
+          <p><a class="btn btn-info" href="estado.jsp" role="button">Ir</a></p>
        </div>
      
       </div> 

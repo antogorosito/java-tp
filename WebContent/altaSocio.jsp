@@ -31,7 +31,7 @@
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="logout">Home</a>
         </li>
         </ul>
       

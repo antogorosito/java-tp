@@ -95,7 +95,7 @@ public class devueltoUno extends HttpServlet {
 		}//termina el agregar
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/devoluciones.jsp").forward(request, response);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	
 		

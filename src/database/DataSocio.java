@@ -2,6 +2,8 @@ package database;
 
 import entidades.*;
 import java.sql.*;
+import java.util.ArrayList;
+
 import database.FactoryConexion;
 
 public class DataSocio 
@@ -166,8 +168,100 @@ public class DataSocio
 			} 
 		}
 	}
-	
-	
-/*	public ArrayList<Socio> getAll() {}
- * 	public void delete(Socio s) {}*/
+	public ArrayList<Socio> getAllAInhabilitar() 
+	{
+		PreparedStatement stmt=null;
+		ResultSet rs= null;
+		ArrayList<Socio> socios=null;
+		try 
+		{
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios inner join lineas_de_prestamos on lineas_de_prestamos.idSocio=socios.idSocio inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date()");
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					socios=new ArrayList<Socio>();
+					Socio s=new Socio();
+					s.setApellido(rs.getString("apellido"));
+					s.setNombre(rs.getString("nombre"));
+					s.setDni(rs.getString("dni"));
+					s.setDomicilio(rs.getString("domicilio"));
+					s.setEmail(rs.getString("email"));
+					s.setEstado(rs.getBoolean("estado"));
+					s.setIdSocio(rs.getInt("idSocio"));
+					s.setTelefono(rs.getString("telefono"));
+					socios.add(s);					
+				}
+			}
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return socios;
+		
+	}
+	public ArrayList<Socio> getAllAHabilitar() // ver query 
+	{
+		PreparedStatement stmt=null;
+		ResultSet rs= null;
+		ArrayList<Socio> socios=null;
+		try 
+		{
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("");
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					socios=new ArrayList<Socio>();
+					Socio s=new Socio();
+					s.setApellido(rs.getString("apellido"));
+					s.setNombre(rs.getString("nombre"));
+					s.setDni(rs.getString("dni"));
+					s.setDomicilio(rs.getString("domicilio"));
+					s.setEmail(rs.getString("email"));
+					s.setEstado(rs.getBoolean("estado"));
+					s.setIdSocio(rs.getInt("idSocio"));
+					s.setTelefono(rs.getString("telefono"));
+					socios.add(s);	
+				}
+			}
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return socios;
+		
+	}
+
+/* 	public void delete(Socio s) {}*/
 }

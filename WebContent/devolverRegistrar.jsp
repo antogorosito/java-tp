@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Prestamo de libros</title>
+    <title>Devolución de libros</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->

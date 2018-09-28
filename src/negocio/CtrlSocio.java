@@ -27,20 +27,25 @@ public class CtrlSocio
 	{
 		ds.update(s,est);
 	}
-/*	public void delete(Socio s)
+
+	
+	public Socio getOne(String dni)
+	{
+		return ds.getOne(dni);
+	}
+	
+	public ArrayList<Socio> getAllAInhabilitar()
+	{
+		return ds.getAllAInhabilitar();
+	}
+	public ArrayList<Socio> getAllAHabilitar()
+	{
+		return ds.getAllAHabilitar();
+	}
+	/*	public void delete(Socio s)
 	{
 		ds.delete(s);
 	}
 	
 	*/
-	
-	public Socio getOne(String dni)
-	{
-		return ds.getOne(dni);
-	}/*
-	
-	public ArrayList<Socio> getAll()
-	{
-		return ds.getAll();
-	}*/
 }
