@@ -1,11 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import entidades.*;
+import negocio.*;
 
 /**
  * Servlet implementation class estado
@@ -35,7 +41,51 @@ public class estado extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String op=request.getParameter("op");
+		if(op.equals("Inhabilitar"))
+		{
+			ArrayList<Socio> lista=new ArrayList<Socio>();
+			CtrlSocio cs=new CtrlSocio();
+			String[] lin=request.getParameterValues("chk");
+			for(int i=0;i<lin.length;i++)
+			{
+				Socio s=cs.getOne(Integer.parseInt(lin[i]));
+				lista.add(s);
+			}
+			for(Socio ss:lista) 
+			{
+				cs.update(ss, false);
+			}
+			PrintWriter out = response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Se registraron las inhabilitaciones');");
+			out.println("location='estado.jsp';");
+			out.println("</script>");
+			
+		}//fin if
+		
+		if(op.equals("Habilitar"))
+		{
+
+			ArrayList<Socio> lista=new ArrayList<Socio>();
+			CtrlSocio cs=new CtrlSocio();
+			String[] lin=request.getParameterValues("chk");
+			for(int i=0;i<lin.length;i++)
+			{
+				Socio s=cs.getOne(Integer.parseInt(lin[i]));
+				lista.add(s);
+			}
+			for(Socio ss:lista) 
+			{
+				cs.update(ss, true);
+			}
+			PrintWriter out = response.getWriter();
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Se registraron las habilitaciones');");
+			out.println("location='estado.jsp';");
+			out.println("</script>");
+		}//fin if
+		
 	}
 
 }

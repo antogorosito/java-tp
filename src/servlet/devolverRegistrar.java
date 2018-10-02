@@ -55,7 +55,7 @@ public class devolverRegistrar extends HttpServlet {
 			ArrayList<LineaDePrestamo> lista=new ArrayList<LineaDePrestamo>();
 			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
 			String[] lin=request.getParameterValues("chk");
-			for(int i=0;i<lin.length;i++) //obtengo las lineas de prestamosseleccionadas
+			for(int i=0;i<lin.length;i++) //obtengo las lineas de prestamos seleccionadas
 			{
 				LineaDePrestamo l=clp.obtener(Integer.parseInt(lin[i]));
 				lista.add(l);

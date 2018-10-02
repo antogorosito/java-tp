@@ -42,6 +42,11 @@ public class CtrlSocio
 	{
 		return ds.getAllAHabilitar();
 	}
+	public ArrayList<Socio> getAllInhabilitados()
+	{
+	
+		return ds.getAllInhabilitados();
+	}
 	/*	public void delete(Socio s)
 	{
 		ds.delete(s);

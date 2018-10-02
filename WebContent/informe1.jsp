@@ -1,3 +1,4 @@
+<%@page import="negocio.CtrlLineaDePrestamo"%>
 <%@page import="negocio.CtrlSocio"%>
 <%@page import="com.mysql.cj.Session"%>
 <%@page import="entidades.*" %>
@@ -48,34 +49,42 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Informe de los libros mas consultados</h1>    
+        <h1 class="display-3">Informe de los libros pendientes de devolucion</h1>    
       </div>
     </div>
 
     <div class="container">
     
-   
-   <table class="table">
+<%CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+   ArrayList<LineaDePrestamo> lineas=clp.getAllPendiente();
+   if(lineas.isEmpty()==false){%>
+    <table class="table">
    	<tr>
-		<th>ID socio</th>
+		<th>Titulo</th>
+		<th>ID ejemplar</th>
+		<th>ID prestamo</th>
+		<th>Fecha a devolver</th>
  		<th>Nombre y apellido</th>
- 		<th>Seleccionar</th>
+ 	
+ 		
  	</tr>
- 	<%CtrlSocio cs=new CtrlSocio();
- 	ArrayList<Socio> sociosInhabilitar = cs.getAllAInhabilitar();
- 	if(sociosInhabilitar!=null){
- 	for(Socio s:sociosInhabilitar){%>
+ 	<% 	for(LineaDePrestamo lp: lineas){%>
    <tr>
-   	<td><%=s.getIdSocio() %></td>
- 	<td><%=s.getNombre() +" "+s.getApellido() %></td>
- 	<td><input type="checkbox" name="chk" checked="checked" value=<%=s.getIdSocio() %>></td>
-  </tr>   <%} }%>
+   	<td><%=lp.getEjemplar().getLibro().getTitulo() %></td>
+   	<td><%=lp.getEjemplar().getIdEjemplar() %></td>
+   	<td><%=lp.getPrestamo().getIdPrestamo() %></td>
+   	<td><%=lp.getPrestamo().getFechaADevolver() %></td>
+ 	<td><%=lp.getSocio().getNombre() +" "+lp.getSocio().getApellido() %></td>
+ 	
+ 	
+  </tr>   <%} %>
   
 
-   </table>
-   <form class="form-bus" action="estado" method="post">
-  	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
-  </form>
+   </table> 
+   <%} %>
+<form class="form-bus" action="informes" method="post">
+<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button>
+</form>
    
     </div>
 

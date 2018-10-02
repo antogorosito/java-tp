@@ -57,13 +57,13 @@
       <div class="container">
    <div class="row">
         <div class="col-md-4">
-          <h2>Libros mas consultados</h2>
-          <p>Imprimir informe sobre los libros mas buscados el ultimo mes. </p>
+          <h2>Libros pendientes de devolucion</h2>
+          <p>Informe sobre los libros que aun no han sido devueltos. </p>
           <p><a class="btn  btn-info" href="informe1.jsp" role="button">Ir  </a></p>
         </div>
         <div class="col-md-4">
           <h2>Socios sancionados</h2>
-          <p>Imprimir informe sobre todos los socios que se encuentran actualmente sancionados. </p>
+          <p>Informe sobre todos los socios que se encuentran actualmente sancionados. </p>
           <p><a class="btn btn-info" href="informe2.jsp" role="button">Ir</a></p>
        </div>
     </div>

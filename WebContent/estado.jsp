@@ -52,59 +52,68 @@
       </div>
     </div>
 
-    <div class="container">
-    
-   <label> SOCIOS A INHABILITAR:</label>
+     <div class="container">
+      <form class="form-bus" action="estado" method="post">
+    <%CtrlSocio cs=new CtrlSocio();
+ 	ArrayList<Socio> sociosInhabilitar = cs.getAllAInhabilitar();
+ 	if(sociosInhabilitar.isEmpty() ==true){%>
+   <label style="color:red;"><b> No hay socios para inhabilitar</b></label>
+   <%}else{ %>
+     <label><b> SOCIOS A INHABILITAR:</b></label>
    <table class="table">
    	<tr>
 		<th>ID socio</th>
  		<th>Nombre y apellido</th>
  		<th>Seleccionar</th>
  	</tr>
- 	<%CtrlSocio cs=new CtrlSocio();
- 	ArrayList<Socio> sociosInhabilitar = cs.getAllAInhabilitar();
- 	if(sociosInhabilitar!=null){
- 	for(Socio s:sociosInhabilitar){%>
+ 
+ <%	for(Socio s:sociosInhabilitar){%>
    <tr>
    	<td><%=s.getIdSocio() %></td>
  	<td><%=s.getNombre() +" "+s.getApellido() %></td>
- 	<td><input type="checkbox" name="chk" checked="checked" value=<%=s.getIdSocio() %>></td>
-  </tr>   <%} }%>
+ 	<td><input type="checkbox" name="chk"  value=<%=s.getIdSocio() %>></td>
+  </tr> 
+    <%} %>
   
-
    </table>
-   <form class="form-bus" action="estado" method="post">
-  	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
+   	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
+   	 <%}%>
+   	
   </form>
-   
+  
     </div>
     
-         <div class="container">
-    
-   <label> SOCIOS A HABILITAR:</label>
+       <div class="container">
+      <form class="form-bus" action="estado" method="post">
+    <%
+ 	ArrayList<Socio> sociosHabilitar = cs.getAllAHabilitar();
+ 	if(sociosHabilitar.isEmpty() ==true){%>
+   <label style="color:red;"> <b>No hay socios para habilitar</b></label>
+   <%}else{ %>
+     <label><b> SOCIOS A HABILITAR:</b></label>
    <table class="table">
    	<tr>
 		<th>ID socio</th>
  		<th>Nombre y apellido</th>
  		<th>Seleccionar</th>
  	</tr>
- 	<%	ArrayList<Socio> sociosHabilitar = cs.getAllAHabilitar();
- 	if(sociosHabilitar!=null){
- 	for(Socio so:sociosHabilitar){%>
+ 
+ <%	for(Socio ss:sociosHabilitar){%>
    <tr>
-   	<td><%=so.getIdSocio() %></td>
- 	<td><%=so.getNombre() +" "+so.getApellido() %></td>
- 	<td><input type="checkbox" name="chk" checked="checked" value=<%=so.getIdSocio() %>></td>
-  </tr>   <%} }%>
+   	<td><%=ss.getIdSocio() %></td>
+ 	<td><%=ss.getNombre() +" "+ss.getApellido() %></td>
+ 	<td><input type="checkbox" name="chk"  value=<%=ss.getIdSocio() %>></td>
+  </tr> 
+    <%} %>
   
-
    </table>
-   <form class="form-bus" action="estado" method="post">
-  	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
+   	<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
+   	 <%}%>
+   	
   </form>
-   
+  
     </div>
-
+   
     <div class="container">
    
       <footer>

@@ -433,7 +433,7 @@ public class DataLineaDePrestamo
 		}
 		return lineas;
 	}
- public LineaDePrestamo obtener(int id)
+ public LineaDePrestamo obtener(int id) //obtener toda la info sobre las lineas seleccionadas (checkbox)
  {
 	 LineaDePrestamo lp=null;
 		PreparedStatement stmt=null;
@@ -469,11 +469,6 @@ public class DataLineaDePrestamo
 					pr.setFechaADevolver(rs.getDate("fechaADevolver"));
 					pr.setFechaPrestamo(rs.getDate("fechaPrestamo"));
 					lp.setPrestamo(pr);
-				//	lp.setDevuelto(rs.getBoolean("devuelto"));
-				//  lp.setFechaDevolucion(rs.getDate("fechaDevolucion"));
-				//	Sancion s=new Sancion();
-				//	s.setIdSancion(rs.getInt("idSancion"));
-				//	lp.setSancion(s);
 				}
 			}
 		} catch (SQLException e) {
@@ -493,5 +488,57 @@ public class DataLineaDePrestamo
 			} 
 		}
 		return lp;
+ }
+ public ArrayList<LineaDePrestamo> getAllPendiente()
+ {
+	 PreparedStatement stmt=null;
+		ResultSet rs= null;
+		ArrayList<LineaDePrestamo> lineas=new ArrayList<LineaDePrestamo>();
+		try 
+		{
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select prestamos.idPrestamo,titulo,ejemplares.idEjemplar,apellido,nombre,socios.idSocio,fechaADevolver  from lineas_de_prestamos inner join ejemplares on ejemplares.idEjemplar=lineas_de_prestamos.idEjemplar inner join libros on libros.idLibro=ejemplares.idLibro inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo inner join socios on socios.idSocio=lineas_de_prestamos.idSocio  where fechaDevolucion is null and devuelto=false");
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					LineaDePrestamo lp=new LineaDePrestamo();
+					Ejemplar ej=new Ejemplar();
+					ej.setIdEjemplar(rs.getInt("ejemplares.idEjemplar"));
+					Libro l=new Libro();
+					l.setTitulo(rs.getString("titulo"));
+					ej.setLibro(l);
+					lp.setEjemplar(ej);
+					Socio so=new Socio();
+					so.setIdSocio(rs.getInt("socios.idSocio"));
+					so.setApellido(rs.getString("apellido"));
+					so.setNombre(rs.getString("nombre"));
+					lp.setSocio(so);
+					Prestamo pr=new Prestamo();
+					pr.setIdPrestamo(rs.getInt("prestamos.idPrestamo"));
+					pr.setFechaADevolver(rs.getDate("fechaADevolver"));							
+					lp.setPrestamo(pr);
+					lineas.add(lp);
+				}
+			}
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return lineas;
  }
 }

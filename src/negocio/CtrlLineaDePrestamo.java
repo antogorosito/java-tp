@@ -64,4 +64,9 @@ public class CtrlLineaDePrestamo
 	{
 		return de.obtener(id);
 	}
+	public ArrayList<LineaDePrestamo> getAllPendiente()
+	{
+		return de.getAllPendiente();
+	}
+	
 }

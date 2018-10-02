@@ -172,17 +172,18 @@ public class DataSocio
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
-		ArrayList<Socio> socios=null;
+		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
 		{
 			
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios inner join lineas_de_prestamos on lineas_de_prestamos.idSocio=socios.idSocio inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date()");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios inner join lineas_de_prestamos on lineas_de_prestamos.idSocio=socios.idSocio inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date() and socios.estado=true group by socios.idSocio");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
+	
 				while(rs.next())
 				{
-					socios=new ArrayList<Socio>();
+					
 					Socio s=new Socio();
 					s.setApellido(rs.getString("apellido"));
 					s.setNombre(rs.getString("nombre"));
@@ -215,21 +216,21 @@ public class DataSocio
 		return socios;
 		
 	}
-	public ArrayList<Socio> getAllAHabilitar() // ver query 
+	public ArrayList<Socio> getAllAHabilitar()  // ver query, si la habilitacion es el mismo dia que termina o el dia mas uno
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
-		ArrayList<Socio> socios=null;
+		ArrayList<Socio> socios=	new ArrayList<Socio>();
 		try 
 		{
 			
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *  from sanciones inner join socios on socios.idSocio=sanciones.idSancion where adddate(fechaSancionHasta,1)=current_date() and estado=false");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
 				while(rs.next())
 				{
-					socios=new ArrayList<Socio>();
+				
 					Socio s=new Socio();
 					s.setApellido(rs.getString("apellido"));
 					s.setNombre(rs.getString("nombre"));
@@ -237,7 +238,7 @@ public class DataSocio
 					s.setDomicilio(rs.getString("domicilio"));
 					s.setEmail(rs.getString("email"));
 					s.setEstado(rs.getBoolean("estado"));
-					s.setIdSocio(rs.getInt("idSocio"));
+					s.setIdSocio(rs.getInt("socios.idSocio"));
 					s.setTelefono(rs.getString("telefono"));
 					socios.add(s);	
 				}
@@ -262,6 +263,53 @@ public class DataSocio
 		return socios;
 		
 	}
-
+	
+	public ArrayList<Socio> getAllInhabilitados() 
+	{
+		PreparedStatement stmt=null;
+		ResultSet rs= null;
+		ArrayList<Socio> listaSocios=new ArrayList<Socio>();
+		try 
+		{
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from socios where estado=false");
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					
+					Socio ss=new Socio();
+					ss.setIdSocio(rs.getInt("idSocio"));
+					ss.setApellido(rs.getString("apellido"));
+					ss.setNombre(rs.getString("nombre"));
+					ss.setDni(rs.getString("dni"));
+					ss.setDomicilio(rs.getString("domicilio"));
+					ss.setEmail(rs.getString("email"));
+					ss.setEstado(rs.getBoolean("estado"));
+					ss.setTelefono(rs.getString("telefono"));
+					listaSocios.add(ss);	
+				}
+			}
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return listaSocios;
+		
+	}
 /* 	public void delete(Socio s) {}*/
 }
