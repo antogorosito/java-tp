@@ -56,6 +56,11 @@
           <p><a class="btn  btn-info" href="altaSocio.jsp" role="button">Ir  </a></p>
         </div>
         <div class="col-md-4">
+          <h2>Alta libro</h2>
+          <p>Realizar el registros de nuevos libros y ejemplares en la biblioteca. </p>
+          <p><a class="btn  btn-info" href="altaLibro.jsp" role="button">Ir  </a></p>
+        </div>
+        <div class="col-md-4">
           <h2>Consultas</h2>
           <p>Realizar consultas sobre la disponibilidad de los libros. </p>
           <p><a class="btn btn-info" href="consultas.jsp" role="button">Ir</a></p>
