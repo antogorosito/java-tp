@@ -74,7 +74,11 @@
    		
    		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
          <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
+  	<%String msj=(String)session.getAttribute("errorAltaS");
   
+ 		if (msj != null) {%>
+ 		<label style="color:red;"><%=msj %></label>
+ 		<%}%>
    	</form>
   
     </div>

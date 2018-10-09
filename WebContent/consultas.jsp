@@ -79,7 +79,11 @@
         <input type="text" name="titulo" required="required" value=<%=titulo %>><%} %>
     <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
   
+  	<%String msj=(String)session.getAttribute("errorCon");
   
+ 		if (msj != null) {%>
+ 		<label style="color:red;"><%=msj %></label>
+ 		<%}%>
 	</form>   
   
     </div>

@@ -3,9 +3,9 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
+
 
 import negocio.*;
 import entidades.*;
@@ -48,51 +48,42 @@ public class agregar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		request.getSession().setAttribute("error",null);
 		String op = request.getParameter("op");	
 	
-		if (op.equals("Agregar")) {
+		if (op.equals("Agregar")) 
+		{
 			
-			if (request.getParameter("idEjemplar") == "") {
-				
-			PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Id vacio');");
-				out.println("location='WEB-INF/lib/agregar.jsp';");
-				out.println("</script>");
-			} else {
 				int id = Integer.parseInt(request.getParameter("idEjemplar"));
 				CtrlEjemplar ce = new CtrlEjemplar();
 				Ejemplar e = ce.getOne(id); // veo si existe el id
-				if (e == null) {
-					PrintWriter out = response.getWriter();
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Id ejemplar incorrecto');");
-					out.println("location='WEB-INF/lib/agregar.jsp';");
-					out.println("</script>");
+				if (e == null)
+				{
+					String msj = "El id "+id+" es incorrecto";
+					request.getSession().setAttribute("error", msj);
+					request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+					
 				} else {
 					HttpSession session = request.getSession();
 					Socio s = (Socio) session.getAttribute("socio");
 					if (ce.existe(id,s) == true)// buscar si esta en otro prestamo de otra persona sin devolver aun
 					{
-						PrintWriter out = response.getWriter();
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('ejemplar no disponible');");
-						out.println("location='WEB-INF/lib/agregar.jsp';");
-						out.println("</script>");
+						String msj = "El ejemplar "+id+" no esta disponible";
+						request.getSession().setAttribute("error", msj);
+						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+						
 					} else {
 						CtrlLineaDePrestamo clp = new CtrlLineaDePrestamo();
 						
 						boolean rta = clp.getOne(s.getIdSocio(), id); // veo si ya tengo otros ejemplares de mismo libro
 						if (rta == true) 
 						{
-							PrintWriter out = response.getWriter();
-							out.println("<script type=\"text/javascript\">");
-							out.println("alert('Posee otros ejemplares del mismo libro ya prestados');");
-							out.println("location='WEB-INF/lib/agregar.jsp';");
-							out.println("</script>");
+							String msj = "Ya posee otros ejempalres del mismo libro prestados.";
+							request.getSession().setAttribute("error", msj);
+							request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+							
 						} else {
 							// que cree el prestamo la primera vez y las siguientes solo agregue
 							CtrlPrestamo cp = new CtrlPrestamo();
@@ -120,11 +111,10 @@ public class agregar extends HttpServlet {
 							boolean resultado = clp.buscarLinea(lp); // me fijo si la linea de prestamo ya existe
 							if (resultado == true) 
 							{
-								PrintWriter out = response.getWriter();
-								out.println("<script type=\"text/javascript\">");
-								out.println("alert('ya esta en el prestamo');");
-								out.println("location='WEB-INF/lib/agregar.jsp';");
-								out.println("</script>");
+								String msj = "El ejemplar "+id+" ya esta en el prestamo";
+								request.getSession().setAttribute("error", msj);
+								request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+								
 							} else {
 								int c = (Integer) session.getAttribute("cantPosible"); // fijarse que no se supere la
 																						// cantidad permitida de libros
@@ -138,7 +128,7 @@ public class agregar extends HttpServlet {
 									request.getSession().setAttribute("cantPosible", c);
 								}
 								ArrayList<LineaDePrestamo> lineas = clp.getAll(ap);// devolver TODAS LAS LINEAS DEL PRESTAMO
-								//request.setAttribute("lineas", lineas);
+							
 								request.getSession().setAttribute("lineas",lineas); // para que me devuelva la lista aun con los carteles uso el session antes use la linea anterior
 								int dias = clp.minimoDias(ap);// buscar minima cantidad de dias en las lineas deprestamo
 								request.getSession().setAttribute("dias", dias);
@@ -146,13 +136,18 @@ public class agregar extends HttpServlet {
 							}
 						}
 					}
-				}
+				
 			} //
 		
 			
 		}
+		if (op.equals("Volver")) 
+		{
+			request.getRequestDispatcher("WEB-INF/lib/prestamo.jsp").forward(request, response);
+		}
 
 		if (op.equals("Guardar")) {
+			request.getSession().setAttribute("errorDev",null);
 			HttpSession session = request.getSession();
 			int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
 			int min=(Integer)session.getAttribute("dias");
@@ -163,21 +158,16 @@ public class agregar extends HttpServlet {
 			{
 				cp.update(pre, min);
 
-			PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Se ha guardado el prestamo por el minimo de dias establecido');");
-				out.println("location='WEB-INF/lib/menu.jsp';");
-				out.println("</script>");
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+			
 			}
 			else
 			{
 				cp.update(pre, di);
 
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Se ha guardado el prestamo con los dias ingresados');");
-				out.println("location='WEB-INF/lib/menu.jsp';");
-				out.println("</script>");
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+				
+			
 			}
 			session.setAttribute("prestamo",null);
 			session.setAttribute("lineas",null);
@@ -185,6 +175,8 @@ public class agregar extends HttpServlet {
 		}
 		if(op.equals("Cancelar"))
 		{	
+			request.getSession().setAttribute("errorDev",null);
+			
 			HttpSession session = request.getSession();
 			CtrlLineaDePrestamo clp= new CtrlLineaDePrestamo();
 			ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");

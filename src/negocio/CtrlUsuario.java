@@ -20,9 +20,9 @@ public class CtrlUsuario
 	{
 		return du.getOne(u,c);
 	}
-	public void add(Usuario u) 
+	public void add(Usuario u, int id) 
 	{
-		du.add(u);
+		du.add(u,id);
 	}
 	
 	

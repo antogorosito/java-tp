@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,7 +81,7 @@ public class devueltoUno extends HttpServlet {
 		if(op.equals("Cancelar"))
 		{
 			request.getSession().setAttribute("errorDevUno",null);
-			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
+//			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	
 		

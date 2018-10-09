@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -68,7 +68,7 @@ public class devolver extends HttpServlet {
 				}
 				else
 				{
-					request.getSession().setAttribute("errorDev",null);
+				
 					request.setAttribute("lineas",lineas);
 					request.setAttribute("socio",s);
 					request.getRequestDispatcher("/WEB-INF/lib/devolverRegistrar.jsp").forward(request, response);
@@ -79,7 +79,7 @@ public class devolver extends HttpServlet {
 		if(op.equals("Cancelar"))
 		{
 			request.getSession().setAttribute("errorDev",null);
-			request.getRequestDispatcher("/WEB-INF/lib/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		
 	}

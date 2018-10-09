@@ -1,4 +1,4 @@
-%@page import="com.mysql.cj.Session"%>
+<%@page import="com.mysql.cj.Session"%>
 <%@page import="entidades.*" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -60,12 +60,12 @@
         <div class="col-md-4">
           <h2>Libros pendientes de devolucion</h2>
           <p>Informe sobre los libros que aun no han sido devueltos. </p>
-         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="pendientes">Ir</button>
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="informe1">Ir</button>
         </div>
         <div class="col-md-4">
           <h2>Socios sancionados</h2>
           <p>Informe sobre todos los socios que se encuentran actualmente sancionados. </p>
-         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="pendientes">Ir</button>
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="informe2">Ir</button>
        </div>
     </div>
   </form>

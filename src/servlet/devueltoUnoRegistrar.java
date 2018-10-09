@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,11 +73,7 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		           	
 					clp.update(l);
 					request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
-				/*	PrintWriter out = response.getWriter();
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('Se registro la devolucion');");
-						out.println("location='WEB-INF/lib/devueltoUno.jsp';");
-						out.println("</script>");*/
+				
 		        }else if (date1.compareTo(date2) > 0) {
 		         
 		            //diferencia entre la fecha que habia que devolverla y hoy
@@ -106,11 +102,7 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		            
 		            clp.update(l,sa);
 		            request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
-		      /*  	PrintWriter out = response.getWriter();
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Se registro la devolucion,inhabilitacion y sancion al socio');");
-					out.println("location='WEB-INF/lib/devueltoUno.jsp';");
-					out.println("</script>");*/
+		    
 		        }  
 			} catch (ParseException e) {
 				

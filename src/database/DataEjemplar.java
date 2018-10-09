@@ -17,7 +17,7 @@ public class DataEjemplar
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
-		ArrayList<Ejemplar> ejemplares=null;
+		ArrayList<Ejemplar> ejemplares=new ArrayList<Ejemplar>();
 		try 
 		{
 			
@@ -29,7 +29,7 @@ public class DataEjemplar
 			{
 				while(rs.next())
 				{
-					ejemplares=new ArrayList<Ejemplar>();
+				
 					Ejemplar e=new Ejemplar();
 					e.setIdEjemplar(rs.getInt("idEjemplar"));	
 					Libro l =new Libro();

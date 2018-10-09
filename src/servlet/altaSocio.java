@@ -1,14 +1,13 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+
 
 import entidades.*;
 import negocio.*;
@@ -40,7 +39,7 @@ public class altaSocio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getSession().setAttribute("errorAltaS",null);
 		String op=request.getParameter("op");
 		if(op.equals("Registrar"))
 		{
@@ -59,28 +58,23 @@ public class altaSocio extends HttpServlet {
 				int tipo=1; 
 				Usuario u=new Usuario(dni,a,tipo);
 				CtrlUsuario cu=new CtrlUsuario();
-				cu.add(u);
+				cu.add(u,socio.getIdSocio());
 				
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Nuevo socio y usuario registrado');");
-				out.println("location='WEB-INF/lib/altaSocio.jsp';");
-				out.println("</script>");
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 			else 
 			{
-			
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Ya existe un socio con el dni');");
-				out.println("location='WEB-INF/lib/altaSocio.jsp';");
-				out.println("</script>");			
+				String msj = "Ya existe un socio con el dni "+dni;
+				request.getSession().setAttribute("errorAltaS", msj);
+				request.getRequestDispatcher("WEB-INF/lib/altaSocio.jsp").forward(request, response);
+					
 			}
 		}
 		
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
+			request.getSession().setAttribute("errorAltaS",null);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}
 

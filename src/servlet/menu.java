@@ -68,6 +68,10 @@ public class menu extends HttpServlet {
 		{
 			request.getRequestDispatcher("WEB-INF/lib/estado.jsp").forward(request, response);
 		}
+		if(op.equals("altaEjemplar"))
+		{
+			request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+		}
 	}
 
 }

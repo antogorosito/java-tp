@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,36 +39,46 @@ public class altaEjemplar extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		request.getSession().setAttribute("errorAltaE2",null);
+		request.getSession().setAttribute("errorAltaE",null);
 		String op=request.getParameter("op");
 		if(op.equals("Buscar")) {
 			String i=request.getParameter("ISBN");
 			
 			CtrlLibro cl= new CtrlLibro();
 			Libro  l=cl.getOne(i);
-			if(l==null) {
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('No existe un libro con ese  ISBN');");
-				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
-				out.println("</script>");
-			} else {
+			if(l==null) 
+			{
+				String msj = "No existe un libro con el ISBN "+i;
+				request.getSession().setAttribute("errorAltaE", msj);
+				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+				
+				
+			} 
+			else 
+			{
+				request.getSession().setAttribute("Libro",l);
 				request.getSession().setAttribute("L", l);
 				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
 			}
 		} 
-		if(op.equals("Guardar")) {
-			int id=Integer.parseInt(request.getParameter("idEjemplar"));
+		
+		if(op.equals("Guardar")) 
+		{	
 			
+			int id=Integer.parseInt(request.getParameter("idEjemplar"));
 			CtrlEjemplar ce= new CtrlEjemplar();
 			Ejemplar e=ce.getEjemplar(id);
 			
-			if(e!=null) {
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Ya existe id de ejemplar');");
-				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
-				out.println("</script>");
+			if(e!=null) 
+			{
+				String msj = "Ya existe un ejemplar con el id "+id;
+				request.getSession().setAttribute("errorAltaE2", msj);
+				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+				
+				
 			} else {
 				HttpSession session = request.getSession();
 			    Libro l = (Libro) session.getAttribute("L");
@@ -76,21 +86,19 @@ public class altaEjemplar extends HttpServlet {
 				
 				session.setAttribute("L", null);
 				session.setAttribute("Libro", null);
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Nuevo ejemplar registrado');");
-				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
-				out.println("</script>");
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 				
 			}
 			
 		}
 		if(op.equals("Cancelar")) 
 		{
+			request.getSession().setAttribute("errorAltaE",null);
+			request.getSession().setAttribute("errorAltaE2",null);
 			HttpSession session= request.getSession();
 			session.setAttribute("L", null);
 			session.setAttribute("Libro", null);
-			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		
 		if(op.equals("Agregar mas")) 
@@ -100,18 +108,17 @@ public class altaEjemplar extends HttpServlet {
 			Ejemplar e=ce.getEjemplar(id);
 			if(e!=null) 
 			{
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Ya existe id de ejemplar');");
-				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
-				out.println("</script>");
+				
+				String msj = "Ya existe un ejemplar con el id "+id;
+				request.getSession().setAttribute("errorAltaE2", msj);
+				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
 			}
 			else 
 			{
 				HttpSession session = request.getSession();
 			    Libro l = (Libro) session.getAttribute("L");
 				ce.add(id,l);
-				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 		}
 	}

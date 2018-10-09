@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,27 +40,25 @@ public class prestamos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.getSession().setAttribute("errorPre",null);
 		int id=Integer.parseInt(request.getParameter("idSocio"));
 		CtrlSocio cs=new CtrlSocio();
 		Socio s=cs.getOne(id);
 		if(s == null)
 		{
-			PrintWriter out= response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('No existe el socio con ese id');");
-			out.println("location='WEB-INF/lib/prestamos.jsp';");
-			out.println("</script>");
+			String msj = "No existe el socio con el id "+id;
+			request.getSession().setAttribute("errorPre", msj);
+			request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+		
 		}
 		else 
 		{
 			if(s.getEstado()==false)
 			{
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Socio inhabilitado o sancionado');");
-				out.println("location='WEB-INF/lib/prestamos.jsp';");
-				out.println("</script>");
+				String msj = "El socio "+id+" esta inhabilitado o sancionado";
+				request.getSession().setAttribute("errorPre", msj);
+				request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+			
 			}
 			else
 			{
@@ -72,14 +70,14 @@ public class prestamos extends HttpServlet {
 				PoliticaPrestamo pp=cpp.getOne();// cantidad maxima de libros prestados posibles
 				if(pp.getCantMaxLibrosPend()<=cant)
 				{
-					PrintWriter out= response.getWriter();
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Ya saco el tope de libros permitidos');");
-					out.println("location='WEB-INF/lib/prestamos.jsp';");
-					out.println("</script>");
+					String msj = "El socio "+id+" ya saco el tope de libros permitidos";
+					request.getSession().setAttribute("errorPre", msj);
+					request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+		
 				}
 				else
-				{					
+				{		
+					request.getSession().setAttribute("errorPre",null);
 					int c=pp.getCantMaxLibrosPend()-cant;
 					request.getSession().setAttribute("cantPosible",c);
 					request.getSession().setAttribute("socio",s);				

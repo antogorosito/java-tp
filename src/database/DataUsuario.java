@@ -49,16 +49,17 @@ public class DataUsuario
 		return l;
 	
 	}
-	public void add(Usuario u)
+	public void add(Usuario u,int id)
 	{
 		PreparedStatement stmt=null;
 		
 		try
 		{
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT  INTO usuarios(nombreUsuario,clave,tipo) VALUES (?,?,?)");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT  INTO usuarios(nombreUsuario,clave,tipo,idSocio) VALUES (?,?,?,?)");
 			stmt.setString(1, u.getNombreUsuario());
 			stmt.setString(2,u.getClave());
 			stmt.setInt(3, u.getTipo());
+			stmt.setInt(4, id);
 		
 			stmt.execute();
 			

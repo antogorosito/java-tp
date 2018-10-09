@@ -57,14 +57,19 @@
           				<p>Realizar el registros de nuevos libros y ejemplares en la biblioteca. </p>
           				<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="altaLibro">Ir</button>
         			</div>
-        			<div class="col-md-4">
-          				<h2>Consultas</h2>
-          				<p>Realizar consultas sobre la disponibilidad de los libros. </p>
-          				<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="consulta">Ir</button>
-       				</div>       
+        		   	<div class="col-md-4">
+          				<h2>Alta Ejemplar</h2>
+          				<p>Realizar el registro de nuevos ejemplares de libros en la biblioteca. </p>
+          				<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="altaEjemplar">Ir</button>
+       				</div>    
       			</div>
       		
 				<div class="row">
+					<div class="col-md-4">
+          				<h2>Consultas</h2>
+          				<p>Realizar consultas sobre la disponibilidad de los libros. </p>
+          				<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="consulta">Ir</button>
+       				</div>    
        				<div class="col-md-4">
           				<h2>Registrar prestamos</h2>
           				<p>Realizar el registro de prestamos de libros a domicilio a los socios.</p>
@@ -75,14 +80,15 @@
           				<p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID EJEMPLAR</p>
           			 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="devueltoUno">Ir</button>
         			</div>
-         			<div class="col-md-4">
+         		
+       			</div> 
+   
+   				<div class="row">
+   					<div class="col-md-4">
           				<h2>Registrar devoluciones </h2>
           				<p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID SOCIO</p>
           				 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="devolver">Ir</button>
         			</div>
-       			</div> 
-   
-   				<div class="row">
       				<div class="col-md-4">
           				<h2>Estado </h2>
           				<p>Realizar la modificacion del estado de los socios. </p>

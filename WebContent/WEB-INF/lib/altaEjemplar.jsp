@@ -66,13 +66,27 @@
    		 
    		 
    		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Buscar">Buscar</button>
+   		 	<%String msj=(String)session.getAttribute("errorAltaE");
+  
+ 		if (msj != null) {%>
+ 		<label style="color:red;"><%=msj %></label>
+ 		<%}%>
+ 		
    	<%Libro li=(Libro)session.getAttribute("L");
    			if(li!=null) {%>
+   			
+   		<p><b><label>Titulo:  <%=li.getTitulo() %></label></b></p>
+   		
    			<p><label>ID Ejemplar:</label>
    		<input name="idEjemplar"type="text" required="required"></p>
    		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Guardar">Guardar</button>
    		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Agregar mas">Agregar mas</button>
    		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
+   		<%String msj2=(String)session.getAttribute("errorAltaE2");
+  
+ 		if (msj2 != null) {%>
+ 		<label style="color:red;"><%=msj2 %></label>
+ 		<%}%>
    		<%} %>
    	</form>
   

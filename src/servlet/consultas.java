@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import negocio.*;
 import entidades.*;
@@ -42,25 +42,25 @@ public class consultas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
+		request.getSession().setAttribute("errorCon",null);
 		String t=request.getParameter("titulo");
 		CtrlEjemplar ce=new CtrlEjemplar();
 		ArrayList<Ejemplar> ejemplares=ce.buscar(t);
 		request.setAttribute("titulo",t);
 		if (ejemplares.isEmpty() == false)
 		{	
-			//HttpSession session=request.getSession();
+			
 			request.setAttribute("listaejemplares", ejemplares);	
 			request.getRequestDispatcher("/consultas.jsp").forward(request, response);
 		}
 		else
 		{
-			PrintWriter out= response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('No se encontraron libros con ese titulo');");
-			out.println("location='WEB-INF/lib/consultas.jsp';");
-			out.println("</script>");
+			String msj = "No existen libros con el titulo "+t;
+			request.getSession().setAttribute("errorCon", msj);
+			request.getRequestDispatcher("/consultas.jsp").forward(request, response);
+			
+		
 		}
 	
 		

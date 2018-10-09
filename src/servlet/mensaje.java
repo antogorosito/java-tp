@@ -35,7 +35,7 @@ public class mensaje extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/lib/menu.jsp").forward(request, response);
+		request.getRequestDispatcher("/menu.jsp").forward(request, response);
 	}
 
 }

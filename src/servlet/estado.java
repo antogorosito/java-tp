@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -56,11 +56,8 @@ public class estado extends HttpServlet {
 			{
 				cs.update(ss, false);
 			}
-			PrintWriter out = response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Se registraron las inhabilitaciones');");
-			out.println("location='WEB-INF/lib/estado.jsp';");
-			out.println("</script>");
+			request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+			
 			
 		}//fin if
 		
@@ -79,11 +76,7 @@ public class estado extends HttpServlet {
 			{
 				cs.update(ss, true);
 			}
-			PrintWriter out = response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Se registraron las habilitaciones');");
-			out.println("location='WEB-INF/lib/estado.jsp';");
-			out.println("</script>");
+			request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 		}//fin if
 		
 	}

@@ -1,18 +1,14 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.plaf.synth.SynthSeparatorUI;
+
 
 import entidades.Libro;
 import negocio.CtrlLibro;
@@ -46,7 +42,8 @@ public class altaLibro extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	{	
+		request.getSession().setAttribute("errorAltaL",null);
 		String op=request.getParameter("op");
 		
 		if(op.equals("Registrar")) 
@@ -60,6 +57,7 @@ public class altaLibro extends HttpServlet {
 			Libro  l=cs.getOne(i);
 			if(l==null)
 			{
+				
 				l=new Libro(t,i,n,d,m);
 				cs.add(l);		
 				request.getSession().setAttribute("Libro", l);
@@ -67,18 +65,16 @@ public class altaLibro extends HttpServlet {
 			}
 			else 
 			{
-			
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Ya existe un libro con ese ISBN');");
-				out.println("location='WEB-INF/lib/altaLibro.jsp';");
-				out.println("</script>");
+				String msj = "Ya existe un libro con el ISBN "+i;
+				request.getSession().setAttribute("errorAltaL", msj);
+				request.getRequestDispatcher("WEB-INF/lib/altaLibro.jsp").forward(request, response);
+				
 			
 			}
 		}//fin if
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}
 }

@@ -62,7 +62,11 @@
     <label>Id socio:</label>
      <input type="number" name="idSocio" required="required">
       <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Buscar</button>
-      
+      	<%String msj=(String)session.getAttribute("errorPre");
+  
+ 		if (msj != null) {%>
+ 		<label style="color:red;"><%=msj %></label>
+ 		<%}%>
     </form>
     </div>
   

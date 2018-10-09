@@ -46,7 +46,7 @@ public class informes extends HttpServlet {
 		}
 		if(op.equals("Volver"))
 		{
-			response.sendRedirect("WEB-INF/lib/informes.jsp");
+			request.getRequestDispatcher("WEB-INF/lib/informes.jsp").forward(request, response);
 		}
 	}
 

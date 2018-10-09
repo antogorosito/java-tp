@@ -40,6 +40,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.getSession().setAttribute("errorLogin",null);
 		String u=request.getParameter("usuario");
 		String c=request.getParameter("clave");
 		
@@ -51,15 +52,15 @@ public class login extends HttpServlet {
 			HttpSession session = request.getSession(); 
 			session.setAttribute("usuario", usuario);
 			
-			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		else
 		{
-			PrintWriter out= response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			 out.println("alert('Usuario o Clave incorrecto');");
-			 out.println("location='login.jsp';");
-			 out.println("</script>");
+			String msj = "Usuario y/o contraseña incorrectas";
+			request.getSession().setAttribute("errorLogin", msj);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			
+		
 		}
 	}
 
