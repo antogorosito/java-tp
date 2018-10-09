@@ -7,7 +7,7 @@ import java.sql.*;
 public class DataEjemplar 
 {
 
-/*	public void add(Ejemplar e){}
+/*	
 	
 	public void delete(Ejemplar e) {}
 	
@@ -144,6 +144,74 @@ public class DataEjemplar
 		}
 		return rta;
 	}
+	public Ejemplar getEjemplar(int id)
+	{
+		Ejemplar ee=null;
+		PreparedStatement stmt=null;
+		ResultSet rs= null; 
+		
+		try 
+		{
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from ejemplares where idEjemplar=?");
+			stmt.setInt(1,id);
+			rs=stmt.executeQuery();
+			if(rs!=null) 	
+			{
+				while(rs.next())
+				{
+					ee=new Ejemplar();
+					ee.setIdEjemplar(rs.getInt("idEjemplar"));
+					Libro l=new Libro();
+					l.setIdLibro(rs.getInt("idLibro"));
+					ee.setLibro(l);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+		return ee;
+	}
 	
+	public void add(int i, Libro l){
+		
+		PreparedStatement stmt=null;
 	
+		try
+		{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT  INTO ejemplares(idEjemplar,idLibro) VALUES (?,?)");
+			stmt.setInt(1, i);
+			stmt.setInt(2, l.getIdLibro());
+		
+			stmt.execute();
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
 }

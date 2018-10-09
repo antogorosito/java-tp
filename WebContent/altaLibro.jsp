@@ -25,19 +25,18 @@
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        <a class="nav-link" href="index.html">Cerrar sesion</a>
+        <a class="nav-link" href="logout">Cerrar sesion</a>
+        </li>
+        </ul>
+          <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        	<a class="nav-link" href="menu.jsp">Menu</a>
         </li>
         </ul>
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
-        <a class="nav-link" href="logout">Home</a>
-        </li>
-        </ul>
-      
-      	<ul class="nav nav-pills float-right">
-        <li class="nav item">
-        <a class="nav-link" href="menu.jsp">menu</a>
+        	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
         
@@ -55,23 +54,24 @@
    	<form class="form-alta" action="altaLibro" method="post">
    	
    		<p><label>Titulo:</label>
-   		<input name="titulo"type="text"></p>
+   		<input name="titulo"type="text" required="required"></p>
    		
    		<p><label>ISBN:</label>
-   		<input name="ISBN"type="text" ></p>
+   		<input name="ISBN"type="text" required="required"></p>
    		
    		<p><label>Nro Edicion:</label>
-   		<input name="nroEdicion"type="text" ></p>
+   		<input name="nroEdicion"type="text" required="required" ></p>
    		
    			<p><label>Fecha Edicion:</label>
-   		<input name="fechaEdicion"type="text"></p>
+   		<input name="fechaEdicion"type="text" required="required"></p>
    		
    			<p><label>Cantidad dias maximo de prestamo:</label>
    		<input name="cantDiasMaxPrestamo"type="text"></p>
    		
    			   		
-   		 <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Registrar</button>
-  
+   		 
+   		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
    	</form>
   
     </div>

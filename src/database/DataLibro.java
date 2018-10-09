@@ -10,14 +10,14 @@ import entidades.Socio;
 
 public class DataLibro 
 {
-
-	public void add(Libro l){}
+/*
+	
 	
 	public void delete(Libro l) {}
 	
 	public void update(Libro l) {
 		
-	}
+	}*/
 
 	
 	public Libro getOne(String ISBN) {
@@ -40,7 +40,7 @@ public class DataLibro
 					l.setIsbn(rs.getString("ISBN"));
 					l.setNroEdicion(rs.getInt("nroEdicion"));
 					l.setFechaEdicion(rs.getDate("fechaEdicion"));
-					//l.setCantMax(rs.getInt("cantDiasMaxPrestamo"));
+					l.setCantDiasMaxPrestamo(rs.getInt("cantDiasMaxPrestamo"));
 					l.setIdLibro(rs.getInt("idLibro"));
 									
 				}
@@ -63,7 +63,42 @@ public class DataLibro
 		}
 		return l;
 	}
+	public void add(Libro l){
+		ResultSet keyResultSet=null;//
+		PreparedStatement stmt=null;
 	
+		try
+		{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO libros(titulo,ISBN,nroEdicion,fechaEdicion,cantDiasMaxPrestamo) VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, l.getTitulo());
+			stmt.setString(2, l.getIsbn());
+			stmt.setInt(3, l.getNroEdicion());
+			stmt.setDate(4, l.getFechaEdicion());
+			stmt.setInt(5, l.getCantDiasMaxPrestamo());
+			stmt.execute();
+			//obtener el id
+			keyResultSet=stmt.getGeneratedKeys();
+			if(keyResultSet!=null && keyResultSet.next()){
+				l.setIdLibro((keyResultSet.getInt(1)));
+			
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
 	/*public ArrayList<Libro> getAll() {
 	
 			

@@ -1,3 +1,5 @@
+
+<%@page import="entidades.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Alta socio</title>
+    <title>Alta ejemplar</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -23,7 +25,7 @@
       <div class="header clearfix">
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-       <ul class="nav nav-pills float-right">
+        <ul class="nav nav-pills float-right">
         <li class="nav item">
         <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
@@ -46,35 +48,32 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Alta de socio</h1>    
+        <h1 class="display-3">Alta de ejemplar</h1>    
       </div>
     </div>
     
      <div class="container">
            			 
-   	<form class="form-alta" action="altaSocio" method="post">
-   	
-   		<p><label>Nombre:</label>
-   		<input name="nombre"type="text" required="required"></p>
-   		
-   		<p><label>Apellido:</label>
-   		<input name="apellido"type="text" required="required" ></p>
-   		
-   		<p><label>Email:</label>
-   		<input name="email"type="email" required="required" ></p>
-   		
-   			<p><label>Domicilio:</label>
-   		<input name="domicilio"type="text" required="required"></p>
-   		
-   			<p><label>Telefono:</label>
-   		<input name="telefono"type="text" required="required"></p>
-   		
-   			<p><label>Dni:</label>
-   		<input name="dni"type="text" id="dni" required="required"></p>
-   		
-   		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
-         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
-  
+   	<form class="form-alta" action="altaEjemplar" method="post">
+   	<% Libro l= (Libro)session.getAttribute("Libro");
+    		if(l==null){%>
+   		<p><label>ISBN:</label>
+   		<input name="ISBN"type="text" required="required"></p>
+   		   <% }else {%>
+   		  <p><label>ISBN:</label>
+   			<input name="ISBN"type="text" required="required" value=<%=l.getIsbn()%>></p>
+   		 <% }%>
+   		 
+   		 
+   		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Buscar">Buscar</button>
+   	<%Libro li=(Libro)session.getAttribute("L");
+   			if(li!=null) {%>
+   			<p><label>ID Ejemplar:</label>
+   		<input name="idEjemplar"type="text" required="required"></p>
+   		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Guardar">Guardar</button>
+   		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Agregar mas">Agregar mas</button>
+   		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
+   		<%} %>
    	</form>
   
     </div>

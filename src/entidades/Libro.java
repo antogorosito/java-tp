@@ -1,6 +1,10 @@
 package entidades;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class Libro 
 {
@@ -11,7 +15,19 @@ public class Libro
 	private Date fechaEdicion; 
 	private int cantDiasMaxPrestamo;
 	
-	
+	public Libro() 
+	{
+		
+	}
+	public Libro(String t, String i,int n,Date f,int m) {
+		this.isbn=i;
+		this.titulo=t;
+		this.nroEdicion=n;
+		this.fechaEdicion=f;
+		this.cantDiasMaxPrestamo=m;
+		
+		
+	}
 	public int getIdLibro() 
 	{
 		return idLibro;

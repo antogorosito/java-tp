@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,37 +41,39 @@ public class altaLibro extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
+		String op=request.getParameter("op");
+		if(op.equals("Registrar")) {
 		String t=request.getParameter("titulo");
 		String i=request.getParameter("ISBN");
-		String n=request.getParameter("nroEdicion");
-		String f=request.getParameter("fechaEdicion");
-		String m=request.getParameter("cantDiasMaxPrestamo");
+		int n=Integer.parseInt(request.getParameter("nroEdicion"));
+	
+		Date d=Date.valueOf(request.getParameter("fechaEdicion"));
+		int m=Integer.parseInt(request.getParameter("cantDiasMaxPrestamo"));
 				
 		CtrlLibro cs=new CtrlLibro();
 		Libro  l=cs.getOne(i);
 		if(l==null)
 		{
-		//Libro libro=new Libro(t,i,n,f,m);
-		//cs.add(libro);
+		Libro libro=new Libro(t,i,n,d,m);
+		cs.add(libro);
 		
-		PrintWriter out= response.getWriter();
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('Nuevo libro registrado');");
-		out.println("location='altaLibro.jsp';");
-		out.println("</script>");
+		request.getSession().setAttribute("Libro", l);
+		request.getRequestDispatcher("/altaEjemplar.jsp").forward(request, response);
 		}
 		else 
 		{
-			/*JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-	        JOptionPane.showMessageDialog(null, "EL ISBN del libro es: " + s.getISBNLibro());*/
 			
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Ya existe un libro con ese ISBN');");//FALTA MOSTRAR EL ID DE SOCIO
+			out.println("alert('Ya existe un libro con ese ISBN');");
 			out.println("location='altaLibro.jsp';");
 			out.println("</script>");
 			
+		}
+		}//fin if
+		if(op.equals("Cancelar"))
+		{
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}
 }

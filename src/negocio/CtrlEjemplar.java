@@ -29,12 +29,15 @@ public class CtrlEjemplar
 		return de.existe(id,s);
 	}
 
-	
-	/*public void add(Ejemplar e) 
-	{
-		de.add(e);
+	public Ejemplar getEjemplar(int i) {
+		return de.getEjemplar(i);
 	}
 	
+	public void add(int id, Libro l) 
+	{
+		de.add(id,l);
+	}
+	/*
 	
 	public void delete(Ejemplar e)
 	{

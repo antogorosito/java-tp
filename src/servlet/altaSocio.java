@@ -40,7 +40,9 @@ public class altaSocio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String op=request.getParameter("op");
+		if(op.equals("Registrar")) {
 		String n=request.getParameter("nombre");
 		String a=request.getParameter("apellido");
 		String d=request.getParameter("domicilio");
@@ -63,8 +65,7 @@ public class altaSocio extends HttpServlet {
 		}
 		else 
 		{
-			/*JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-	        JOptionPane.showMessageDialog(null, "EL id de socio es: " + s.getIdSocio());*/
+		
 			
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
@@ -74,7 +75,11 @@ public class altaSocio extends HttpServlet {
 			
 		}
 		
-		
+		}
+		if(op.equals("Cancelar"))
+		{
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+		}
 	}
 
 }

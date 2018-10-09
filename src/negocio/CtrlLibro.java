@@ -15,12 +15,9 @@ public class CtrlLibro
 		de=new DataLibro();
 	}
 	
+	/*
 	
-	
-	public void add(Libro l) 
-	{
-		de.add(l);
-	}
+
 	
 	public void delete(Libro l)
 	{
@@ -31,10 +28,14 @@ public class CtrlLibro
 	{
 		de.update(l);
 	}
-	
+	*/
 	public Libro getOne(String ISBN)
 	{
 		return de.getOne(ISBN);
+	}
+	public void add(Libro l) 
+	{
+		de.add(l);
 	}
 	
 	/*public ArrayList<Libro> getAll()
