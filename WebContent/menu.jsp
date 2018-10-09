@@ -65,14 +65,15 @@
           <p>Realizar consultas sobre la disponibilidad de los libros. </p>
           <p><a class="btn btn-info" href="consultas.jsp" role="button">Ir</a></p>
        </div>
-        <div class="col-md-4">
+        
+      </div>
+
+       <div class="row">
+       <div class="col-md-4">
           <h2>Registrar prestamos</h2>
           <p>Realizar el registro de prestamos de libros a domicilio a los socios.</p>
           <p><a class="btn btn-info" href="prestamos.jsp" role="button">Ir</a></p>
         </div>
-      </div>
-
-       <div class="row">
         <div class="col-md-4">
           <h2>Registrar devoluciones</h2>
           <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID EJEMPLAR</p>
@@ -81,19 +82,16 @@
          <div class="col-md-4">
           <h2>Registrar devoluciones </h2>
           <p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID SOCIO</p>
-         
           <p><a class="btn btn-info" href="devolver.jsp" role="button">Ir</a></p>
         </div>
-        <div class="col-md-4">
+       </div> 
+   
+   <div class="row">
+      <div class="col-md-4">
           <h2>Estado </h2>
           <p>Realizar la modificacion del estado de los socios. </p>
           <p><a class="btn btn-info" href="estado.jsp" role="button">Ir</a></p>
        </div>
-     
-      </div> 
-   
-   <div class="row">
-      
          <div class="col-md-4">
           <h2>Informes</h2>
           <p>Imprimir los respectivos informes. </p>
