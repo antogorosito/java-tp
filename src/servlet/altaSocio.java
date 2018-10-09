@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
-import entidades.Socio;
-import negocio.CtrlSocio;
+import entidades.*;
+import negocio.*;
 
 /**
  * Servlet implementation class altaSocio
@@ -42,7 +42,8 @@ public class altaSocio extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String op=request.getParameter("op");
-		if(op.equals("Registrar")) {
+		if(op.equals("Registrar"))
+		{
 		String n=request.getParameter("nombre");
 		String a=request.getParameter("apellido");
 		String d=request.getParameter("domicilio");
@@ -56,10 +57,14 @@ public class altaSocio extends HttpServlet {
 		{
 		Socio socio=new Socio(a,n,e,d,t,dni);
 		cs.add(socio);
+		int tipo=1; 
+		Usuario u=new Usuario(dni,a,tipo);
+		CtrlUsuario cu=new CtrlUsuario();
+		cu.add(u);
 		
 		PrintWriter out= response.getWriter();
 		out.println("<script type=\"text/javascript\">");
-		out.println("alert('Nuevo socio registrado');");
+		out.println("alert('Nuevo socio y usuario registrado');");
 		out.println("location='altaSocio.jsp';");
 		out.println("</script>");
 		}

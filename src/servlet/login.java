@@ -48,9 +48,10 @@ public class login extends HttpServlet {
 		Usuario usuario= cu.getOne(u,c);
 		if(usuario!=null)
 		{
-			request.getRequestDispatcher("menu.jsp").forward(request, response);
 			HttpSession session = request.getSession(true); // ver
 			session.setAttribute("usuario", usuario);
+			
+			request.getRequestDispatcher("menu.jsp").forward(request, response);
 		}
 		else
 		{

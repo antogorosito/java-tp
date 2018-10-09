@@ -49,10 +49,40 @@ public class DataUsuario
 		return l;
 	
 	}
+	public void add(Usuario u)
+	{
+		PreparedStatement stmt=null;
+		
+		try
+		{
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT  INTO usuarios(nombreUsuario,clave,tipo) VALUES (?,?,?)");
+			stmt.setString(1, u.getNombreUsuario());
+			stmt.setString(2,u.getClave());
+			stmt.setInt(3, u.getTipo());
+		
+			stmt.execute();
+			
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{	
+				stmt.close();
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			} 
+		}
+	}
+	
 	
 	/*public ArrayList<Usuario> getAll() {}
-	public void add(Usuario u){}
-	
+
 	public void delete(Usuario u) {}
 	
 	public void update(Usuario u) {}*/

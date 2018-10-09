@@ -1,3 +1,4 @@
+<%@page import="entidades.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,7 +48,8 @@
         <h1 class="display-3">Menu biblioteca</h1>    
       </div>
     </div>
-    
+    <%Usuario u =(Usuario)session.getAttribute("usuario");
+    		if(u.getTipo()==0){%>
      <div class="container">
    <div class="row">
         <div class="col-md-4">
@@ -99,7 +101,24 @@
         </div>
       </div> 
     </div>
-
+<%} else if(u.getTipo()==1){ %>
+     <div class="container">
+   <div class="row">
+          <div class="col-md-4">
+          <h2>Prestamos pendientes</h2>
+          <p>Realizar consulta de los prestamos pendientes de devolucion. </p>
+          <p><a class="btn btn-info" href="pendientes.jsp" role="button">Ir</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Consultas</h2>
+          <p>Realizar consultas sobre la disponibilidad de los libros. </p>
+          <p><a class="btn btn-info" href="consultas.jsp" role="button">Ir</a></p>
+       </div>
+        
+      </div>
+        
+ </div>
+<%} %>
     <div class="container">
    
       <footer>

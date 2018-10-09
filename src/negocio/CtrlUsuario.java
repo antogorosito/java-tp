@@ -20,14 +20,15 @@ public class CtrlUsuario
 	{
 		return du.getOne(u,c);
 	}
+	public void add(Usuario u) 
+	{
+		du.add(u);
+	}
+	
 	
 	/*public ArrayList<Usuario> getAll()
 	{
 		return du.getAll();
-	}
-		public void add(Usuario u) 
-	{
-		du.add(u);
 	}
 	
 	public void delete(Usuario u)

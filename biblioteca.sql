@@ -255,7 +255,11 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `nombreUsuario` varchar(20) NOT NULL,
   `clave` varchar(20) NOT NULL,
+   `tipo` int(1) NOT NULL,
+    `idSocio` int(11)  NULL,
   PRIMARY KEY (`nombreUsuario`)
+    KEY `idSocioUsuario_fk` (`idSocio`),
+  CONSTRAINT `idSocioUsuario_fk` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idsocio`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -265,7 +269,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('antonella','anto123'),('sabrina','sabri123');
+INSERT INTO `usuarios` VALUES ('antonella','anto123',0,null),('sabrina','sabri123',0,null);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
