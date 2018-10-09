@@ -1,15 +1,13 @@
-%@page import="com.mysql.cj.Session"%>
-<%@page import="entidades.*" %>
-<%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    pageEncoding="ISO-8859-1"%>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Informes</title>
+    <title>Login</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -28,16 +26,7 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-       <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        <a class="nav-link" href="logout">Cerrar sesion</a>
-        </li>
-        </ul>
-          <ul class="nav nav-pills float-right">
-        <li class="nav item">
-        	<a class="nav-link" href="menu.jsp">Menu</a>
-        </li>
-        </ul>
+     
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
@@ -51,24 +40,26 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Informes</h1>    
+        <h1 class="display-3">Inicio de sesion</h1>    
       </div>
     </div>
-      <div class="container">
-   <div class="row">
-        <div class="col-md-4">
-          <h2>Libros pendientes de devolucion</h2>
-          <p>Informe sobre los libros que aun no han sido devueltos. </p>
-          <p><a class="btn  btn-info" href="informe1.jsp" role="button">Ir  </a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Socios sancionados</h2>
-          <p>Informe sobre todos los socios que se encuentran actualmente sancionados. </p>
-          <p><a class="btn btn-info" href="informe2.jsp" role="button">Ir</a></p>
-       </div>
-    </div>
+    
+     <div class="container">
+   <form class="form-signin" action="login" method="post">
+      
+    
+      <label >Usuario</label>
+      <input type="text"  name="usuario" class="form-control"  required="required"  style="margin-bottom: 15px">
+      <label >Clave</label>
+      <input type="password"  name="clave" class="form-control" required="required">
+   
+      <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Iniciar sesion</button>
   
      </div>
+    
+    </form>
+  
+    </div>
 
     <div class="container">
    

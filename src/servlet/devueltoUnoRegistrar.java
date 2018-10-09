@@ -72,12 +72,12 @@ public class devueltoUnoRegistrar extends HttpServlet {
 				{
 		           	
 					clp.update(l);
-					
-					PrintWriter out = response.getWriter();
+					request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+				/*	PrintWriter out = response.getWriter();
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('Se registro la devolucion');");
-						out.println("location='devueltoUno.jsp';");
-						out.println("</script>");
+						out.println("location='WEB-INF/lib/devueltoUno.jsp';");
+						out.println("</script>");*/
 		        }else if (date1.compareTo(date2) > 0) {
 		         
 		            //diferencia entre la fecha que habia que devolverla y hoy
@@ -105,12 +105,12 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		            }
 		            
 		            clp.update(l,sa);
-
-		        	PrintWriter out = response.getWriter();
+		            request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+		      /*  	PrintWriter out = response.getWriter();
 					out.println("<script type=\"text/javascript\">");
 					out.println("alert('Se registro la devolucion,inhabilitacion y sancion al socio');");
-					out.println("location='devueltoUno.jsp';");
-					out.println("</script>");
+					out.println("location='WEB-INF/lib/devueltoUno.jsp';");
+					out.println("</script>");*/
 		        }  
 			} catch (ParseException e) {
 				
@@ -120,7 +120,7 @@ public class devueltoUnoRegistrar extends HttpServlet {
 		}
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/devueltoUno.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/lib/devueltoUno.jsp").forward(request, response);
 		}
 	}
 

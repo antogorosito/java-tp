@@ -44,46 +44,43 @@ public class altaSocio extends HttpServlet {
 		String op=request.getParameter("op");
 		if(op.equals("Registrar"))
 		{
-		String n=request.getParameter("nombre");
-		String a=request.getParameter("apellido");
-		String d=request.getParameter("domicilio");
-		String e=request.getParameter("email");
-		String t=request.getParameter("telefono");
-		String dni=request.getParameter("dni");
-		
-		CtrlSocio cs=new CtrlSocio();
-		Socio  s=cs.getOne(dni);
-		if(s==null)
-		{
-		Socio socio=new Socio(a,n,e,d,t,dni);
-		cs.add(socio);
-		int tipo=1; 
-		Usuario u=new Usuario(dni,a,tipo);
-		CtrlUsuario cu=new CtrlUsuario();
-		cu.add(u);
-		
-		PrintWriter out= response.getWriter();
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('Nuevo socio y usuario registrado');");
-		out.println("location='altaSocio.jsp';");
-		out.println("</script>");
-		}
-		else 
-		{
-		
+			String n=request.getParameter("nombre");
+			String a=request.getParameter("apellido");
+			String d=request.getParameter("domicilio");
+			String e=request.getParameter("email");
+			String t=request.getParameter("telefono");
+			String dni=request.getParameter("dni");		
+			CtrlSocio cs=new CtrlSocio();
+			Socio  s=cs.getOne(dni);
+			if(s==null)
+			{
+				Socio socio=new Socio(a,n,e,d,t,dni);
+				cs.add(socio);
+				int tipo=1; 
+				Usuario u=new Usuario(dni,a,tipo);
+				CtrlUsuario cu=new CtrlUsuario();
+				cu.add(u);
+				
+				PrintWriter out= response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Nuevo socio y usuario registrado');");
+				out.println("location='WEB-INF/lib/altaSocio.jsp';");
+				out.println("</script>");
+			}
+			else 
+			{
 			
-			PrintWriter out= response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Ya existe un socio con el dni');");//FALTA MOSTRAR EL ID DE SOCIO
-			out.println("location='altaSocio.jsp';");
-			out.println("</script>");
-			
+				PrintWriter out= response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Ya existe un socio con el dni');");
+				out.println("location='WEB-INF/lib/altaSocio.jsp';");
+				out.println("</script>");			
+			}
 		}
 		
-		}
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
 		}
 	}
 

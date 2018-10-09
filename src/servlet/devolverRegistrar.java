@@ -114,11 +114,10 @@ public class devolverRegistrar extends HttpServlet {
 					
 					e.printStackTrace();
 				}
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Se registro la devolucion');");
-				out.println("location='devolver.jsp';");
-				out.println("</script>");
+				
+			
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+		
 				
 					
 
@@ -130,7 +129,7 @@ public class devolverRegistrar extends HttpServlet {
 		}
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/devolver.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
 		}
 	}
 

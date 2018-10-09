@@ -49,7 +49,7 @@ public class prestamos extends HttpServlet {
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('No existe el socio con ese id');");
-			out.println("location='prestamos.jsp';");
+			out.println("location='WEB-INF/lib/prestamos.jsp';");
 			out.println("</script>");
 		}
 		else 
@@ -59,7 +59,7 @@ public class prestamos extends HttpServlet {
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Socio inhabilitado o sancionado');");
-				out.println("location='prestamos.jsp';");
+				out.println("location='WEB-INF/lib/prestamos.jsp';");
 				out.println("</script>");
 			}
 			else
@@ -75,7 +75,7 @@ public class prestamos extends HttpServlet {
 					PrintWriter out= response.getWriter();
 					out.println("<script type=\"text/javascript\">");
 					out.println("alert('Ya saco el tope de libros permitidos');");
-					out.println("location='prestamos.jsp';");
+					out.println("location='WEB-INF/lib/prestamos.jsp';");
 					out.println("</script>");
 				}
 				else
@@ -83,7 +83,7 @@ public class prestamos extends HttpServlet {
 					int c=pp.getCantMaxLibrosPend()-cant;
 					request.getSession().setAttribute("cantPosible",c);
 					request.getSession().setAttribute("socio",s);				
-					request.getRequestDispatcher("/agregar.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
 				}
 			}
 			

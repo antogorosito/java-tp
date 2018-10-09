@@ -50,11 +50,11 @@ public class altaEjemplar extends HttpServlet {
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('No existe un libro con ese  ISBN');");
-				out.println("location='altaEjemplar.jsp';");
+				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
 				out.println("</script>");
 			} else {
 				request.getSession().setAttribute("L", l);
-				request.getRequestDispatcher("/altaEjemplar.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
 			}
 		} 
 		if(op.equals("Guardar")) {
@@ -67,7 +67,7 @@ public class altaEjemplar extends HttpServlet {
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Ya existe id de ejemplar');");
-				out.println("location='altaEjemplar.jsp';");
+				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
 				out.println("</script>");
 			} else {
 				HttpSession session = request.getSession();
@@ -79,39 +79,39 @@ public class altaEjemplar extends HttpServlet {
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Nuevo ejemplar registrado');");
-				out.println("location='altaEjemplar.jsp';");
+				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
 				out.println("</script>");
 				
 			}
 			
 		}
-		if(op.equals("Cancelar")) {
+		if(op.equals("Cancelar")) 
+		{
 			HttpSession session= request.getSession();
 			session.setAttribute("L", null);
 			session.setAttribute("Libro", null);
-			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
 		}
-		if(op.equals("Agregar mas")) {
-			
-int id=Integer.parseInt(request.getParameter("idEjemplar"));
-			
+		
+		if(op.equals("Agregar mas")) 
+		{
+			int id=Integer.parseInt(request.getParameter("idEjemplar"));
 			CtrlEjemplar ce= new CtrlEjemplar();
 			Ejemplar e=ce.getEjemplar(id);
-			
-			if(e!=null) {
+			if(e!=null) 
+			{
 				PrintWriter out= response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Ya existe id de ejemplar');");
-				out.println("location='altaEjemplar.jsp';");
+				out.println("location='WEB-INF/lib/altaEjemplar.jsp';");
 				out.println("</script>");
-			} else {
+			}
+			else 
+			{
 				HttpSession session = request.getSession();
 			    Libro l = (Libro) session.getAttribute("L");
 				ce.add(id,l);
-				
-			
-			
-			request.getRequestDispatcher("/altaEjemplar.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
 			}
 		}
 	}

@@ -390,6 +390,7 @@ public class DataLineaDePrestamo
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
+			
 				while(rs.next())
 				{
 					LineaDePrestamo lp=new LineaDePrestamo();

@@ -1,28 +1,23 @@
 package servlet;
 
-import java.io.PrintWriter;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import negocio.CtrlUsuario;
-import entidades.Usuario;
 
 /**
- * Servlet implementation class login
+ * Servlet implementation class mensaje
  */
-@WebServlet({ "/login", "/Login" })
-public class login extends HttpServlet {
+@WebServlet("/mensaje")
+public class mensaje extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public login() {
+    public mensaje() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,27 +35,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String u=request.getParameter("usuario");
-		String c=request.getParameter("clave");
-		
-		CtrlUsuario cu= new CtrlUsuario();
-		
-		Usuario usuario= cu.getOne(u,c);
-		if(usuario!=null)
-		{
-			HttpSession session = request.getSession(); 
-			session.setAttribute("usuario", usuario);
-			
-			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
-		}
-		else
-		{
-			PrintWriter out= response.getWriter();
-			out.println("<script type=\"text/javascript\">");
-			 out.println("alert('Usuario o Clave incorrecto');");
-			 out.println("location='login.jsp';");
-			 out.println("</script>");
-		}
+		request.getRequestDispatcher("/WEB-INF/lib/menu.jsp").forward(request, response);
 	}
 
 }

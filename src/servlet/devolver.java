@@ -41,6 +41,7 @@ public class devolver extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.getSession().setAttribute("errorDev",null);
 		String op=request.getParameter("opc");
 		if(op.equals("Buscar"))
 		{
@@ -49,38 +50,36 @@ public class devolver extends HttpServlet {
 			Socio s=cs.getOne(id);
 			if(s == null)
 			{
-				PrintWriter out= response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('No existe el socio con ese id');");
-				out.println("location='devolver.jsp';");
-				out.println("</script>");
+				String msj = "No existe el socio con el id "+id;
+				request.getSession().setAttribute("errorDev", msj);
+				request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
 			}
 			else 
 			{
 				//ver si posee libros pendientes de devolucion
 				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
 				ArrayList<LineaDePrestamo> lineas=clp.getAll(id);
-				if(lineas==null)
+				if(lineas.isEmpty())
 				{
-
-					PrintWriter out= response.getWriter();
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('No posee libros pendientes de devolucion');");
-					out.println("location='devolver.jsp';");
-					out.println("</script>");
+					String msj = "El socio con id "+id+ " No posee libros pendientes de devolucion";
+					request.getSession().setAttribute("errorDev", msj);
+					request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
+					
 				}
 				else
 				{
+					request.getSession().setAttribute("errorDev",null);
 					request.setAttribute("lineas",lineas);
 					request.setAttribute("socio",s);
-					request.getRequestDispatcher("/devolverRegistrar.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/lib/devolverRegistrar.jsp").forward(request, response);
 				}
 				
 			}
 		}
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+			request.getSession().setAttribute("errorDev",null);
+			request.getRequestDispatcher("/WEB-INF/lib/menu.jsp").forward(request, response);
 		}
 		
 	}

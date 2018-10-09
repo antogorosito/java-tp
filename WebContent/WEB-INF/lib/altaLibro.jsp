@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Alta socio</title>
+    <title>Alta libro</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -23,7 +23,7 @@
       <div class="header clearfix">
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-       <ul class="nav nav-pills float-right">
+        <ul class="nav nav-pills float-right">
         <li class="nav item">
         <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
@@ -40,41 +40,38 @@
         </li>
         </ul>
         
-        
       </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Alta de socio</h1>    
+        <h1 class="display-3">Alta de libro</h1>    
       </div>
     </div>
     
      <div class="container">
            			 
-   	<form class="form-alta" action="altaSocio" method="post">
+   	<form class="form" action="altaLibro" method="post">
    	
-   		<p><label>Nombre:</label>
-   		<input name="nombre"type="text" required="required"></p>
+   		<p><label>Titulo:</label>
+   		<input name="titulo"type="text" required="required"></p>
    		
-   		<p><label>Apellido:</label>
-   		<input name="apellido"type="text" required="required" ></p>
+   		<p><label>ISBN:</label>
+   		<input name="ISBN"type="text" required="required"></p>
    		
-   		<p><label>Email:</label>
-   		<input name="email"type="email" required="required" ></p>
+   		<p><label>Nro Edicion:</label>
+   		<input name="nroEdicion"type="text" required="required" ></p>
    		
-   			<p><label>Domicilio:</label>
-   		<input name="domicilio"type="text" required="required"></p>
+   			<p><label>Fecha Edicion:</label>
+   		<input name="fechaEdicion"type="text" required="required" placeholder="yyyy-MM-dd"></p>
    		
-   			<p><label>Telefono:</label>
-   		<input name="telefono"type="text" required="required"></p>
+   			<p><label>Cantidad dias maximo de prestamo:</label>
+   		<input name="cantDiasMaxPrestamo"type="text"></p>
    		
-   			<p><label>Dni:</label>
-   		<input name="dni"type="text" id="dni" required="required"></p>
-   		
+   			   		
+   		 
    		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
-         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
-  
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
    	</form>
   
     </div>

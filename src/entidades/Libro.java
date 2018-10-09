@@ -19,11 +19,23 @@ public class Libro
 	{
 		
 	}
-	public Libro(String t, String i,int n,Date f,int m) {
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
+	}
+	
+	public Libro(String t, String i,int n,String f,int m) {
 		this.isbn=i;
 		this.titulo=t;
 		this.nroEdicion=n;
-		this.fechaEdicion=f;
+		DateFormat Formato=new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.fechaEdicion=convertUtilToSql(Formato.parse(f));
+		} catch (ParseException e) {
+	
+			e.printStackTrace();
+		}
+		
 		this.cantDiasMaxPrestamo=m;
 		
 		

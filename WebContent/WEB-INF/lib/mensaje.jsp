@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Alta ejemplar</title>
+    <title>Mensaje</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -46,36 +46,16 @@
       </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+   <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Alta de ejemplar</h1>    
+        <h1 class="display-3">Se ha realizado la registración con exito</h1>    
       </div>
     </div>
     
      <div class="container">
-           			 
-   	<form class="form-alta" action="altaEjemplar" method="post">
-   	<% Libro l= (Libro)session.getAttribute("Libro");
-    		if(l==null){%>
-   		<p><label>ISBN:</label>
-   		<input name="ISBN"type="text" required="required"></p>
-   		   <% }else {%>
-   		  <p><label>ISBN:</label>
-   			<input name="ISBN"type="text" required="required" value=<%=l.getIsbn()%>></p>
-   		 <% }%>
-   		 
-   		 
-   		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Buscar">Buscar</button>
-   	<%Libro li=(Libro)session.getAttribute("L");
-   			if(li!=null) {%>
-   			<p><label>ID Ejemplar:</label>
-   		<input name="idEjemplar"type="text" required="required"></p>
-   		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Guardar">Guardar</button>
-   		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Agregar mas">Agregar mas</button>
-   		<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
-   		<%} %>
-   	</form>
-  
+        <form class="form-bus" action="mensaje" method="post">		 
+   		<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Volver</button>
+   		</form>  
     </div>
 
     <div class="container">

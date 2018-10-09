@@ -42,31 +42,20 @@ public class devueltoUno extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		request.getSession().setAttribute("errorDevUno",null);
 		String op = request.getParameter("opc");
 		if(op.equals("Agregar"))
 		{
-			if (request.getParameter("idEjemplar") == "") 
-			{
-				
-				PrintWriter out = response.getWriter();
-				out.println("<script type=\"text/javascript\">");
-				out.println("alert('Id vacio');");
-				out.println("location='devueltoUno.jsp';");
-				out.println("</script>");
-			} 
-			else
-			{
+			
 				int id = Integer.parseInt(request.getParameter("idEjemplar"));
 				CtrlEjemplar ce = new CtrlEjemplar();
 				Ejemplar e = ce.getOne(id); // veo si existe el id
 				if (e == null )
 				{
-					PrintWriter out = response.getWriter();
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Id ejemplar incorrecto');");
-					out.println("location='devueltoUno.jsp';");
-					out.println("</script>");
+					String msj = "No existe el ejemplar con el id "+id;
+					request.getSession().setAttribute("errorDevUno", msj);
+					request.getRequestDispatcher("WEB-INF/lib/devueltoUno.jsp").forward(request, response);
+				
 				} 
 				else 
 				{
@@ -74,28 +63,27 @@ public class devueltoUno extends HttpServlet {
 					LineaDePrestamo lp=clp.getOne(id);//me fijo si esta pendiente de devolucion
 					if (lp == null)
 					{
-						PrintWriter out = response.getWriter();
-						out.println("<script type=\"text/javascript\">");
-						out.println("alert('El id ingresado no esta pendiente de devolucion');");
-						out.println("location='devueltoUno.jsp';");
-						out.println("</script>");
+						String msj = "El ejemplar "+id+" no esta pendiente de devolucion";
+						request.getSession().setAttribute("errorDevUno", msj);
+						request.getRequestDispatcher("WEB-INF/lib/devueltoUno.jsp").forward(request, response);
+						
 					}
 					else
 					{
-						
+						request.getSession().setAttribute("errorDevUno",null);
 						HttpSession session = request.getSession();
-					
-						
+										
 						session.setAttribute("lineaPre",lp);
-						request.getRequestDispatcher("/devueltoUnoRegistrar.jsp").forward(request, response);
+						request.getRequestDispatcher("WEB-INF/lib/devueltoUnoRegistrar.jsp").forward(request, response);
 					}
 				}
-			}
+			
 			
 		}//termina el agregar
 		if(op.equals("Cancelar"))
 		{
-			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+			request.getSession().setAttribute("errorDevUno",null);
+			request.getRequestDispatcher("WEB-INF/lib/menu.jsp").forward(request, response);
 		}
 	
 		

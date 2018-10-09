@@ -257,7 +257,7 @@ CREATE TABLE `usuarios` (
   `clave` varchar(20) NOT NULL,
    `tipo` int(1) NOT NULL,
     `idSocio` int(11)  NULL,
-  PRIMARY KEY (`nombreUsuario`)
+  PRIMARY KEY (`nombreUsuario`),
     KEY `idSocioUsuario_fk` (`idSocio`),
   CONSTRAINT `idSocioUsuario_fk` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idsocio`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

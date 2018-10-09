@@ -36,9 +36,17 @@ public class informes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String op=request.getParameter("op");
+		if(op.equals("informe1"))
+		{
+			request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
+		}
+		if(op.equals("informe2")) 
+		{
+			request.getRequestDispatcher("WEB-INF/lib/informe2.jsp").forward(request, response);
+		}
 		if(op.equals("Volver"))
 		{
-			response.sendRedirect("informes.jsp");
+			response.sendRedirect("WEB-INF/lib/informes.jsp");
 		}
 	}
 

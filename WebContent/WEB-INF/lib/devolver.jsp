@@ -28,7 +28,7 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-  <ul class="nav nav-pills float-right">
+     <ul class="nav nav-pills float-right">
         <li class="nav item">
         <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
@@ -55,18 +55,26 @@
     </div>
      
       <div class="container">
-      <form class="form-bus" action="devueltoUno" method="post">
-      
-      	<label>Id ejemplar:</label>
-      	<input type="text" name="idEjemplar">
-      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Agregar">Agregar</button>
-      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Cancelar">Cancelar</button>
-      
-      
-   
-    </form>
+      <form class="form-bus" action="devolver" method="post">
+       <label>Id socio:</label>
+     <input type="number" name="idSocio" required="required">
+     
+     
+ 		
+      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Buscar">Buscar</button>
+      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Cancelar" formnovalidate>Cancelar</button>
+      	
+      	<%String msj=(String)session.getAttribute("errorDev");
+  
+ 		if (msj != null) {%>
+ 		<label style="color:red;"><%=msj %></label>
+ 		<%}%>
+      </form>
+    
+  
       </div>
-      
+
+    
       <div class="container">
    
       <footer>

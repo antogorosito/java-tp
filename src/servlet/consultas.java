@@ -59,7 +59,7 @@ public class consultas extends HttpServlet {
 			PrintWriter out= response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('No se encontraron libros con ese titulo');");
-			out.println("location='consultas.jsp';");
+			out.println("location='WEB-INF/lib/consultas.jsp';");
 			out.println("</script>");
 		}
 	

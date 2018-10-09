@@ -60,7 +60,7 @@ public class agregar extends HttpServlet {
 			PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Id vacio');");
-				out.println("location='agregar.jsp';");
+				out.println("location='WEB-INF/lib/agregar.jsp';");
 				out.println("</script>");
 			} else {
 				int id = Integer.parseInt(request.getParameter("idEjemplar"));
@@ -70,7 +70,7 @@ public class agregar extends HttpServlet {
 					PrintWriter out = response.getWriter();
 					out.println("<script type=\"text/javascript\">");
 					out.println("alert('Id ejemplar incorrecto');");
-					out.println("location='agregar.jsp';");
+					out.println("location='WEB-INF/lib/agregar.jsp';");
 					out.println("</script>");
 				} else {
 					HttpSession session = request.getSession();
@@ -80,7 +80,7 @@ public class agregar extends HttpServlet {
 						PrintWriter out = response.getWriter();
 						out.println("<script type=\"text/javascript\">");
 						out.println("alert('ejemplar no disponible');");
-						out.println("location='agregar.jsp';");
+						out.println("location='WEB-INF/lib/agregar.jsp';");
 						out.println("</script>");
 					} else {
 						CtrlLineaDePrestamo clp = new CtrlLineaDePrestamo();
@@ -91,7 +91,7 @@ public class agregar extends HttpServlet {
 							PrintWriter out = response.getWriter();
 							out.println("<script type=\"text/javascript\">");
 							out.println("alert('Posee otros ejemplares del mismo libro ya prestados');");
-							out.println("location='agregar.jsp';");
+							out.println("location='WEB-INF/lib/agregar.jsp';");
 							out.println("</script>");
 						} else {
 							// que cree el prestamo la primera vez y las siguientes solo agregue
@@ -123,7 +123,7 @@ public class agregar extends HttpServlet {
 								PrintWriter out = response.getWriter();
 								out.println("<script type=\"text/javascript\">");
 								out.println("alert('ya esta en el prestamo');");
-								out.println("location='agregar.jsp';");
+								out.println("location='WEB-INF/lib/agregar.jsp';");
 								out.println("</script>");
 							} else {
 								int c = (Integer) session.getAttribute("cantPosible"); // fijarse que no se supere la
@@ -142,7 +142,7 @@ public class agregar extends HttpServlet {
 								request.getSession().setAttribute("lineas",lineas); // para que me devuelva la lista aun con los carteles uso el session antes use la linea anterior
 								int dias = clp.minimoDias(ap);// buscar minima cantidad de dias en las lineas deprestamo
 								request.getSession().setAttribute("dias", dias);
-								request.getRequestDispatcher("/agregar.jsp").forward(request, response);
+								request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
 							}
 						}
 					}
@@ -166,7 +166,7 @@ public class agregar extends HttpServlet {
 			PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Se ha guardado el prestamo por el minimo de dias establecido');");
-				out.println("location='menu.jsp';");
+				out.println("location='WEB-INF/lib/menu.jsp';");
 				out.println("</script>");
 			}
 			else
@@ -176,7 +176,7 @@ public class agregar extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('Se ha guardado el prestamo con los dias ingresados');");
-				out.println("location='menu.jsp';");
+				out.println("location='WEB-INF/lib/menu.jsp';");
 				out.println("</script>");
 			}
 			session.setAttribute("prestamo",null);
@@ -197,7 +197,7 @@ public class agregar extends HttpServlet {
 			cp.delete(ap);
 			session.setAttribute("prestamo",null);
 			session.setAttribute("lineas",null);
-			request.getRequestDispatcher("/prestamos.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
 		}
 
 	}

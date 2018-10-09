@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Login</title>
+    <title>Alta socio</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -15,49 +15,67 @@
 
     <!-- Custom styles for this template -->
     <link href="style/jumbotron.css" rel="stylesheet">
-    
-       
-     
+           
   </head>
 
   <body>   
      
       <div class="header clearfix">
-        
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-     
+       <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        <a class="nav-link" href="logout">Cerrar sesion</a>
+        </li>
+        </ul>
+          <ul class="nav nav-pills float-right">
+        <li class="nav item">
+        	<a class="nav-link" href="menu.jsp">Menu</a>
+        </li>
+        </ul>
         
         <ul class="nav nav-pills float-right">
         <li class="nav item">
         	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
-      
+        
         
       </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Inicio de sesion</h1>    
+        <h1 class="display-3">Alta de socio</h1>    
       </div>
     </div>
     
      <div class="container">
-   <form class="form-signin" action="login" method="post">
-      
-    
-      <label >Usuario</label>
-      <input type="text"  name="usuario" class="form-control"  required="required"  style="margin-bottom: 15px">
-      <label >Clave</label>
-      <input type="password"  name="clave" class="form-control" required="required">
-   
-      <button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px">Iniciar sesion</button>
+           			 
+   	<form class="form-alta" action="altaSocio" method="post">
+   	
+   		<p><label>Nombre:</label>
+   		<input name="nombre"type="text" required="required"></p>
+   		
+   		<p><label>Apellido:</label>
+   		<input name="apellido"type="text" required="required" ></p>
+   		
+   		<p><label>Email:</label>
+   		<input name="email"type="email" required="required" ></p>
+   		
+   			<p><label>Domicilio:</label>
+   		<input name="domicilio"type="text" required="required"></p>
+   		
+   			<p><label>Telefono:</label>
+   		<input name="telefono"type="text" required="required"></p>
+   		
+   			<p><label>Dni:</label>
+   		<input name="dni"type="text" id="dni" required="required"></p>
+   		
+   		 <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
   
-   
-    
-    </form>
+   	</form>
   
     </div>
 

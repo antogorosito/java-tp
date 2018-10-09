@@ -1,4 +1,4 @@
-<%@page import="com.mysql.cj.Session"%>
+%@page import="com.mysql.cj.Session"%>
 <%@page import="entidades.*" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Devolución de libros</title>
+    <title>Informes</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -28,7 +28,7 @@
         
         <img src="imagenes/logo.jpg" title="logo" width="300" height="90"/>
         
-     <ul class="nav nav-pills float-right">
+       <ul class="nav nav-pills float-right">
         <li class="nav item">
         <a class="nav-link" href="logout">Cerrar sesion</a>
         </li>
@@ -44,31 +44,34 @@
         	<a class="nav-link" href="index.html">Home</a>
         </li>
         </ul>
+      
         
       </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Devolución de libros</h1>    
+        <h1 class="display-3">Informes</h1>    
       </div>
     </div>
-     
       <div class="container">
-      <form class="form-bus" action="devolver" method="post">
-       <label>Id socio:</label>
-     <input type="number" name="idSocio" >
-    
-      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Buscar">Buscar</button>
-      	<button class="btn btn-lg btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Cancelar">Cancelar</button>
-      	
-      </form>
-    
-  
-      </div>
+    <form class="form-bus" action="informes" method="post">
+   <div class="row">
+        <div class="col-md-4">
+          <h2>Libros pendientes de devolucion</h2>
+          <p>Informe sobre los libros que aun no han sido devueltos. </p>
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="pendientes">Ir</button>
+        </div>
+        <div class="col-md-4">
+          <h2>Socios sancionados</h2>
+          <p>Informe sobre todos los socios que se encuentran actualmente sancionados. </p>
+         <button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="pendientes">Ir</button>
+       </div>
+    </div>
+  </form>
+     </div>
 
-    
-      <div class="container">
+    <div class="container">
    
       <footer>
         <p>© Trabajo practico java -2018 - Gorosito, Velazquez</p>

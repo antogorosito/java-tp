@@ -59,7 +59,7 @@ public class estado extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Se registraron las inhabilitaciones');");
-			out.println("location='estado.jsp';");
+			out.println("location='WEB-INF/lib/estado.jsp';");
 			out.println("</script>");
 			
 		}//fin if
@@ -82,7 +82,7 @@ public class estado extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Se registraron las habilitaciones');");
-			out.println("location='estado.jsp';");
+			out.println("location='WEB-INF/lib/estado.jsp';");
 			out.println("</script>");
 		}//fin if
 		
