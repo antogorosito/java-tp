@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 public class Libro 
 {
@@ -19,26 +18,27 @@ public class Libro
 	{
 		
 	}
-	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate)
+	{
 		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
 		return sDate;
 	}
 	
-	public Libro(String t, String i,int n,String f,int m) {
+	public Libro(String t, String i,int n,String f,int m) 
+	{
 		this.isbn=i;
 		this.titulo=t;
 		this.nroEdicion=n;
 		DateFormat Formato=new SimpleDateFormat("yyyy-MM-dd");
-		try {
+		try 
+		{
 			this.fechaEdicion=convertUtilToSql(Formato.parse(f));
-		} catch (ParseException e) {
-	
+		} 
+		catch (ParseException e)
+		{
 			e.printStackTrace();
 		}
-		
 		this.cantDiasMaxPrestamo=m;
-		
-		
 	}
 	public int getIdLibro() 
 	{

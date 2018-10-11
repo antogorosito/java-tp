@@ -15,7 +15,8 @@ public class Sancion
 	
 	public Sancion(){}
 	
-	private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) 
+	{
 		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
 		return sDate;
 	}
@@ -25,18 +26,18 @@ public class Sancion
 		java.util.Date fecha=new java.util.Date();
 		DateFormat Formato=new SimpleDateFormat("yyyy-MM-dd");
 		String fechaAct=Formato.format(fecha);
-		try {
+		try 
+		{
 			this.fechaSancion=convertUtilToSql(Formato.parse(fechaAct));
-		} catch (ParseException e) {
-	
+		}
+		catch (ParseException e) 
+		{
 			e.printStackTrace();
 		}
-		
 		GregorianCalendar fechaa = new GregorianCalendar();
 		fechaa.setTime(this.fechaSancion);
 		fechaa.add(fechaa.DATE, d);
 		java.sql.Date sDate = convertUtilToSql(fechaa.getTime());
-			
 		this.fechaSancionHasta=sDate;
 		this.socio=s;
 	}

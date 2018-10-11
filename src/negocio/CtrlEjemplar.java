@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import database.DataEjemplar;
 import entidades.*;
 
-import java.util.ArrayList;
+
 
 public class CtrlEjemplar 
 {
@@ -37,22 +37,5 @@ public class CtrlEjemplar
 	{
 		de.add(id,l);
 	}
-	/*
 	
-	public void delete(Ejemplar e)
-	{
-		de.delete(e);
-	}
-	
-	public void update(Ejemplar e)
-	{
-		de.update(e);
-	}
-	
-
-	
-	public ArrayList<Ejemplar> getAll()
-	{
-		return de.getAll();
-	}*/
 }

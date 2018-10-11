@@ -12,8 +12,7 @@ public class DataPoliticaSancion
 	{
 		PoliticaSancion p=null;
 		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
+		ResultSet rs= null; 	
 		try 
 		{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from politica_sanciones where ? between diasDeAtrasoDesde and diasDeAtrasoHasta");
@@ -30,8 +29,9 @@ public class DataPoliticaSancion
 					p.setIdPoliticaSancion(rs.getInt("idPoliticaSancion"));
 				}
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -54,11 +54,9 @@ public class DataPoliticaSancion
 		PoliticaSancion p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
-		
 		try 
 		{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select max(diasDeSancion) as maximo from politica_sanciones");
-			
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
@@ -66,11 +64,11 @@ public class DataPoliticaSancion
 				{
 					p=new PoliticaSancion();
 					p.setDiasDeSancion(rs.getInt("maximo"));
-			
 				}
 			}
-		} catch (SQLException e) {
-			
+		} 
+		catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -87,13 +85,5 @@ public class DataPoliticaSancion
 		}
 		return p;
 	}
-	/*	public void add(PoliticaSancion ps){}
 	
-	public void delete(PoliticaSancion ps) {}
-	
-	public void update(PoliticaSancion ps) {}
-	
-
-	
-	public ArrayList<PoliticaSancion> getAll() {}*/
 }

@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.ArrayList;
-
 import database.DataPoliticaSancion;
 import entidades.PoliticaSancion;;
 
@@ -23,25 +21,5 @@ public class CtrlPoliticaSancion
 		return dps.getMax();
 	}
 	
-/*	public void add(PoliticaSancion ps) 
-	{
-		dps.add(ps);
-	}
-	
-	public void delete(PoliticaSancion ps)
-	{
-		dps.delete(ps);
-	}
-	
-	public void update(PoliticaSancion ps)
-	{
-		dps.update(ps);
-	}
-	
-	
-	
-	public ArrayList<PoliticaSancion> getAll()
-	{
-		return dps.getAll();
-	}*/
+
 }

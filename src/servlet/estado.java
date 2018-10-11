@@ -1,9 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,13 +15,15 @@ import negocio.*;
  * Servlet implementation class estado
  */
 @WebServlet("/estado")
-public class estado extends HttpServlet {
+public class estado extends HttpServlet
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public estado() {
+    public estado()
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +31,8 @@ public class estado extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -39,45 +40,71 @@ public class estado extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		request.setAttribute("errorEstInh",null);
+		request.setAttribute("errorEstHab", null);
 		String op=request.getParameter("op");
 		if(op.equals("Inhabilitar"))
 		{
 			ArrayList<Socio> lista=new ArrayList<Socio>();
 			CtrlSocio cs=new CtrlSocio();
 			String[] lin=request.getParameterValues("chk");
-			for(int i=0;i<lin.length;i++)
+			if(lin!=null)
 			{
-				Socio s=cs.getOne(Integer.parseInt(lin[i]));
-				lista.add(s);
+				for(int i=0;i<lin.length;i++)
+				{
+					Socio s=cs.getOne(Integer.parseInt(lin[i]));
+					lista.add(s);
+				}
+				for(Socio ss:lista) 
+				{
+					cs.update(ss, false);
+				}
+				int nro=7;
+				request.getSession().setAttribute("opc",nro);			
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
-			for(Socio ss:lista) 
+			else 
 			{
-				cs.update(ss, false);
+				String msj="No se selecciono ningun socio para inhabilitar";
+				request.setAttribute("errorEstInh",msj);
+				request.getRequestDispatcher("WEB-INF/lib/estado.jsp").forward(request, response);
 			}
-			request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
-			
-			
-		}//fin if
-		
+		}
 		if(op.equals("Habilitar"))
 		{
-
 			ArrayList<Socio> lista=new ArrayList<Socio>();
 			CtrlSocio cs=new CtrlSocio();
 			String[] lin=request.getParameterValues("chk");
-			for(int i=0;i<lin.length;i++)
+			if(lin!=null)
 			{
-				Socio s=cs.getOne(Integer.parseInt(lin[i]));
-				lista.add(s);
+				for(int i=0;i<lin.length;i++)
+				{
+					Socio s=cs.getOne(Integer.parseInt(lin[i]));
+					lista.add(s);
+				}
+				for(Socio ss:lista) 
+				{
+					cs.update(ss, true);
+				}
+				int nro=8;
+				request.getSession().setAttribute("opc",nro);
+				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
-			for(Socio ss:lista) 
+			else
 			{
-				cs.update(ss, true);
+				String msj="No se selecciono ningun socio para habilitar";
+				request.setAttribute("errorEstHab",msj);
+				request.getRequestDispatcher("WEB-INF/lib/estado.jsp").forward(request, response);
 			}
-			request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
-		}//fin if
+		}
+		if(op.equals("Volver"))
+		{
+			request.setAttribute("errorEstInh",null);
+			request.setAttribute("errorEstHab",null);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+		}
 		
 	}
 

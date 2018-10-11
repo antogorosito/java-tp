@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.ArrayList;
-
 import database.DataSancion;
 import entidades.*;
 
@@ -24,20 +22,5 @@ public class CtrlSancion
 		return ds.getOne(l);
 	}
 	
-/*	
-	public void delete(Sancion s)
-	{
-		ds.delete(s);
-	}
-	
-	public void update(Sancion s)
-	{
-		ds.update(s);
-	}
-	
-	
-	public ArrayList<Sancion> getAll()
-	{
-		return ds.getAll();
-	}*/
+
 }

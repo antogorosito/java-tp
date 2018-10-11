@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.ArrayList;
-
 import database.DataLibro;
 import entidades.Libro;
 
@@ -15,20 +13,6 @@ public class CtrlLibro
 		de=new DataLibro();
 	}
 	
-	/*
-	
-
-	
-	public void delete(Libro l)
-	{
-		de.delete(l);
-	}
-	
-	public void update(Libro l)
-	{
-		de.update(l);
-	}
-	*/
 	public Libro getOne(String ISBN)
 	{
 		return de.getOne(ISBN);
@@ -38,8 +22,4 @@ public class CtrlLibro
 		de.add(l);
 	}
 	
-	/*public ArrayList<Libro> getAll()
-	{
-		return de.getAll();
-	}*/
 }

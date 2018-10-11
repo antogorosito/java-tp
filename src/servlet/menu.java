@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class menu
  */
 @WebServlet("/menu")
-public class menu extends HttpServlet {
+public class menu extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public menu() {
+    public menu() 
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,7 +27,8 @@ public class menu extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -33,8 +36,8 @@ public class menu extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		String op = request.getParameter("op");	
 		if(op.equals("altaSocio"))
 		{
@@ -71,6 +74,14 @@ public class menu extends HttpServlet {
 		if(op.equals("altaEjemplar"))
 		{
 			request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+		}
+		if(op.equals("pendiente"))
+		{
+			request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);
+		}
+		if(op.equals("contraseña"))
+		{
+			request.getRequestDispatcher("WEB-INF/lib/contraseña.jsp").forward(request, response);
 		}
 	}
 

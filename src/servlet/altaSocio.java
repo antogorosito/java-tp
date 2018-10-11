@@ -16,13 +16,15 @@ import negocio.*;
  * Servlet implementation class altaSocio
  */
 @WebServlet({ "/altaSocio", "/altasocio" })
-public class altaSocio extends HttpServlet {
+public class altaSocio extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public altaSocio() {
+    public altaSocio() 
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +32,8 @@ public class altaSocio extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -38,8 +41,9 @@ public class altaSocio extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("errorAltaS",null);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		request.setAttribute("errorAltaS",null);
 		String op=request.getParameter("op");
 		if(op.equals("Registrar"))
 		{
@@ -59,21 +63,21 @@ public class altaSocio extends HttpServlet {
 				Usuario u=new Usuario(dni,a,tipo);
 				CtrlUsuario cu=new CtrlUsuario();
 				cu.add(u,socio.getIdSocio());
-				
+				int nro=1;
+				request.getSession().setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 			else 
 			{
 				String msj = "Ya existe un socio con el dni "+dni;
-				request.getSession().setAttribute("errorAltaS", msj);
+				request.setAttribute("errorAltaS", msj);
 				request.getRequestDispatcher("WEB-INF/lib/altaSocio.jsp").forward(request, response);
-					
 			}
 		}
 		
 		if(op.equals("Cancelar"))
 		{
-			request.getSession().setAttribute("errorAltaS",null);
+			request.setAttribute("errorAltaS",null);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}

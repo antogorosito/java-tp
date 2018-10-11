@@ -27,7 +27,6 @@ public class CtrlSocio
 	{
 		ds.update(s,est);
 	}
-
 	
 	public Socio getOne(String dni)
 	{
@@ -47,10 +46,5 @@ public class CtrlSocio
 	
 		return ds.getAllInhabilitados();
 	}
-	/*	public void delete(Socio s)
-	{
-		ds.delete(s);
-	}
 	
-	*/
 }

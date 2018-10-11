@@ -17,13 +17,15 @@ import negocio.CtrlLibro;
  * Servlet implementation class altaLibro
  */
 @WebServlet("/altaLibro")
-public class altaLibro extends HttpServlet {
+public class altaLibro extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public altaLibro() {
+    public altaLibro()
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +33,8 @@ public class altaLibro extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -43,9 +46,8 @@ public class altaLibro extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{	
-		request.getSession().setAttribute("errorAltaL",null);
+		request.setAttribute("errorAltaL",null);
 		String op=request.getParameter("op");
-		
 		if(op.equals("Registrar")) 
 		{
 			String t=request.getParameter("titulo");
@@ -57,7 +59,6 @@ public class altaLibro extends HttpServlet {
 			Libro  l=cs.getOne(i);
 			if(l==null)
 			{
-				
 				l=new Libro(t,i,n,d,m);
 				cs.add(l);		
 				request.getSession().setAttribute("Libro", l);
@@ -66,14 +67,13 @@ public class altaLibro extends HttpServlet {
 			else 
 			{
 				String msj = "Ya existe un libro con el ISBN "+i;
-				request.getSession().setAttribute("errorAltaL", msj);
+				request.setAttribute("errorAltaL", msj);
 				request.getRequestDispatcher("WEB-INF/lib/altaLibro.jsp").forward(request, response);
-				
-			
 			}
-		}//fin if
+		}
 		if(op.equals("Cancelar"))
 		{
+			request.setAttribute("errorAltaL",null);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}

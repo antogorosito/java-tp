@@ -1,5 +1,5 @@
 package database;
-import java.sql.*;// me permite cambiar de ocnecctor al usar java.sql.connection
+import java.sql.*;
 
 
 
@@ -19,7 +19,7 @@ public class FactoryConexion {
 	FactoryConexion() {
 		
 		try {
-			Class.forName(dbDriver);// crear una nueva clase de driver 
+			Class.forName(dbDriver);
 		} catch (ClassNotFoundException e) {
 			System.out.println(e);
 

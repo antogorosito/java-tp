@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.ArrayList;
-
 import database.DataUsuario;
 import entidades.Usuario;
 
@@ -13,9 +11,7 @@ public class CtrlUsuario
 	{
 		du=new DataUsuario();
 	}
-	
 
-	
 	public Usuario getOne(String u,String c)
 	{
 		return du.getOne(u,c);
@@ -24,20 +20,5 @@ public class CtrlUsuario
 	{
 		du.add(u,id);
 	}
-	
-	
-	/*public ArrayList<Usuario> getAll()
-	{
-		return du.getAll();
-	}
-	
-	public void delete(Usuario u)
-	{
-		du.delete(u);
-	}
-	
-	public void update(Usuario u)
-	{
-		du.update(u);
-	}*/
+
 }

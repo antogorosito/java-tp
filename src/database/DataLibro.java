@@ -1,31 +1,16 @@
 package database;
 
 import java.sql.*;
-import java.util.ArrayList;
-
-import entidades.Ejemplar;
-import entidades.Libro;
-import entidades.Socio;
+import entidades.*;
 
 
 public class DataLibro 
 {
-/*
-	
-	
-	public void delete(Libro l) {}
-	
-	public void update(Libro l) {
-		
-	}*/
-
-	
-	public Libro getOne(String ISBN) {
-		
+	public Libro getOne(String ISBN) 
+	{
 		Libro l=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
-		
 		try 
 		{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM libros WHERE ISBN=?");
@@ -41,12 +26,12 @@ public class DataLibro
 					l.setNroEdicion(rs.getInt("nroEdicion"));
 					l.setFechaEdicion(rs.getDate("fechaEdicion"));
 					l.setCantDiasMaxPrestamo(rs.getInt("cantDiasMaxPrestamo"));
-					l.setIdLibro(rs.getInt("idLibro"));
-									
+					l.setIdLibro(rs.getInt("idLibro"));	
 				}
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -63,10 +48,10 @@ public class DataLibro
 		}
 		return l;
 	}
-	public void add(Libro l){
+	public void add(Libro l)
+	{
 		ResultSet keyResultSet=null;//
 		PreparedStatement stmt=null;
-	
 		try
 		{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO libros(titulo,ISBN,nroEdicion,fechaEdicion,cantDiasMaxPrestamo) VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
@@ -76,11 +61,9 @@ public class DataLibro
 			stmt.setDate(4, l.getFechaEdicion());
 			stmt.setInt(5, l.getCantDiasMaxPrestamo());
 			stmt.execute();
-			//obtener el id
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				l.setIdLibro((keyResultSet.getInt(1)));
-			
 			}
 		}
 		catch(SQLException e)
@@ -99,8 +82,5 @@ public class DataLibro
 			} 
 		}
 	}
-	/*public ArrayList<Libro> getAll() {
 	
-			
-	}*/
 }

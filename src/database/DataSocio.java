@@ -12,7 +12,6 @@ public class DataSocio
 	{
 		ResultSet keyResultSet=null;//
 		PreparedStatement stmt=null;
-	
 		try
 		{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO socios(apellido,nombre,email,domicilio,telefono,dni,estado) VALUES (?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
@@ -24,11 +23,10 @@ public class DataSocio
 			stmt.setString(6, s.getDni());
 			stmt.setBoolean(7, s.getEstado());
 			stmt.execute();
-			//obtener el id
 			keyResultSet=stmt.getGeneratedKeys();
-			if(keyResultSet!=null && keyResultSet.next()){
+			if(keyResultSet!=null && keyResultSet.next())
+			{
 				s.setIdSocio(keyResultSet.getInt(1));
-			
 			}
 		}
 		catch(SQLException e)
@@ -51,11 +49,9 @@ public class DataSocio
 	
 	public Socio getOne(String dni) 
 	{
-	
 		Socio s=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
-		
 		try 
 		{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE dni=?");
@@ -76,8 +72,9 @@ public class DataSocio
 					s.setTelefono(rs.getString("telefono"));				
 				}
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -99,11 +96,9 @@ public class DataSocio
 	{
 		Socio s=null;
 		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
+		ResultSet rs= null; 		
 		try 
 		{
-			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM socios WHERE idSocio=?");
 			stmt.setInt(1,id);
 			rs=stmt.executeQuery();
@@ -122,8 +117,9 @@ public class DataSocio
 					s.setTelefono(rs.getString("telefono"));				
 				}
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -144,16 +140,16 @@ public class DataSocio
 	public void update(Socio s,boolean est) 
 	{
 		PreparedStatement stmt=null;
-		try {
-		
-			
+		try 
+		{
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update socios set estado=? where idSocio=?");
 			stmt.setBoolean(1, est);	
 			stmt.setInt(2,s.getIdSocio());
 			stmt.executeUpdate();
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -175,15 +171,12 @@ public class DataSocio
 		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
 		{
-			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios inner join lineas_de_prestamos on lineas_de_prestamos.idSocio=socios.idSocio inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date() and socios.estado=true group by socios.idSocio");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
-	
 				while(rs.next())
 				{
-					
 					Socio s=new Socio();
 					s.setApellido(rs.getString("apellido"));
 					s.setNombre(rs.getString("nombre"));
@@ -195,8 +188,7 @@ public class DataSocio
 					s.setTelefono(rs.getString("telefono"));
 					socios.add(s);					
 				}
-			}
-			
+			}		
 		}
 		catch(SQLException e)
 		{
@@ -216,21 +208,19 @@ public class DataSocio
 		return socios;
 		
 	}
-	public ArrayList<Socio> getAllAHabilitar()  // ver query, si la habilitacion es el mismo dia que termina o el dia mas uno
+	public ArrayList<Socio> getAllAHabilitar()  
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
-		ArrayList<Socio> socios=	new ArrayList<Socio>();
+		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
-		{
-			
+		{	
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *  from sanciones inner join socios on socios.idSocio=sanciones.idSancion where adddate(fechaSancionHasta,1)=current_date() and estado=false");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
 				while(rs.next())
 				{
-				
 					Socio s=new Socio();
 					s.setApellido(rs.getString("apellido"));
 					s.setNombre(rs.getString("nombre"));
@@ -242,8 +232,7 @@ public class DataSocio
 					s.setTelefono(rs.getString("telefono"));
 					socios.add(s);	
 				}
-			}
-			
+			}	
 		}
 		catch(SQLException e)
 		{
@@ -271,14 +260,12 @@ public class DataSocio
 		ArrayList<Socio> listaSocios=new ArrayList<Socio>();
 		try 
 		{
-			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from socios where estado=false");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
 				while(rs.next())
 				{
-					
 					Socio ss=new Socio();
 					ss.setIdSocio(rs.getInt("idSocio"));
 					ss.setApellido(rs.getString("apellido"));
@@ -290,8 +277,7 @@ public class DataSocio
 					ss.setTelefono(rs.getString("telefono"));
 					listaSocios.add(ss);	
 				}
-			}
-			
+			}	
 		}
 		catch(SQLException e)
 		{
@@ -311,5 +297,5 @@ public class DataSocio
 		return listaSocios;
 		
 	}
-/* 	public void delete(Socio s) {}*/
+
 }

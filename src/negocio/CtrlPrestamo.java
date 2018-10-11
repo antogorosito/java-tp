@@ -1,7 +1,5 @@
 package negocio;
 
-import java.util.ArrayList;
-
 import database.DataPrestamo;
 import entidades.*;
 
@@ -33,15 +31,5 @@ public class CtrlPrestamo
 		dp.delete(p);
 	}
 	
-	/*
 	
-	public Prestamo getOne(Prestamo p)
-	{
-		return dp.getOne(p);
-	}
-	
-	public ArrayList<Prestamo> getAll()
-	{
-		return dp.getAll();
-	}*/
 }

@@ -17,13 +17,15 @@ import negocio.*;
  * Servlet implementation class devolver
  */
 @WebServlet("/devolver")
-public class devolver extends HttpServlet {
+public class devolver extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public devolver() {
+    public devolver()
+    {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +33,8 @@ public class devolver extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -39,9 +42,9 @@ public class devolver extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getSession().setAttribute("errorDev",null);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		request.setAttribute("errorDev",null);
 		String op=request.getParameter("opc");
 		if(op.equals("Buscar"))
 		{
@@ -51,7 +54,7 @@ public class devolver extends HttpServlet {
 			if(s == null)
 			{
 				String msj = "No existe el socio con el id "+id;
-				request.getSession().setAttribute("errorDev", msj);
+				request.setAttribute("errorDev", msj);
 				request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
 			}
 			else 
@@ -62,23 +65,22 @@ public class devolver extends HttpServlet {
 				if(lineas.isEmpty())
 				{
 					String msj = "El socio con id "+id+ " No posee libros pendientes de devolucion";
-					request.getSession().setAttribute("errorDev", msj);
-					request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
-					
+					request.setAttribute("errorDev", msj);
+					request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);				
 				}
 				else
 				{
-				
-					request.setAttribute("lineas",lineas);
-					request.setAttribute("socio",s);
+					request.getSession().setAttribute("lineasD",lineas);
+					request.getSession().setAttribute("socioD",s);
 					request.getRequestDispatcher("/WEB-INF/lib/devolverRegistrar.jsp").forward(request, response);
 				}
-				
 			}
 		}
-		if(op.equals("Cancelar"))
+		if(op.equals("Volver"))
 		{
-			request.getSession().setAttribute("errorDev",null);
+			request.getSession().setAttribute("socioD",null);
+			request.getSession().setAttribute("lineasD",null);
+			request.setAttribute("errorDev",null);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		

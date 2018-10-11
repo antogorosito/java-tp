@@ -1,4 +1,6 @@
 <%@page import="entidades.*" %>
+<%@page import="negocio.*" %>
+<%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <html lang="en">
 <head>
@@ -8,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
 
-    <title>Alta ejemplar</title>
+    <title>Libros pendientes de devolución</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
@@ -32,45 +34,44 @@
         </ul>
         <ul class="nav nav-pills float-right">
         	<li class="nav item">
-	        	<a class="nav-link" href=""logout"">Home</a>
+	        	<a class="nav-link" href="logout">Home</a>
         	</li>
         </ul>
 	</div>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
     	<div class="container">
-	        <h1 class="display-3">Alta de ejemplar</h1>    
+	        <h1 class="display-3">Libros pendientes de devolución</h1>    
       	</div>
     </div>
     <div class="container">   			 
-   		<form class="form" action="altaEjemplar" method="post">
-   			<% Libro l= (Libro)session.getAttribute("Libro");
-    		if(l==null){%>
-	   		<p><label>ISBN:</label>
-   			<input name="ISBN"type="text" required="required"></p>
-   		   	<% }else {%>
-   		  	<p><label>ISBN:</label>
-   			<input name="ISBN"type="text" required="required" value=<%=l.getIsbn()%>></p>
-   		 	<% }%>
-   	     	<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Buscar">Buscar</button>
-   		 	<%String msj=(String)request.getAttribute("errorAltaE");
-   			if (msj != null) {%>
- 			<label style="color:red;"><%=msj %></label>
- 			<%}%>
- 			<%Libro li=(Libro)session.getAttribute("L");
-   			if(li!=null) {%>
-   			<p><b><label>Titulo:  <%=li.getTitulo() %></label></b></p>
-   			<p><label>ID Ejemplar:</label>
-   			<input name="idEjemplar"type="text" required="required"></p>
-   			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Guardar">Guardar</button>
-   			<button class="btn  btn-primary " style="margin-right: 50px" type="submit" name="op" value="Agregar mas">Agregar mas</button>
-   			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
-   			<%String msj2=(String)request.getAttribute("errorAltaE2");
-	 		if (msj2 != null) {%>
- 			<label style="color:red;"><%=msj2 %></label>
- 			<%}%>
-   			<%} %>
-   		</form>
+   		<%Usuario u=(Usuario)session.getAttribute("usuario");
+    	if(u.getTipo()==1){%>
+    	<p><label>Nombre y apellido:<%=u.getSocio().getApellido() +" "+ u.getSocio().getNombre()%></label></p>
+    	<p><label>Estado: </label>  <%if(u.getSocio().getEstado()==false){ %> <label>Inhabilitado</label><%}else{ %><label>Habilitado</label><%} %></p>  	
+    	<%CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+    	ArrayList<LineaDePrestamo> lineas=clp.getAll(u.getSocio().getIdSocio());
+    	if(lineas.isEmpty()!=true){%>
+    	<table>
+    		<tr>
+				<th>Id ejemplar</th>
+ 				<th>Titulo</th>
+ 				<th>Fecha a devolver</th>
+		 	</tr>
+		 	<%for(LineaDePrestamo ll: lineas){%>
+		 	<tr>
+ 		 		<td><%=ll.getEjemplar().getIdEjemplar() %></td>
+ 		 		<td><%=ll.getEjemplar().getLibro().getTitulo() %></td>
+ 		 		<td><%=ll.getPrestamo().getFechaADevolver() %></td>
+	 		</tr>
+ 			<%} %>
+    	</table>
+    	<%}else{%>
+    	<label>No posee libros pendientes de devolucion</label>
+    	<%}} %>
+    	<form class="form-bus" action="pendiente" method="post">
+			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button>
+		</form>
     </div>
     <div class="container">
 	    <footer>

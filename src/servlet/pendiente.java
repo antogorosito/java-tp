@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class informes
+ * Servlet implementation class pendiente
  */
-@WebServlet("/informes")
-public class informes extends HttpServlet 
+@WebServlet("/pendiente")
+public class pendiente extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public informes() 
+    public pendiente()
     {
         super();
         // TODO Auto-generated constructor stub
@@ -39,17 +39,9 @@ public class informes extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		String op=request.getParameter("op");
-		if(op.equals("informe1"))
-		{
-			request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
-		}
-		if(op.equals("informe2")) 
-		{
-			request.getRequestDispatcher("WEB-INF/lib/informe2.jsp").forward(request, response);
-		}
 		if(op.equals("Volver"))
 		{
-			request.getRequestDispatcher("WEB-INF/lib/informes.jsp").forward(request, response);
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}
 

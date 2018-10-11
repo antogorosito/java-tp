@@ -12,18 +12,15 @@ public class DataSancion
 
 	public void add(Sancion s)
 	{
-
 		ResultSet keyResultSet=null;//
 		PreparedStatement stmt=null;
 		try 
 		{
-			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into sanciones(fechaSancion,fechaSancionHasta,idSocio) values(?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setDate(1,s.getFechaSancion());
 			stmt.setDate(2, s.getFechaSancionHasta());
 			stmt.setInt(3, s.getSocio().getIdSocio());
 			stmt.execute();		
-			//obtener el id
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				s.setIdSancion(keyResultSet.getInt(1));
@@ -49,8 +46,7 @@ public class DataSancion
 	{
 		Sancion s=null;
 		PreparedStatement stmt=null;
-		ResultSet rs= null; 
-		
+		ResultSet rs= null; 	
 		try 
 		{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select sanciones.* from sanciones inner join lineas_de_prestamos on lineas_de_prestamos.idSancion=sanciones.idSancion where lineas_de_prestamos.idPrestamo=? and sanciones.fechaSancion=current_date()");
@@ -71,8 +67,9 @@ public class DataSancion
 				
 				}
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
 		finally 
@@ -89,11 +86,5 @@ public class DataSancion
 		}
 		return s;
 	}
-	/*	public void delete(Sancion s) {}
 	
-	public void update(Sancion s) {}
-	
-	
-	
-	public ArrayList<Sancion> getAll() {}*/
 }

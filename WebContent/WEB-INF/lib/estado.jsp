@@ -35,7 +35,7 @@
         </ul>
         <ul class="nav nav-pills float-right">
 	        <li class="nav item">
-        		<a class="nav-link" href="index.html">Home</a>
+        		<a class="nav-link" href="logout">Home</a>
         	</li>
         </ul>
 	</div>
@@ -69,7 +69,11 @@
   				</tr> 
     		<%} %>
   		   </table>
-   			<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
+   			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
+   			<%String msj=(String)request.getAttribute("errorEstInh");  
+ 			if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
    	 		<%}%>   	
 		</form>
 	</div>
@@ -94,8 +98,13 @@
   				</tr> 
     	<%} %>
   		   </table>
-   			<button class="btn btn-lg btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
-   	 	<%}%>   	
+   			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
+   			<%String msj=(String)request.getAttribute("errorEstHab");  
+ 			if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
+   	 	<%}%>   
+   	 		<p><button class="btn btn-info " style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button></p>	
 		</form>
 	</div>
     <div class="container">
