@@ -84,7 +84,7 @@ public class altaEjemplar extends HttpServlet
 				ce.add(id,l);
 				session.setAttribute("L", null);
 				session.setAttribute("Libro", null);
-				int nro=1;
+				int nro=2;
 				session.setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
 			}
