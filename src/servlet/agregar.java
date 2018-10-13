@@ -1,11 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
+import util.*;
 import negocio.*;
 import entidades.*;
 
@@ -138,24 +135,39 @@ public class agregar extends HttpServlet
 			int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
 			int min=(Integer)session.getAttribute("dias");
 			Prestamo pre = (Prestamo) session.getAttribute("prestamo");
-			session.setAttribute("prestamo",null);
-			session.setAttribute("lineas",null);
 			CtrlPrestamo cp=new CtrlPrestamo();
 			if(di>min)
 			{
-				cp.update(pre, min);
+				GregorianCalendar fecha = new GregorianCalendar();
+				fecha.setTime(pre.getFechaPrestamo());
+				fecha.add(Calendar.DATE, min);
+				java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+				cp.update(pre, min,sDate);
 				int nro=3;
+				Socio s=(Socio)request.getSession().getAttribute("socio");// obtengo el mail y lo pongo den el send
+				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ min+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
+				Emailer.getInstance().send("antonellabj21@gmail.com","Confirmacion prestamo",msj);
 				request.getSession().setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
 			}
 			else
 			{
-				cp.update(pre, di);
+				GregorianCalendar fecha = new GregorianCalendar();
+				fecha.setTime(pre.getFechaPrestamo());
+				fecha.add(Calendar.DATE, di);
+				java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+				cp.update(pre, di,sDate);
 				int nro=4;
+				Socio s=(Socio)request.getSession().getAttribute("socio");// obtengo el mail y lo pongo den el send
+				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ di+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
+				Emailer.getInstance().send("antonellabj21@gmail.com","Confirmacion prestamo",msj);
 				request.getSession().setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
+			session.setAttribute("prestamo",null);
+			session.setAttribute("lineas",null);
 		}
+		
 		if(op.equals("Cancelar"))
 		{	
 			request.setAttribute("errorDev",null);
@@ -178,6 +190,12 @@ public class agregar extends HttpServlet
 		}
 
 	}
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) 
+	{
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
+	}
+	
 
 	
 }

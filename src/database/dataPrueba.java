@@ -1,16 +1,32 @@
 package database;
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import entidades.*;
+import negocio.CtrlPrestamo;
 
 public class dataPrueba {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException  {
-		System.out.println("prueba");
+		/*System.out.println("prueba");
 		if(getL(1)==null) {System.out.println("no hay");}
 		else {System.out.println("hay");}
-		
+		*/
+		CtrlPrestamo cp=new CtrlPrestamo();
+		Prestamo p=cp.getOne(8);
+		GregorianCalendar fecha = new GregorianCalendar();
+		fecha.setTime(p.getFechaPrestamo());
+		fecha.add(Calendar.DATE, 3);
+		java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+		System.out.println(sDate);
+	}
+	
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate) 
+	{
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
 	}
 	
 	public static Libro getL(int i) throws SQLException, ClassNotFoundException 

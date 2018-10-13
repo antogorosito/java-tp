@@ -1,13 +1,13 @@
 package database;
 
-import entidades.Socio;
-import entidades.Usuario;
+import entidades.*;
 
 import java.sql.*;
 
 
 public class DataUsuario
 {
+	
 	public Usuario getOne(String u, String c) 
 	{
 		Usuario l=null;
@@ -15,7 +15,7 @@ public class DataUsuario
 		ResultSet rs= null; 
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios inner join socios on socios.idSocio=usuarios.idSocio WHERE nombreUsuario=? and clave=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios WHERE nombreUsuario=? and clave=?");
 			stmt.setString(1,u);
 			stmt.setString(2,c);
 			rs=stmt.executeQuery();
@@ -27,11 +27,8 @@ public class DataUsuario
 					l.setNombreUsuario(rs.getString("nombreUsuario"));
 					l.setClave(rs.getString("clave"));
 					l.setTipo(rs.getInt("tipo"));
-					Socio s= new Socio();
+					Socio s=new Socio();
 					s.setIdSocio(rs.getInt("idSocio"));
-					s.setApellido(rs.getString("apellido"));
-					s.setNombre(rs.getString("nombre"));
-					s.setEstado(rs.getBoolean("estado"));
 					l.setSocio(s);
 				}
 			}

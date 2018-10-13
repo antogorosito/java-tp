@@ -1,5 +1,7 @@
 package negocio;
 
+import java.sql.Date;
+
 import database.DataPrestamo;
 import entidades.*;
 
@@ -21,15 +23,18 @@ public class CtrlPrestamo
 		dp.add(p);
 	}
 	
-	public void update(Prestamo p, int di)
+	public void update(Prestamo p, int di,Date sDate)
 	{
-		dp.update(p,di);
+		dp.update(p,di,sDate);
 	}
 	
 	public void delete(Prestamo p)
 	{
 		dp.delete(p);
 	}
-	
+	public Prestamo getOne(int id)
+	{
+		return dp.getOne(id);
+	}
 	
 }

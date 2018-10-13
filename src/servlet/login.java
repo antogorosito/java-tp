@@ -48,6 +48,7 @@ public class login extends HttpServlet
 		String c=request.getParameter("clave");
 		CtrlUsuario cu= new CtrlUsuario();
 		Usuario usuario= cu.getOne(u,c);
+	
 		if(usuario!=null)
 		{
 			HttpSession session = request.getSession(); 

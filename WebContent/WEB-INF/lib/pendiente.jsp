@@ -46,9 +46,11 @@
     </div>
     <div class="container">   			 
    		<%Usuario u=(Usuario)session.getAttribute("usuario");
-    	if(u.getTipo()==1){%>
-    	<p><label>Nombre y apellido:<%=u.getSocio().getApellido() +" "+ u.getSocio().getNombre()%></label></p>
-    	<p><label>Estado: </label>  <%if(u.getSocio().getEstado()==false){ %> <label>Inhabilitado</label><%}else{ %><label>Habilitado</label><%} %></p>  	
+    	if(u.getTipo()==1){
+    	CtrlSocio cs=new CtrlSocio();
+    	Socio s=cs.getOne(u.getSocio().getIdSocio());%>
+    	<p><label>Nombre y apellido:<%=s.getApellido() +" "+ s.getNombre()%></label></p>
+    	<p><label>Estado: </label>  <%if(s.getEstado()==false){ %> <label>Inhabilitado</label><%}else{ %><label>Habilitado</label><%} %></p>  	
     	<%CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
     	ArrayList<LineaDePrestamo> lineas=clp.getAll(u.getSocio().getIdSocio());
     	if(lineas.isEmpty()!=true){%>
