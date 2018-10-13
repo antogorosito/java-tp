@@ -116,12 +116,7 @@
           				<p>Realizar consultas sobre la disponibilidad de los libros. </p>
           				<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="consulta">Ir</button>
        				</div>
-        			<div class="col-md-4">
-          				<h2>Contraseña</h2>
-          				<p>Realizar cambios en la contraseña. </p>
-          				<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="contraseña">Ir</button>
-       				</div>
-     			 </div>
+               </div>
 			</form>
 		 </div>
 <%} %>
