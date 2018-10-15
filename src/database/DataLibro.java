@@ -38,8 +38,9 @@ public class DataLibro
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -50,7 +51,7 @@ public class DataLibro
 	}
 	public void add(Libro l)
 	{
-		ResultSet keyResultSet=null;//
+		ResultSet keyResultSet=null;
 		PreparedStatement stmt=null;
 		try
 		{
@@ -74,7 +75,9 @@ public class DataLibro
 		{
 			try 
 			{	
-				stmt.close();
+				if(keyResultSet!=null)keyResultSet.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{

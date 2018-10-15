@@ -41,8 +41,9 @@ public class DataUsuario
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -72,7 +73,8 @@ public class DataUsuario
 		{
 			try 
 			{	
-				stmt.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{

@@ -40,8 +40,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -76,7 +77,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
+				if(keyResultSet!=null)keyResultSet.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -112,8 +115,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -158,7 +162,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -194,8 +200,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -250,8 +257,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -291,7 +299,8 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();				
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();	
 			}
 			catch(SQLException e)
 			{
@@ -322,7 +331,8 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();				
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -352,7 +362,8 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();				
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();			
 			}
 			catch(SQLException e)
 			{
@@ -407,7 +418,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -460,8 +473,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -512,7 +526,9 @@ public class DataLineaDePrestamo
 		{
 			try 
 			{	
-				stmt.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{

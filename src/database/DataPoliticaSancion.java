@@ -38,8 +38,9 @@ public class DataPoliticaSancion
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
@@ -75,8 +76,9 @@ public class DataPoliticaSancion
 		{
 			try 
 			{	
-				stmt.close();
-				rs.close();
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
 			}
 			catch(SQLException e)
 			{
