@@ -31,18 +31,7 @@
 	        	<a class="nav-link" href="menu.jsp">Menu</a>
         	</li>
         </ul>
-        <ul class="nav nav-pills float-right">
-        	<li class="nav item">
-        		<a class="nav-link" href="logout">Home</a>
-        	</li>
-        </ul>
-        <%}else{ %>
-        <ul class="nav nav-pills float-right">
-        	<li class="nav item">
-	        	<a class="nav-link" href="index.html">Home</a>
-        	</li>
-        </ul>
-        <%} %>
+        <%}%>
 	</div>
     <div class="jumbotron">
 	    <div class="container">

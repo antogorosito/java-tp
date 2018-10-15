@@ -269,7 +269,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('antonella','anto123',0,null),('sabrina','sabri123',0,null);
+INSERT INTO `usuarios` VALUES ('antonella','anto123',0,null),('sabrina','sabri123',0,null),('35456789','Romeno',1,1),('36587977','Knazovic',1,2),('26894120','Lopez',1,3),('39562140','Sanchez',1,4);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 

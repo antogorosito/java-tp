@@ -30,11 +30,6 @@
 	        	<a class="nav-link" href="menu.jsp">Menu</a>
         	</li>
         </ul>
-        <ul class="nav nav-pills float-right">
-        	<li class="nav item">
-	        	<a class="nav-link" href=""logout"">Home</a>
-        	</li>
-        </ul>
 	</div>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">

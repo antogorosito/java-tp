@@ -17,7 +17,8 @@
 	    <!-- Custom styles for this template -->
 	    <link href="style/jumbotron.css" rel="stylesheet">     
 	</head>
-
+    <%Usuario u =(Usuario)session.getAttribute("usuario");
+    	if(u!=null){%>
 	<body>   
     	<div class="header clearfix">
         
@@ -27,13 +28,7 @@
         		<li class="nav item">
         			<a class="nav-link" href="logout">Cerrar sesion</a>
         		</li>
-        	</ul>
-        
-        	<ul class="nav nav-pills float-right">
-	        	<li class="nav item">
-	        		<a class="nav-link" href="logout">Home</a>
-        		</li>
-        	</ul>     
+        	</ul> 
 		</div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -42,8 +37,8 @@
         		<h1 class="display-3">Menu biblioteca</h1>    
       		</div>
     	</div>
-    <%Usuario u =(Usuario)session.getAttribute("usuario");
-    		if(u.getTipo()==0){%>
+
+    <%	if(u.getTipo()==0){%>
      	<div class="container">
 			<form class="form-bus" action="menu" method="post">
    				<div class="row">
@@ -119,14 +114,16 @@
                </div>
 			</form>
 		 </div>
-<%} %>
+<%}%>
     <div class="container">
    
       <footer>
         <p>© Trabajo practico java -2018 - Gorosito, Velazquez</p>
       </footer>
     </div> <!-- /container -->
-
+<%}else { %>
+	<label>No tiene acceso a esta pagina</label>
+<%} %>
 
 
 </body></html>
