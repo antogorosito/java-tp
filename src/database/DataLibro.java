@@ -61,7 +61,7 @@ public class DataLibro
 			stmt.setInt(3, l.getNroEdicion());
 			stmt.setDate(4, l.getFechaEdicion());
 			stmt.setInt(5, l.getCantDiasMaxPrestamo());
-			stmt.execute();
+			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				l.setIdLibro((keyResultSet.getInt(1)));

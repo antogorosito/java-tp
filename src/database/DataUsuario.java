@@ -63,7 +63,7 @@ public class DataUsuario
 			stmt.setString(2,u.getClave());
 			stmt.setInt(3, u.getTipo());
 			stmt.setInt(4, id);
-			stmt.execute();
+			stmt.executeUpdate();
 		}
 		catch(SQLException e)
 		{

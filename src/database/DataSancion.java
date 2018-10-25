@@ -20,7 +20,7 @@ public class DataSancion
 			stmt.setDate(1,s.getFechaSancion());
 			stmt.setDate(2, s.getFechaSancionHasta());
 			stmt.setInt(3, s.getSocio().getIdSocio());
-			stmt.execute();		
+			stmt.executeUpdate();		
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				s.setIdSancion(keyResultSet.getInt(1));

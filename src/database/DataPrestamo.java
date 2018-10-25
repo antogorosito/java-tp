@@ -53,7 +53,7 @@ public class DataPrestamo
 			stmt.setDate(1, p.getFechaPrestamo());
 			stmt.setTime(2, p.getHoraPrestamo());
 			stmt.setInt(3,p.getSocio().getIdSocio());
-			stmt.execute();		
+			stmt.executeUpdate();		
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
 				p.setIdPrestamo(keyResultSet.getInt(1));

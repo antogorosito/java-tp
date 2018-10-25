@@ -22,7 +22,7 @@ public class DataSocio
 			stmt.setString(5, s.getTelefono());
 			stmt.setString(6, s.getDni());
 			stmt.setBoolean(7, s.getEstado());
-			stmt.execute();
+			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next())
 			{

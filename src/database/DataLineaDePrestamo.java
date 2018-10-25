@@ -64,7 +64,7 @@ public class DataLineaDePrestamo
 			stmt.setInt(2, lp.getSocio().getIdSocio());
 			stmt.setInt(3, lp.getPrestamo().getIdPrestamo());
 			stmt.setInt(4, lp.getEjemplar().getIdEjemplar());
-			stmt.execute();		
+			stmt.executeUpdate();		
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next())
 			{

@@ -186,7 +186,7 @@ public class DataEjemplar
 			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT  INTO ejemplares(idEjemplar,idLibro) VALUES (?,?)");
 			stmt.setInt(1, i);
 			stmt.setInt(2, l.getIdLibro());
-			stmt.execute();
+			stmt.executeUpdate();
 		}
 		catch(SQLException e)
 		{
