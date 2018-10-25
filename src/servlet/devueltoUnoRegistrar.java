@@ -68,7 +68,7 @@ public class devueltoUnoRegistrar extends HttpServlet
 				{
 					clp.update(l);
 					int nro=5;
-					request.getSession().setAttribute("opc",nro);
+					request.setAttribute("opc",nro);
 					request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 		        }
 				else if (date1.compareTo(date2) > 0) 
@@ -95,7 +95,7 @@ public class devueltoUnoRegistrar extends HttpServlet
 		            }
 		            clp.update(l,sa);
 		            int nro=6;
-					request.getSession().setAttribute("opc",nro);
+					request.setAttribute("opc",nro);
 		            request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 		        }  
 			} 

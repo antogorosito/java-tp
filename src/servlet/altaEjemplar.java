@@ -60,7 +60,7 @@ public class altaEjemplar extends HttpServlet
 			} 
 			else 
 			{
-				request.getSession().setAttribute("Libro",l);
+				request.getSession().setAttribute("Libro",l);//para que cdo agrego un ejemplar sin libro me llene el input
 				request.getSession().setAttribute("L", l);
 				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
 			}
@@ -85,7 +85,7 @@ public class altaEjemplar extends HttpServlet
 				session.setAttribute("L", null);
 				session.setAttribute("Libro", null);
 				int nro=2;
-				session.setAttribute("opc",nro);
+				request.setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
 			}
 			
@@ -116,7 +116,7 @@ public class altaEjemplar extends HttpServlet
 				HttpSession session = request.getSession();
 			    Libro l = (Libro) session.getAttribute("L");
 				ce.add(id,l);
-				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
 			}
 		}
 	}

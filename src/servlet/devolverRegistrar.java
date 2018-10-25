@@ -107,7 +107,7 @@ public class devolverRegistrar extends HttpServlet
 					}
 					int nro=5;
 					request.getSession().setAttribute("lineasD",null);
-					request.getSession().setAttribute("opc",nro);	
+					request.setAttribute("opc",nro);	
 					request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 				}
 			}

@@ -62,7 +62,7 @@ public class estado extends HttpServlet
 					cs.update(ss, false);
 				}
 				int nro=7;
-				request.getSession().setAttribute("opc",nro);			
+				request.setAttribute("opc",nro);			
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 			else 
@@ -89,7 +89,7 @@ public class estado extends HttpServlet
 					cs.update(ss, true);
 				}
 				int nro=8;
-				request.getSession().setAttribute("opc",nro);
+				request.setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 			else

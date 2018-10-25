@@ -64,7 +64,7 @@ public class altaSocio extends HttpServlet
 				CtrlUsuario cu=new CtrlUsuario();
 				cu.add(u,socio.getIdSocio());
 				int nro=1;
-				request.getSession().setAttribute("opc",nro);
+				request.setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 			else 

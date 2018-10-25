@@ -130,7 +130,7 @@ public class agregar extends HttpServlet
 		}
 		if (op.equals("Guardar")) 
 		{
-			request.setAttribute("errorDev",null);
+			request.setAttribute("error",null);
 			HttpSession session = request.getSession();
 			int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
 			int min=(Integer)session.getAttribute("dias");
@@ -147,7 +147,7 @@ public class agregar extends HttpServlet
 				Socio s=(Socio)request.getSession().getAttribute("socio");
 				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ min+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
 				Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
-				request.getSession().setAttribute("opc",nro);
+				request.setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
 			}
 			else
@@ -158,10 +158,10 @@ public class agregar extends HttpServlet
 				java.sql.Date sDate = convertUtilToSql(fecha.getTime());
 				cp.update(pre, di,sDate);
 				int nro=4;
-				Socio s=(Socio)request.getSession().getAttribute("socio");// obtengo el mail y lo pongo den el send
+				Socio s=(Socio)request.getSession().getAttribute("socio");
 				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ di+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
-				Emailer.getInstance().send("antonellabj21@gmail.com","Confirmacion prestamo",msj);
-				request.getSession().setAttribute("opc",nro);
+				Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
+				request.setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 			}
 			session.setAttribute("prestamo",null);
@@ -170,7 +170,7 @@ public class agregar extends HttpServlet
 		
 		if(op.equals("Cancelar"))
 		{	
-			request.setAttribute("errorDev",null);
+			request.setAttribute("error",null);
 			HttpSession session = request.getSession();
 			CtrlLineaDePrestamo clp= new CtrlLineaDePrestamo();
 			ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");

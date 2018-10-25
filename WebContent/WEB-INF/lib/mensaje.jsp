@@ -36,7 +36,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 	<div class="jumbotron">
     	<div class="container">
-      		<%int nro=(Integer)session.getAttribute("opc");
+      		<%int nro=(Integer)request.getAttribute("opc");
     		if(nro==1){%>
         	<h1 class="display-3">Se ha registrado el alta del socio y usuario con exito</h1>
         	<%} else if(nro==2){%>

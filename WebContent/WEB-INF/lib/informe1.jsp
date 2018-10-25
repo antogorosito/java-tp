@@ -61,6 +61,8 @@
  				<td><%=lp.getSocio().getNombre() +" "+lp.getSocio().getApellido() %></td> 	
   			</tr>   <%} %>
    		</table> 
+	   	<%} else{ %>
+	   	<label>No hay libros pendientes de devolucion</label>
 	   	<%} %>
 		<form class="form-bus" action="informes" method="post">
 			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button>

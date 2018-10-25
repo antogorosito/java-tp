@@ -39,7 +39,7 @@
  				<tr>
 					<th>Id ejemplar</th>
  					<th>Titulo</th>
- 					<th>linea</th>		
+ 					<th>Seleccionar</th>		
  		 		</tr>
  				<%for(LineaDePrestamo ll: lineas){%>
  				<tr>
