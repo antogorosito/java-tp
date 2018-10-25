@@ -16,7 +16,7 @@ public class CtrlLineaDePrestamo
 		de=new DataLineaDePrestamo();
 	}
 	
-	public boolean getOne(int socio, int ejem)
+	public LineaDePrestamo getOne(int socio,int ejem)
 	{
 		return de.getOne(socio, ejem);
 	}

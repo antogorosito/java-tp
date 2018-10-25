@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class DataLineaDePrestamo 
 {
-	public boolean getOne(int socio, int ejem)//  veo si ya tengo otros ejemplares de mismo libro
+	public LineaDePrestamo getOne(int socio, int ejem)//  veo si ya tengo otros ejemplares de mismo libro
 	{
-		boolean rta=false;
+		LineaDePrestamo l=null;
 		PreparedStatement stmt=null;
 		ResultSet rs= null; 
 		try 
@@ -28,7 +28,8 @@ public class DataLineaDePrestamo
 			{
 				while(rs.next())
 				{
-					rta=true;
+					l=new LineaDePrestamo();
+					l.setIdLineaPrestamo(rs.getInt("idLineaPrestamo"));
 				}
 			}
 		}
@@ -49,8 +50,9 @@ public class DataLineaDePrestamo
 				e.printStackTrace();
 			} 
 		}
-		return rta;
+		return l;
 	}
+
 	public void add(LineaDePrestamo lp)
 	{
 		PreparedStatement stmt=null;

@@ -241,7 +241,7 @@ CREATE TABLE `socios` (
 
 LOCK TABLES `socios` WRITE;
 /*!40000 ALTER TABLE `socios` DISABLE KEYS */;
-INSERT INTO `socios` VALUES (1,'Hernan','Romeno','hernan@gmail.com','4235689','San Martin 456','35456789',0),(2,'Mauricio','Knazovic','mauri@gmail.com','4551203','Alvear 1204','36587977',1),(3,'Ana','Lopez','ana@hotmail.com','4785698','Eva Peron 6985','26894120',1),(4,'Ezequiel','Sanchez','eze@gmail.com','4668956','Laprida 5142','39562140',0);
+INSERT INTO `socios` VALUES (1,'Hernan','Romeno','antonellabj21@gmail.com','4235689','San Martin 456','35456789',0),(2,'Mauricio','Knazovic','isabri91@gmail.com','4551203','Alvear 1204','36587977',1),(3,'Ana','Lopez','antoo.-bj@hotmail.com','4785698','Eva Peron 6985','26894120',1),(4,'Ezequiel','Sanchez','sabri64_5@hotmail.com','4668956','Laprida 5142','39562140',0);
 /*!40000 ALTER TABLE `socios` ENABLE KEYS */;
 UNLOCK TABLES;
 

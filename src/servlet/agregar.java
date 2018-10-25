@@ -75,10 +75,10 @@ public class agregar extends HttpServlet
 				else
 				{
 					CtrlLineaDePrestamo clp = new CtrlLineaDePrestamo();
-					boolean rta = clp.getOne(s.getIdSocio(), id); // veo si ya tengo otros ejemplares de mismo libro
-					if (rta == true) 
+					LineaDePrestamo rta = clp.getOne(s.getIdSocio(), id); // veo si ya tengo otros ejemplares de mismo libro
+					if (rta == null) 
 					{
-						String msj = "Ya posee otros ejempalres del mismo libro prestados.";
+						String msj = "Ya posee otros ejemplares del mismo libro prestados.";
 						request.setAttribute("error", msj);
 						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
 					}
@@ -144,9 +144,9 @@ public class agregar extends HttpServlet
 				java.sql.Date sDate = convertUtilToSql(fecha.getTime());
 				cp.update(pre, min,sDate);
 				int nro=3;
-				Socio s=(Socio)request.getSession().getAttribute("socio");// obtengo el mail y lo pongo den el send
+				Socio s=(Socio)request.getSession().getAttribute("socio");
 				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ min+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
-				Emailer.getInstance().send("antonellabj21@gmail.com","Confirmacion prestamo",msj);
+				Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
 				request.getSession().setAttribute("opc",nro);
 				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
 			}
