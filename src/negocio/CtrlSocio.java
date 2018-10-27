@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import database.DataSocio;
 import entidades.Socio;
+import util.AppDataException;
 
 public class CtrlSocio
 {
@@ -14,7 +15,7 @@ public class CtrlSocio
 		ds=new DataSocio();
 	}
 	
-	public Socio getOne(int id)
+	public Socio getOne(int id) 
 	{
 		return ds.getOne(id);
 	}

@@ -77,7 +77,7 @@ public class devueltoUnoRegistrar extends HttpServlet
 		            int diasDif=(int)((date1.getTime()-date2.getTime())/86400000);  
 		            CtrlSocio cs=new CtrlSocio();
 		            boolean est=false;
-		            Socio s=l.getSocio();
+		            Socio s=l.getPrestamo().getSocio();
 		            cs.update(s, est);
 		            //obtengo tiempo de sancion
 		            CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
@@ -90,7 +90,7 @@ public class devueltoUnoRegistrar extends HttpServlet
 		            Sancion sa=css.getOne(l);
 		            if(sa==null)
 		            {
-		            	sa=new Sancion(ps.getDiasDeSancion(),l.getSocio());
+		            	sa=new Sancion(ps.getDiasDeSancion(),l.getPrestamo().getSocio());
 		            	css.add(sa);
 		            }
 		            clp.update(l,sa);

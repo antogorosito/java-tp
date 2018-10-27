@@ -43,9 +43,8 @@
 	</div>
 
     <div class="container">
-    	<form class="form-bus" action="estado" method="post">
-    	<%CtrlSocio cs=new CtrlSocio();
- 		ArrayList<Socio> sociosInhabilitar = cs.getAllAInhabilitar();
+    	<form class="form-bus" action="estados" method="post">
+    	<%ArrayList<Socio> sociosInhabilitar = (ArrayList<Socio>)session.getAttribute("sociosInhabilitar");
  		if(sociosInhabilitar.isEmpty() ==true){%>
 			<label style="color:red;"><b> No hay socios para inhabilitar</b></label>
    			<%}else{ %>
@@ -54,27 +53,22 @@
    				<tr>
 					<th>ID socio</th>
  					<th>Nombre y apellido</th>
- 					<th>Seleccionar</th>
  				</tr>
 			 <%	for(Socio s:sociosInhabilitar){%>
    				<tr>
    					<td><%=s.getIdSocio() %></td>
  					<td><%=s.getNombre() +" "+s.getApellido() %></td>
-				 	<td><input type="checkbox" name="chk"  value=<%=s.getIdSocio() %>></td>
   				</tr> 
     		<%} %>
   		   </table>
    			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
-   			<%String msj=(String)request.getAttribute("errorEstInh");  
- 			if (msj != null) {%>
- 			<label style="color:red;"><%=msj %></label>
- 			<%}%>
+   			
    	 		<%}%>   	
 		</form>
 	</div>
     <div class="container">
-    	<form class="form-bus" action="estado" method="post">
-    	<% 	ArrayList<Socio> sociosHabilitar = cs.getAllAHabilitar();
+    	<form class="form-bus" action="estados" method="post">
+    	<% 	ArrayList<Socio> sociosHabilitar =(ArrayList<Socio>)session.getAttribute("sociosHabilitar");
  		if(sociosHabilitar.isEmpty() ==true){%>
    			<label style="color:red;"> <b>No hay socios para habilitar</b></label>
    		<%}else{ %>
@@ -83,21 +77,16 @@
    				<tr>
 					<th>ID socio</th>
  					<th>Nombre y apellido</th>
- 					<th>Seleccionar</th>
  				</tr>
 		 <%	for(Socio ss:sociosHabilitar){%>
    				<tr>
    					<td><%=ss.getIdSocio() %></td>
 			 		<td><%=ss.getNombre() +" "+ss.getApellido() %></td>
- 					<td><input type="checkbox" name="chk"  value=<%=ss.getIdSocio() %>></td>
   				</tr> 
     	<%} %>
   		   </table>
    			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
-   			<%String msj=(String)request.getAttribute("errorEstHab");  
- 			if (msj != null) {%>
- 			<label style="color:red;"><%=msj %></label>
- 			<%}%>
+   			
    	 	<%}%>   
    	 		<p><button class="btn btn-info " style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button></p>	
 		</form>

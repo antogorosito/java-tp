@@ -69,7 +69,7 @@ public class menu extends HttpServlet
 		}
 		if(op.equals("estado"))
 		{
-			request.getRequestDispatcher("WEB-INF/lib/estado.jsp").forward(request, response);
+			request.getRequestDispatcher("estado").forward(request, response);
 		}
 		if(op.equals("altaEjemplar"))
 		{
@@ -77,7 +77,7 @@ public class menu extends HttpServlet
 		}
 		if(op.equals("pendiente"))
 		{
-			request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);
+			request.getRequestDispatcher("pendiente").forward(request, response);
 		}
 		if(op.equals("contraseña"))
 		{

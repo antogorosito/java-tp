@@ -1,13 +1,13 @@
 package database;
 
 import entidades.*;
+import util.AppDataException;
 
 import java.sql.*;
 
 
 public class DataUsuario
-{
-	
+{	
 	public Usuario getOne(String u, String c) 
 	{
 		Usuario l=null;
@@ -31,12 +31,13 @@ public class DataUsuario
 					s.setIdSocio(rs.getInt("idSocio"));
 					l.setSocio(s);
 				}
-			}
-		} 
-		catch (SQLException e)
+			}		
+		}
+		catch (SQLException e )
 		{
 			e.printStackTrace();
 		}
+		
 		finally 
 		{
 			try 

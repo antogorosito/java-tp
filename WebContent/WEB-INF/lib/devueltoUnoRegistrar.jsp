@@ -42,7 +42,7 @@
  				<tr>
  		 			<td><%=lp.getEjemplar().getIdEjemplar()%></td>
  		 			<td><%=lp.getEjemplar().getLibro().getTitulo()%></td>
- 		 			<td><%=lp.getSocio().getApellido()+" "+ lp.getSocio().getNombre()%></td>	 
+ 		 			<td><%=lp.getPrestamo().getSocio().getApellido()+" "+lp.getPrestamo().getSocio().getNombre()%></td>
  				</tr>
  			</table>
 		 	<button class="btn btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Registrar">Registrar</button>

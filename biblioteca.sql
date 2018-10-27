@@ -81,19 +81,16 @@ CREATE TABLE `lineas_de_prestamos` (
   `fechaDevolucion` date DEFAULT NULL,
   `devuelto` tinyint(1) NOT NULL,
   `idSancion` int(11) DEFAULT NULL,
-  `idSocio` int(11) NOT NULL,
   `idPrestamo` int(11) NOT NULL,
   `idEjemplar` int(11) NOT NULL,
   PRIMARY KEY (`idLineaPrestamo`),
-  KEY `idSocioLinea_fk` (`idSocio`),
   KEY `idEjemplar_fk` (`idEjemplar`),
   KEY `idPrestamo_fk` (`idPrestamo`),
   KEY `idSancion_fk` (`idSancion`),
   CONSTRAINT `idEjemplar_fk` FOREIGN KEY (`idEjemplar`) REFERENCES `ejemplares` (`idejemplar`) ON UPDATE CASCADE,
   CONSTRAINT `idPrestamo_fk` FOREIGN KEY (`idPrestamo`) REFERENCES `prestamos` (`idprestamo`) ON UPDATE CASCADE,
-  CONSTRAINT `idSancion_fk` FOREIGN KEY (`idSancion`) REFERENCES `sanciones` (`idsancion`) ON UPDATE CASCADE,
-  CONSTRAINT `idSocioLinea_fk` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idsocio`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  CONSTRAINT `idSancion_fk` FOREIGN KEY (`idSancion`) REFERENCES `sanciones` (`idsancion`) ON UPDATE CASCADE
+  ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +99,7 @@ CREATE TABLE `lineas_de_prestamos` (
 
 LOCK TABLES `lineas_de_prestamos` WRITE;
 /*!40000 ALTER TABLE `lineas_de_prestamos` DISABLE KEYS */;
-INSERT INTO `lineas_de_prestamos` VALUES (1,'2018-08-05',1,NULL,1,1,101),(2,'2018-08-05',1,NULL,1,1,210),(3,'2018-07-28',1,2,2,2,210),(4,'2018-07-28',1,2,2,2,212),(5,'2018-07-22',1,NULL,3,3,410),(6,'2018-07-22',1,NULL,3,3,105),(7,NULL,0,NULL,4,4,405),(8,NULL,0,NULL,4,4,323),(9,'2018-08-24',1,NULL,3,5,322),(10,'2018-08-28',1,1,3,6,322),(11,NULL,0,NULL,1,7,101),(12,NULL,0,NULL,1,7,104),(13,NULL,0,NULL,2,8,103),(14,NULL,0,NULL,2,8,402);
+INSERT INTO `lineas_de_prestamos` VALUES (1,'2018-08-05',1,NULL,1,101),(2,'2018-08-05',1,NULL,1,210),(3,'2018-07-28',1,2,2,210),(4,'2018-07-28',1,2,2,212),(5,'2018-07-22',1,NULL,3,410),(6,'2018-07-22',1,NULL,3,105),(7,NULL,0,NULL,4,405),(8,NULL,0,NULL,4,323),(9,'2018-08-24',1,NULL,5,322),(10,'2018-08-28',1,1,6,322),(11,NULL,0,NULL,7,101),(12,NULL,0,NULL,7,104),(13,NULL,0,NULL,8,103),(14,NULL,0,NULL,8,402);
 /*!40000 ALTER TABLE `lineas_de_prestamos` ENABLE KEYS */;
 UNLOCK TABLES;
 

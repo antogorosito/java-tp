@@ -40,8 +40,7 @@
       	</div>
     </div>
     <div class="container">
-    	<%CtrlSocio cs=new CtrlSocio();
- 		ArrayList<Socio> sociosI = cs.getAllInhabilitados();
+    	<%ArrayList<Socio> sociosI = (ArrayList<Socio>)request.getAttribute("listaInhabilitados");
  		if(sociosI.isEmpty()==false){ %>
    		<table class="table">
 		   	<tr>

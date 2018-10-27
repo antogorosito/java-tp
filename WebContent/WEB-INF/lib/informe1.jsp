@@ -41,8 +41,7 @@
       	</div>
     </div>
     <div class="container">
- 		<%CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-   		ArrayList<LineaDePrestamo> lineas=clp.getAllPendiente();
+ 		<%ArrayList<LineaDePrestamo> lineas=(ArrayList<LineaDePrestamo>)request.getAttribute("listaPendiente");
    		if(lineas.isEmpty()==false){%>
 	    <table class="table">
 		   	<tr>
@@ -58,7 +57,7 @@
    				<td><%=lp.getEjemplar().getIdEjemplar() %></td>
    				<td><%=lp.getPrestamo().getIdPrestamo() %></td>
    				<td><%=lp.getPrestamo().getFechaADevolver() %></td>
- 				<td><%=lp.getSocio().getNombre() +" "+lp.getSocio().getApellido() %></td> 	
+ 				<td><%=lp.getPrestamo().getSocio().getNombre() +" "+lp.getPrestamo().getSocio().getApellido() %></td> 	
   			</tr>   <%} %>
    		</table> 
 	   	<%} else{ %>

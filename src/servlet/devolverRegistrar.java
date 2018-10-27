@@ -82,7 +82,7 @@ public class devolverRegistrar extends HttpServlet
 							int diasDif=(int)((date1.getTime()-date2.getTime())/86400000);  
 							CtrlSocio cs=new CtrlSocio();
 							boolean est=false;//inhabilito
-							Socio s=ll.getSocio();
+							Socio s=ll.getPrestamo().getSocio();
 							cs.update(s, est); 
 							//	obtengo tiempo de sancion
 							CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
@@ -95,7 +95,7 @@ public class devolverRegistrar extends HttpServlet
 							Sancion sa=css.getOne(ll);
 							if(sa==null)
 							{
-								sa=new Sancion(ps.getDiasDeSancion(),ll.getSocio());
+								sa=new Sancion(ps.getDiasDeSancion(),ll.getPrestamo().getSocio());
 								css.add(sa);
 							}
 							clp.update(ll,sa);

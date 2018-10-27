@@ -24,12 +24,8 @@ public class CtrlEjemplar
 	{
 		return de.getOne(id);
 	}
-	public boolean existe(int id, Socio s)
+	public Ejemplar getEjemplar(int i)
 	{
-		return de.existe(id,s);
-	}
-
-	public Ejemplar getEjemplar(int i) {
 		return de.getEjemplar(i);
 	}
 	

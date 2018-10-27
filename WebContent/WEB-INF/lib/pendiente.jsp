@@ -40,14 +40,11 @@
       	</div>
     </div>
     <div class="container">   			 
-   		<%Usuario u=(Usuario)session.getAttribute("usuario");
-    	if(u.getTipo()==1){
-    	CtrlSocio cs=new CtrlSocio();
-    	Socio s=cs.getOne(u.getSocio().getIdSocio());%>
+   		<%Socio s=(Socio)request.getAttribute("socio");
+   		if(s!=null){%>
     	<p><label>Nombre y apellido:<%=s.getApellido() +" "+ s.getNombre()%></label></p>
     	<p><label>Estado: </label>  <%if(s.getEstado()==false){ %> <label>Inhabilitado</label><%}else{ %><label>Habilitado</label><%} %></p>  	
-    	<%CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-    	ArrayList<LineaDePrestamo> lineas=clp.getAll(u.getSocio().getIdSocio());
+    	<%ArrayList<LineaDePrestamo>lineas=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas");
     	if(lineas.isEmpty()!=true){%>
     	<table>
     		<tr>
@@ -66,6 +63,7 @@
     	<%}else{%>
     	<label>No posee libros pendientes de devolucion</label>
     	<%}} %>
+
     	<form class="form-bus" action="pendiente" method="post">
 			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button>
 		</form>

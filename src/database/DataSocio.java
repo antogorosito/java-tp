@@ -95,7 +95,7 @@ public class DataSocio
 		return s;
 	}
 	
-	public Socio getOne(int id)
+	public Socio getOne(int id) 
 	{
 		Socio s=null;
 		PreparedStatement stmt=null;
@@ -121,7 +121,7 @@ public class DataSocio
 				}
 			}
 		}
-		catch (SQLException e) 
+		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
@@ -176,7 +176,7 @@ public class DataSocio
 		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios inner join lineas_de_prestamos on lineas_de_prestamos.idSocio=socios.idSocio inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date() and socios.estado=true group by socios.idSocio");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios  inner join prestamos on prestamos.idSocio=socios.idSocio inner join lineas_de_prestamos on lineas_de_prestamos.idPrestamo=prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date() and socios.estado=true group by socios.idSocio");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{

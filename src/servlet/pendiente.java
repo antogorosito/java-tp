@@ -1,12 +1,17 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import entidades.*;
+import negocio.*;
 /**
  * Servlet implementation class pendiente
  */
@@ -39,9 +44,24 @@ public class pendiente extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		String op=request.getParameter("op");
-		if(op.equals("Volver"))
+		if(op!=null)
 		{
-			request.getRequestDispatcher("/menu.jsp").forward(request, response);
+			if(op.equals("Volver"))
+			{
+				request.getRequestDispatcher("/menu.jsp").forward(request, response);
+			}
+			else
+			{
+				HttpSession session = request.getSession();
+				Usuario u=(Usuario)session.getAttribute("usuario");
+				CtrlSocio cs=new CtrlSocio();
+				Socio s=cs.getOne(u.getSocio().getIdSocio());
+				request.setAttribute("socio",s);
+				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+				ArrayList<LineaDePrestamo> lineas=clp.getAll(s.getIdSocio());
+				request.setAttribute("lineas",lineas);
+				request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);	
+			}
 		}
 	}
 

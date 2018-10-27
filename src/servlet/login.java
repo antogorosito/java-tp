@@ -2,6 +2,8 @@ package servlet;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import negocio.*;
+import util.AppDataException;
 import entidades.*;
 
 /**
@@ -48,7 +51,6 @@ public class login extends HttpServlet
 		String c=request.getParameter("clave");
 		CtrlUsuario cu= new CtrlUsuario();
 		Usuario usuario= cu.getOne(u,c);
-	
 		if(usuario!=null)
 		{
 			HttpSession session = request.getSession(); 

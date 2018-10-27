@@ -16,7 +16,7 @@ public class CtrlLineaDePrestamo
 		de=new DataLineaDePrestamo();
 	}
 	
-	public LineaDePrestamo getOne(int socio,int ejem)
+	public LineaDePrestamo getOne(Socio socio,int ejem)
 	{
 		return de.getOne(socio, ejem);
 	}
@@ -24,7 +24,11 @@ public class CtrlLineaDePrestamo
 	{
 		de.add(lp);
 	}
-	public boolean buscarLinea(LineaDePrestamo lp)
+	public LineaDePrestamo existe(int id, Socio s)
+	{
+		return de.existe(id,s);
+	}
+	public LineaDePrestamo buscarLinea(LineaDePrestamo lp)
 	{
 		return de.buscarLinea(lp);
 	}

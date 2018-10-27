@@ -66,7 +66,9 @@ public class agregar extends HttpServlet
 			{
 				HttpSession session = request.getSession();
 				Socio s = (Socio) session.getAttribute("socio");
-				if (ce.existe(id,s) == true)// buscar si esta en otro prestamo de otra persona sin devolver aun
+				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+				LineaDePrestamo lll=clp.existe(id, s);// buscar si esta en otro prestamo de otra persona sin devolver aun
+				if (lll!=null)
 				{
 					String msj = "El ejemplar "+id+" no esta disponible";
 					request.setAttribute("error", msj);
@@ -74,9 +76,8 @@ public class agregar extends HttpServlet
 				}
 				else
 				{
-					CtrlLineaDePrestamo clp = new CtrlLineaDePrestamo();
-					LineaDePrestamo rta = clp.getOne(s.getIdSocio(), id); // veo si ya tengo otros ejemplares de mismo libro
-					if (rta == null) 
+					LineaDePrestamo rta = clp.getOne(s, id); // veo si ya tengo otros ejemplares de mismo libro
+					if (rta != null) 
 					{
 						String msj = "Ya posee otros ejemplares del mismo libro prestados.";
 						request.setAttribute("error", msj);
@@ -94,9 +95,9 @@ public class agregar extends HttpServlet
 							session.setAttribute("prestamo", p);
 						}
 						Prestamo ap = (Prestamo) session.getAttribute("prestamo");
-						LineaDePrestamo lp = new LineaDePrestamo(s, ap, e);
-						boolean resultado = clp.buscarLinea(lp); // me fijo si la linea de prestamo ya existe
-						if (resultado == true) 
+						LineaDePrestamo lp = new LineaDePrestamo(ap, e);
+						LineaDePrestamo li = clp.buscarLinea(lp); // me fijo si la linea de prestamo ya existe
+						if (li!=null) 
 						{
 							String msj = "El ejemplar "+id+" ya esta en el prestamo";
 							request.setAttribute("error", msj);

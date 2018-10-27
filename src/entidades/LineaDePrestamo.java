@@ -8,7 +8,6 @@ public class LineaDePrestamo
 	private Date fechaDevolucion;
 	private boolean devuelto;
 	private Sancion sancion;
-	private Socio socio;
 	private Prestamo prestamo;
 	private Ejemplar ejemplar;
 	
@@ -16,9 +15,8 @@ public class LineaDePrestamo
 	{
 		
 	}
-	public LineaDePrestamo(Socio s, Prestamo p, Ejemplar e)
+	public LineaDePrestamo(Prestamo p, Ejemplar e)
 	{
-		this.socio=s;
 		this.prestamo=p;
 		this.ejemplar=e;
 		this.devuelto=false;
@@ -54,14 +52,6 @@ public class LineaDePrestamo
 	public void setSancion(Sancion sancion) 
 	{
 		this.sancion = sancion;
-	}
-	public Socio getSocio() 
-	{
-		return socio;
-	}
-	public void setSocio(Socio socio) 
-	{
-		this.socio = socio;
 	}
 	public Prestamo getPrestamo() 
 	{

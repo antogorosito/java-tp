@@ -1,12 +1,16 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.*;
+import negocio.*;
 /**
  * Servlet implementation class informes
  */
@@ -41,10 +45,16 @@ public class informes extends HttpServlet
 		String op=request.getParameter("op");
 		if(op.equals("informe1"))
 		{
-			request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
+			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+	   		ArrayList<LineaDePrestamo> lineas=clp.getAllPendiente();
+	   		request.setAttribute("listaPendiente",lineas);
+	   		request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
 		}
 		if(op.equals("informe2")) 
 		{
+			CtrlSocio cs=new CtrlSocio();
+	 		ArrayList<Socio> sociosI = cs.getAllInhabilitados();
+	 		request.setAttribute("listaInhabilitados",sociosI);
 			request.getRequestDispatcher("WEB-INF/lib/informe2.jsp").forward(request, response);
 		}
 		if(op.equals("Volver"))

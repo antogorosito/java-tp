@@ -41,6 +41,7 @@
   			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>
  			<%}%>
+
     	</form>
     </div>
     <div class="container">
