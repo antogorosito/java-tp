@@ -46,23 +46,28 @@ public class login extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		request.setAttribute("errorLogin",null);
+			
+		
 		String u=request.getParameter("usuario");
 		String c=request.getParameter("clave");
 		CtrlUsuario cu= new CtrlUsuario();
-		Usuario usuario= cu.getOne(u,c);
-		if(usuario!=null)
+		try 
 		{
+		Usuario usuario= cu.getOne(u,c);
+	
+		
 			HttpSession session = request.getSession(); 
 			session.setAttribute("usuario", usuario);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
-		else
+		catch(AppDataException ape)
 		{
-			String msj = "Usuario y/o contraseña incorrectas";
-			request.setAttribute("errorLogin", msj);
+			request.setAttribute("errorLogin",ape.getMessage());
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
+	
+		
+		
 	}
 
 }

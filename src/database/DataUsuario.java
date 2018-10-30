@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class DataUsuario
 {	
-	public Usuario getOne(String u, String c) 
+	public Usuario getOne(String u, String c)  throws AppDataException
 	{
 		Usuario l=null;
 		PreparedStatement stmt=null;
@@ -35,7 +35,8 @@ public class DataUsuario
 		}
 		catch (SQLException e )
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "No existe el usuario.");
+			throw ape;
 		}
 		
 		finally 

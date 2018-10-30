@@ -13,7 +13,7 @@ public class CtrlUsuario
 		du=new DataUsuario();
 	}
 
-	public Usuario getOne(String u,String c) 
+	public Usuario getOne(String u,String c) throws AppDataException
 	{
 		return du.getOne(u,c);
 	}
