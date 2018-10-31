@@ -121,9 +121,8 @@
         <p>© Trabajo practico java -2018 - Gorosito, Velazquez</p>
       </footer>
     </div> <!-- /container -->
-<%}else { %>
-	<label>No tiene acceso a esta pagina</label>
 <%} %>
+
 
 
 </body></html>

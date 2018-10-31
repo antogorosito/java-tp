@@ -1,6 +1,8 @@
 package database;
 
 import entidades.*;
+import util.AppDataException;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -95,7 +97,7 @@ public class DataSocio
 		return s;
 	}
 	
-	public Socio getOne(int id) 
+	public Socio getOne(int id)  
 	{
 		Socio s=null;
 		PreparedStatement stmt=null;

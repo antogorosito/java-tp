@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.*;
+import util.AppDataException;
 import entidades.*;
 
 /**
@@ -82,8 +83,10 @@ public class prestamos extends HttpServlet
 						request.getSession().setAttribute("socio",s);				
 						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
 					}
-				}				
+				}		
 			}
+						
+			
 		}
 		if(op.equals("Volver"))
 		{

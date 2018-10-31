@@ -15,7 +15,7 @@ public class CtrlSocio
 		ds=new DataSocio();
 	}
 	
-	public Socio getOne(int id) 
+	public Socio getOne(int id)  
 	{
 		return ds.getOne(id);
 	}

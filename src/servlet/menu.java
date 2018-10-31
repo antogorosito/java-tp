@@ -79,10 +79,7 @@ public class menu extends HttpServlet
 		{
 			request.getRequestDispatcher("pendiente").forward(request, response);
 		}
-		if(op.equals("contraseña"))
-		{
-			request.getRequestDispatcher("WEB-INF/lib/contraseña.jsp").forward(request, response);
-		}
+
 	}
 
 }
