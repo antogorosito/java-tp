@@ -51,7 +51,9 @@ public class DataSancion
 		ResultSet rs= null; 	
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select sanciones.* from sanciones inner join lineas_de_prestamos on lineas_de_prestamos.idSancion=sanciones.idSancion where lineas_de_prestamos.idPrestamo=? and sanciones.fechaSancion=current_date()");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select sanciones.* from sanciones"
+					+ " inner join lineas_de_prestamos on lineas_de_prestamos.idSancion=sanciones.idSancion"
+					+ " where lineas_de_prestamos.idPrestamo=? and sanciones.fechaSancion=current_date()");
 			stmt.setInt(1,l.getPrestamo().getIdPrestamo());
 			rs=stmt.executeQuery();
 			if(rs!=null) 	

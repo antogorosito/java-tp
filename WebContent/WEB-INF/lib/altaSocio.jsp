@@ -38,6 +38,10 @@
     </div>
     <div class="container">
     	<form class="form-alta" action="altaSocio" method="post">
+    	<%String msj=(String)request.getAttribute("error");  
+ 			if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
 			<p><label>Nombre:</label>
    			<input name="nombre"type="text" required="required"></p>   		
    			<p><label>Apellido:</label>
@@ -52,10 +56,7 @@
    			<input name="dni"type="text" id="dni" required="required"></p>
    		 	<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
          	<button class="btn btn-info " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
-  			<%String msj=(String)request.getAttribute("errorAltaS");  
- 			if (msj != null) {%>
- 			<label style="color:red;"><%=msj %></label>
- 			<%}%>
+  			
    		</form>
 	</div>
     <div class="container">

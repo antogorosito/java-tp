@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import entidades.*;
 import negocio.*;
+import util.AppDataException;
 /**
  * Servlet implementation class pendiente
  */
@@ -26,7 +27,6 @@ public class pendiente extends HttpServlet
     public pendiente()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,7 +34,6 @@ public class pendiente extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -43,26 +42,24 @@ public class pendiente extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String op=request.getParameter("op");
-		if(op!=null)
+		try
 		{
-			if(op.equals("Volver"))
-			{
-				request.getRequestDispatcher("/menu.jsp").forward(request, response);
-			}
-			else
-			{
-				HttpSession session = request.getSession();
-				Usuario u=(Usuario)session.getAttribute("usuario");
-				CtrlSocio cs=new CtrlSocio();
-				Socio s=cs.getOne(u.getSocio().getIdSocio());
-				request.setAttribute("socio",s);
-				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-				ArrayList<LineaDePrestamo> lineas=clp.getAll(s.getIdSocio());
-				request.setAttribute("lineas",lineas);
-				request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);	
-			}
+			Usuario u=(Usuario)request.getSession().getAttribute("usuario");
+			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+			ArrayList<LineaDePrestamo> lineas=clp.getAll(u.getSocio().getIdSocio());
+			request.setAttribute("lineas",lineas);
+			request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);	
 		}
+		catch(AppDataException ape)
+		{
+			request.setAttribute("error",ape.getMessage());
+			request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);
+		}
+		catch (Exception e) 
+		{
+			request.setAttribute("error",e.getMessage());
+			request.getRequestDispatcher("WEB-INF/lib/pendiente.jsp").forward(request, response);
+		}	
 	}
 
 }

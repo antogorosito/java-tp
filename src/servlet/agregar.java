@@ -49,100 +49,74 @@ public class agregar extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		request.setAttribute("error",null);
-		String op = request.getParameter("op");	
+		String op = request.getParameter("op");
+		HttpSession session = request.getSession();
 		if (op.equals("Agregar")) 
 		{
-			int id = Integer.parseInt(request.getParameter("idEjemplar"));
-			CtrlEjemplar ce = new CtrlEjemplar();
-			Ejemplar e = ce.getOne(id); // veo si existe el id
-			if (e == null)
+			try
 			{
-				String msj = "El id "+id+" es incorrecto";
-				request.setAttribute("error", msj);
-				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
-			}
-			else
-			{
-				HttpSession session = request.getSession();
+				int id = Integer.parseInt(request.getParameter("idEjemplar"));
+				CtrlEjemplar ce = new CtrlEjemplar();
+				Ejemplar e = ce.getOne(id);  //ver que existe
 				Socio s = (Socio) session.getAttribute("socio");
 				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-				LineaDePrestamo lll=clp.existe(id, s);// buscar si esta en otro prestamo de otra persona sin devolver aun
-				if (lll!=null)
+				LineaDePrestamo lll=clp.existe(id, s); //ver si esta en el prestamo de otra persona
+				LineaDePrestamo rta = clp.getOne(s, id);	 // veo si ya tengo otros ejemplares de mismo libro
+				//creo el prestamos por primera vez y en los siguientes solo agrego lineas
+				CtrlPrestamo cp = new CtrlPrestamo();
+				Prestamo ap = (Prestamo) session.getAttribute("prestamo"); 
+				if (ap == null) 
 				{
-					String msj = "El ejemplar "+id+" no esta disponible";
+					Prestamo p = new Prestamo(s);
+					cp.add(p); 
+					session.setAttribute("prestamo", p);
+				}
+				ap = (Prestamo) session.getAttribute("prestamo");
+				LineaDePrestamo lp = new LineaDePrestamo(ap, e);
+				LineaDePrestamo li = clp.buscarLinea(lp); // ver si la linea de prestamo ya existe
+				int c = (Integer) session.getAttribute("cantPosible"); //ver que no se supere la cantidad permitida de libros prestados
+				if (c <= 0) 
+				{
+					String msj = "No se pueden agregar mas libros";
 					request.setAttribute("error", msj);
-					request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
 				}
 				else
 				{
-					LineaDePrestamo rta = clp.getOne(s, id); // veo si ya tengo otros ejemplares de mismo libro
-					if (rta != null) 
-					{
-						String msj = "Ya posee otros ejemplares del mismo libro prestados.";
-						request.setAttribute("error", msj);
-						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
-					}
-					else
-					{
-						// que cree el prestamo la primera vez y las siguientes solo agregue
-						CtrlPrestamo cp = new CtrlPrestamo();
-						Prestamo app = (Prestamo) session.getAttribute("prestamo");
-						if (app == null) 
-						{
-							Prestamo p = new Prestamo(s);
-							cp.add(p); 
-							session.setAttribute("prestamo", p);
-						}
-						Prestamo ap = (Prestamo) session.getAttribute("prestamo");
-						LineaDePrestamo lp = new LineaDePrestamo(ap, e);
-						LineaDePrestamo li = clp.buscarLinea(lp); // me fijo si la linea de prestamo ya existe
-						if (li!=null) 
-						{
-							String msj = "El ejemplar "+id+" ya esta en el prestamo";
-							request.setAttribute("error", msj);
-							request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
-						}
-						else
-						{
-							int c = (Integer) session.getAttribute("cantPosible"); // fijarse que no se supere la cantidad permitida de libros prestados
-							if (c <= 0) 
-							{
-								String msj = "No se pueden agregar mas libros";
-								request.setAttribute("error", msj);
-							}
-							else
-							{
-								clp.add(lp);
-								c = c - 1;
-								request.getSession().setAttribute("cantPosible", c);
-							}
-							ArrayList<LineaDePrestamo> lineas = clp.getAll(ap);
-							request.getSession().setAttribute("lineas",lineas); 
-							int dias = clp.minimoDias(ap);// buscar minima cantidad de dias en las lineas deprestamo
-							request.getSession().setAttribute("dias", dias);
-							request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
-						}
-					}
+					clp.add(lp);
+					c = c - 1;
+					request.getSession().setAttribute("cantPosible", c);
 				}
-				
-			} 
-					
+				ArrayList<LineaDePrestamo> lineas = clp.getAll(ap);
+				request.getSession().setAttribute("lineas",lineas); 
+				int dias = clp.minimoDias(ap);// buscar minima cantidad de dias en las lineas deprestamo
+				request.getSession().setAttribute("dias", dias);
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}
+			catch(AppDataException ape)
+			{
+				request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("error",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}								
 		}
+		
 		if (op.equals("Guardar")) 
 		{
-			request.setAttribute("error",null);
-			HttpSession session = request.getSession();
 			int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
 			int min=(Integer)session.getAttribute("dias");
 			Prestamo pre = (Prestamo) session.getAttribute("prestamo");
 			CtrlPrestamo cp=new CtrlPrestamo();
 			if(di>min)
 			{
-				GregorianCalendar fecha = new GregorianCalendar();
-				fecha.setTime(pre.getFechaPrestamo());
-				fecha.add(Calendar.DATE, min);
-				java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+				Calendar calendar=Calendar.getInstance();
+				calendar.setTime(pre.getFechaPrestamo());
+				calendar.add(Calendar.DAY_OF_YEAR,min);
+				java.sql.Date sDate = convertUtilToSql(calendar.getTime());
+				
 				cp.update(pre, min,sDate);
 				int nro=3;
 				Socio s=(Socio)request.getSession().getAttribute("socio");
@@ -153,10 +127,11 @@ public class agregar extends HttpServlet
 			}
 			else
 			{
-				GregorianCalendar fecha = new GregorianCalendar();
-				fecha.setTime(pre.getFechaPrestamo());
-				fecha.add(Calendar.DATE, di);
-				java.sql.Date sDate = convertUtilToSql(fecha.getTime());
+				Calendar calendar=Calendar.getInstance();
+				calendar.setTime(pre.getFechaPrestamo());
+				calendar.add(Calendar.DAY_OF_YEAR,di);
+				java.sql.Date sDate = convertUtilToSql(calendar.getTime());
+			
 				cp.update(pre, di,sDate);
 				int nro=4;
 				Socio s=(Socio)request.getSession().getAttribute("socio");
@@ -171,8 +146,6 @@ public class agregar extends HttpServlet
 		
 		if(op.equals("Cancelar"))
 		{	
-			request.setAttribute("error",null);
-			HttpSession session = request.getSession();
 			CtrlLineaDePrestamo clp= new CtrlLineaDePrestamo();
 			ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");
 			if(li != null) 

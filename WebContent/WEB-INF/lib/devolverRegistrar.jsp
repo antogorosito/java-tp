@@ -51,7 +51,7 @@
  			</table>
 	     	<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
      		<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
-     			<%String msj=(String)request.getAttribute("errorDevReg");  
+     			<%String msj=(String)request.getAttribute("error");  
  			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>
  			<%}%>

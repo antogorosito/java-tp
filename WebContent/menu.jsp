@@ -66,12 +66,12 @@
           				<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="consulta">Ir</button>
        				</div>    
        				<div class="col-md-4">
-          				<h2>Registrar prestamos</h2>
+          				<h2>Registrar prestamo</h2>
           				<p>Realizar el registro de prestamos de libros a domicilio a los socios.</p>
 				       <button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="prestamo">Ir</button>
         			</div>
         			<div class="col-md-4">
-          				<h2>Registrar devoluciones</h2>
+          				<h2>Devoluciones por ejemplar</h2>
           				<p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID EJEMPLAR</p>
           			 <button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="devueltoUno">Ir</button>
         			</div>
@@ -90,7 +90,7 @@
           				 <button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="estado">Ir</button>
        				</div>
          			<div class="col-md-4">
-          				<h2>Registrar devoluciones </h2>
+          				<h2>Devoluciones por socio</h2>
           				<p>Realizar el registro de la devolucion de los libros prestados a domicilio a los socios. Ingresando ID SOCIO</p>
           				 <button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="devolver">Ir</button>
         			</div>

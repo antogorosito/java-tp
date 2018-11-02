@@ -1,7 +1,8 @@
 package negocio;
 
 import database.DataPoliticaPrestamo;
-import entidades.PoliticaPrestamo;;
+import entidades.PoliticaPrestamo;
+import util.AppDataException;;
 
 public class CtrlPoliticaPrestamo 
 {
@@ -12,7 +13,7 @@ public class CtrlPoliticaPrestamo
 	{
 		dpp=new DataPoliticaPrestamo();
 	}
-	public PoliticaPrestamo getOne()
+	public PoliticaPrestamo getOne() throws AppDataException
 	{
 		return dpp.getOne();
 	}

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Libro;
 import negocio.CtrlLibro;
+import util.AppDataException;
 
 /**
  * Servlet implementation class altaLibro
@@ -27,7 +28,6 @@ public class altaLibro extends HttpServlet
     public altaLibro()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,7 +35,6 @@ public class altaLibro extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -46,34 +45,41 @@ public class altaLibro extends HttpServlet
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{	
-		request.setAttribute("errorAltaL",null);
 		String op=request.getParameter("op");
 		if(op.equals("Registrar")) 
 		{
-			String t=request.getParameter("titulo");
-			String i=request.getParameter("ISBN");
-			int n=Integer.parseInt(request.getParameter("nroEdicion"));
-			String d=request.getParameter("fechaEdicion").toString();
-			int m=Integer.parseInt(request.getParameter("cantDiasMaxPrestamo"));
-			CtrlLibro cs=new CtrlLibro();
-			Libro  l=cs.getOne(i);
-			if(l==null)
+			try
 			{
-				l=new Libro(t,i,n,d,m);
-				cs.add(l);		
-				request.getSession().setAttribute("Libro", l);
-				request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+				String t=request.getParameter("titulo");
+				String i=request.getParameter("ISBN");
+				int n=Integer.parseInt(request.getParameter("nroEdicion"));
+				String d=request.getParameter("fechaEdicion").toString();
+				int m=Integer.parseInt(request.getParameter("cantDiasMaxPrestamo"));
+				CtrlLibro cs=new CtrlLibro();
+				Libro  l=cs.getOne(i);
+				if(l==null)
+				{
+					l=new Libro(t,i,n,d,m);
+					cs.add(l);		
+					request.getSession().setAttribute("Libro", l);
+					request.getRequestDispatcher("WEB-INF/lib/altaEjemplar.jsp").forward(request, response);
+				}
+				else 
+				{
+					String msj = "Ya existe un libro con el ISBN "+i;
+					request.setAttribute("error", msj);
+					request.getRequestDispatcher("WEB-INF/lib/altaLibro.jsp").forward(request, response);
+				}
 			}
-			else 
+			catch (Exception e) 
 			{
-				String msj = "Ya existe un libro con el ISBN "+i;
-				request.setAttribute("errorAltaL", msj);
+				request.setAttribute("error",e.getMessage());
 				request.getRequestDispatcher("WEB-INF/lib/altaLibro.jsp").forward(request, response);
-			}
+			}		
 		}
+		
 		if(op.equals("Cancelar"))
 		{
-			request.setAttribute("errorAltaL",null);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}

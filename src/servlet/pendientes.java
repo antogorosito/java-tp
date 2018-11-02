@@ -1,35 +1,25 @@
 package servlet;
 
-
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import negocio.*;
-import util.AppDataException;
-import entidades.*;
 
 /**
- * Servlet implementation class login
+ * Servlet implementation class pendientes
  */
-@WebServlet({ "/login", "/Login" })
-public class login extends HttpServlet 
-{
+@WebServlet("/pendientes")
+public class pendientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public login() 
-    {
+    public pendientes() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
@@ -37,7 +27,7 @@ public class login extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -46,33 +36,12 @@ public class login extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-			
-		try 
+
+		String op=request.getParameter("op");
+		if(op.equals("Volver"))
 		{
-		String u=request.getParameter("usuario");
-		String c=request.getParameter("clave");
-		CtrlUsuario cu= new CtrlUsuario();
-		
-		Usuario usuario= cu.getOne(u,c);
-	
-		
-			HttpSession session = request.getSession(); 
-			session.setAttribute("usuario", usuario);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
-		catch(AppDataException ape)
-		{
-			request.setAttribute("errorLogin",ape.getMessage());
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-		}
-		catch (Exception e) 
-		{
-			request.setAttribute("errorLogin",e.getMessage());
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-		}
-	
-		
-		
 	}
 
 }

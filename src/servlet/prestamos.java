@@ -41,34 +41,25 @@ public class prestamos extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		request.setAttribute("errorPre",null);
 		String op=request.getParameter("op");
 		if(op.equals("Buscar"))
 		{
-			int id=Integer.parseInt(request.getParameter("idSocio"));
-			CtrlSocio cs=new CtrlSocio();
-			Socio s=cs.getOne(id);
-			if(s == null)
+			try
 			{
-				String msj = "No existe el socio con el id "+id;
-				request.setAttribute("errorPre", msj);
-				request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);	
-			}
-			else 
-			{
+				int id=Integer.parseInt(request.getParameter("idSocio"));
+				CtrlSocio cs=new CtrlSocio();
+				Socio s=cs.getOne(id);
 				if(s.getEstado()==false)
 				{
-					String msj = "El socio "+id+" esta inhabilitado o sancionado";
-					request.setAttribute("errorPre", msj);
-					request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+					AppDataException ape = new AppDataException("El socio esta inhabilitado"+ id);
+					throw ape;
 				}
 				else
 				{
-					//	buscar cantidad de prestamos de los socios para saber lo del tope
 					CtrlPrestamo cp=new CtrlPrestamo();
 					int cant=cp.obtenerCantidad(id);
 					CtrlPoliticaPrestamo cpp=new CtrlPoliticaPrestamo();
-					PoliticaPrestamo pp=cpp.getOne();// cantidad maxima de libros prestados posibles
+					PoliticaPrestamo pp=cpp.getOne();
 					if(pp.getCantMaxLibrosPend()<=cant)
 					{
 						String msj = "El socio "+id+" ya saco el tope de libros permitidos";
@@ -77,20 +68,27 @@ public class prestamos extends HttpServlet
 					}
 					else
 					{		
-						request.getSession().setAttribute("errorPre",null);
 						int c=pp.getCantMaxLibrosPend()-cant;
 						request.getSession().setAttribute("cantPosible",c);
 						request.getSession().setAttribute("socio",s);				
 						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
-					}
-				}		
+					}		
+				}
 			}
-						
-			
+			catch(AppDataException ape)
+			{
+				request.setAttribute("errorPre",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("errorPre",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+			}						
 		}
+		
 		if(op.equals("Volver"))
 		{
-			request.setAttribute("errorPre",null);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import negocio.*;
+import util.AppDataException;
 import entidades.*;
 
 
@@ -46,29 +47,32 @@ public class consultas extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		request.setAttribute("errorCon",null);
 		String op=request.getParameter("op");
 		if(op.equals("Buscar"))
 		{
-			String t=request.getParameter("titulo");	
-			CtrlEjemplar ce=new CtrlEjemplar();
-			ArrayList<Ejemplar> ejemplares=ce.buscar(t);
-			request.setAttribute("titulo",t);
-			if (ejemplares.isEmpty() == false)
+			try 
 			{	
+				String t=request.getParameter("titulo");	
+				CtrlEjemplar ce=new CtrlEjemplar();
+				ArrayList<Ejemplar> ejemplares=ce.buscar(t);
+				request.setAttribute("titulo",t);
 				request.setAttribute("listaejemplares", ejemplares);	
 				request.getRequestDispatcher("/consultas.jsp").forward(request, response);
 			}
-			else
+			catch(AppDataException ape)
 			{
-				String msj = "No existen libros con el titulo "+t;
-				request.setAttribute("errorCon", msj);
+				request.setAttribute("errorCon",ape.getMessage());
 				request.getRequestDispatcher("/consultas.jsp").forward(request, response);
 			}
+			catch (Exception e) 
+			{
+				request.setAttribute("errorCon",e.getMessage());
+				request.getRequestDispatcher("/consultas.jsp").forward(request, response);
+			}	
 		}
+		
 		if(op.equals("Volver"))
 		{
-			request.setAttribute("errorCon",null);
 			Usuario u=(Usuario)request.getSession().getAttribute("usuario");
 			if(u!=null)
 			{

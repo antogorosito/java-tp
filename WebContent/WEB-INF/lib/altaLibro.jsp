@@ -38,6 +38,10 @@
     </div>
     <div class="container">
     	<form class="form" action="altaLibro" method="post">
+    	<%String msj=(String)request.getAttribute("error");
+ 			if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
    			<p><label>Titulo:</label>
    			<input name="titulo"type="text" required="required"></p>		
    			<p><label>ISBN:</label>
@@ -50,10 +54,7 @@
 	   		<input name="cantDiasMaxPrestamo"type="text"></p>
    			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
          	<button class="btn btn-info " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Cancelar</button>
-         	<%String msj=(String)request.getAttribute("errorAltaL");
- 			if (msj != null) {%>
- 			<label style="color:red;"><%=msj %></label>
- 			<%}%>
+         	
 	   	</form>
     </div>
 	<div class="container">

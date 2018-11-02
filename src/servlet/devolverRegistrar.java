@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.*;
 import negocio.*;
+import util.AppDataException;
 
 /**
  * Servlet implementation class devolverRegistrar
@@ -29,7 +30,6 @@ public class devolverRegistrar extends HttpServlet
     public devolverRegistrar()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -37,7 +37,6 @@ public class devolverRegistrar extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -46,7 +45,6 @@ public class devolverRegistrar extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		request.setAttribute("errorDevReg",null);
 		String op=request.getParameter("op");
 		if(op.equals("Registrar"))
 		{
@@ -71,20 +69,20 @@ public class devolverRegistrar extends HttpServlet
 					{
 						java.util.Date date1 = sdf.parse(fechaActu);
 						java.util.Date date2=sdf.parse(fechadev);
-						// 	devuelve <0 si actual es menor a devolver .devuelve 0 si son iguales. devuelve >0 si actual es mayor a devolver
+						// 	devuelve <0 si actual es menor a devolver 
+						//  devuelve 0 si son iguales. 
+						//  devuelve >0 si actual es mayor a devolver
 						if (date1.compareTo(date2) < 0 || date1.compareTo(date2)==0 )
 						{
 							clp.update(ll);
 						}
 						else if (date1.compareTo(date2) > 0) 
 						{
-							//	diferencia entre la fecha que habia que devolverla y hoy
 							int diasDif=(int)((date1.getTime()-date2.getTime())/86400000);  
 							CtrlSocio cs=new CtrlSocio();
-							boolean est=false;//inhabilito
+							boolean est=false;
 							Socio s=ll.getPrestamo().getSocio();
 							cs.update(s, est); 
-							//	obtengo tiempo de sancion
 							CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
 							PoliticaSancion ps=cps.getOne(diasDif);
 							if(ps==null) // por si son mas dias de atraso que los que tienen la bd, lo sanciono por el maximo de dias cargado.
@@ -103,7 +101,9 @@ public class devolverRegistrar extends HttpServlet
 					} 
 					catch (ParseException e) 
 					{
-						e.printStackTrace();
+						AppDataException ape = new AppDataException(e, "Error en el pasaje de fechas");
+				    	request.setAttribute("error",ape.getMessage());
+						request.getRequestDispatcher("WEB-INF/lib/devueltoRegistrar.jsp").forward(request, response);
 					}
 					int nro=5;
 					request.getSession().setAttribute("lineasD",null);
@@ -114,7 +114,7 @@ public class devolverRegistrar extends HttpServlet
 			else
 			{
 				String msj="No se selecciono ningun libro para devolver";
-				request.setAttribute("errorDevReg",msj);
+				request.setAttribute("error",msj);
 				request.getRequestDispatcher("WEB-INF/lib/devolverRegistrar.jsp").forward(request, response);
 			}
 		}
@@ -122,7 +122,6 @@ public class devolverRegistrar extends HttpServlet
 		{
 			request.getSession().setAttribute("lineasD",null);
 			request.getSession().setAttribute("socioD",null);
-			request.setAttribute("errorDevReg",null);
 			request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
 		}
 	}

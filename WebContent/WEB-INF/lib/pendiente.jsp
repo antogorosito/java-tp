@@ -40,11 +40,17 @@
       	</div>
     </div>
     <div class="container">   			 
-   		<%Socio s=(Socio)request.getAttribute("socio");
-   		if(s!=null){%>
-    	<p><label>Nombre y apellido:<%=s.getApellido() +" "+ s.getNombre()%></label></p>
-    	<p><label>Estado: </label>  <%if(s.getEstado()==false){ %> <label>Inhabilitado</label><%}else{ %><label>Habilitado</label><%} %></p>  	
+    
+    
+   		<%Usuario u=(Usuario)session.getAttribute("usuario");%>
+    	<p><label>Nombre y apellido:<%=u.getSocio().getApellido() +" "+ u.getSocio().getNombre()%></label></p>
+    	<p><label>Estado: </label>  <%if(u.getSocio().getEstado()==false){ %> <label>Inhabilitado</label><%}else{ %><label>Habilitado</label><%} %></p>
+    		<%String msj=(String)request.getAttribute("error");
+	 	if (msj != null) {%>
+ 		<label style="color:red;"><%=msj %></label>
+ 		<%}%>  	
     	<%ArrayList<LineaDePrestamo>lineas=(ArrayList<LineaDePrestamo>)request.getAttribute("lineas");
+    	if(lineas!=null){
     	if(lineas.isEmpty()!=true){%>
     	<table>
     		<tr>
@@ -60,11 +66,8 @@
 	 		</tr>
  			<%} %>
     	</table>
-    	<%}else{%>
-    	<label>No posee libros pendientes de devolucion</label>
-    	<%}} %>
-
-    	<form class="form-bus" action="pendiente" method="post">
+    	<%}}%>
+    	<form class="form-bus" action="pendientes" method="post">
 			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button>
 		</form>
     </div>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.*;
 import negocio.*;
+import util.AppDataException;
 
 /**
  * Servlet implementation class devolver
@@ -27,7 +28,6 @@ public class devolver extends HttpServlet
     public devolver()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,7 +35,6 @@ public class devolver extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,43 +43,36 @@ public class devolver extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		request.setAttribute("errorDev",null);
 		String op=request.getParameter("opc");
 		if(op.equals("Buscar"))
 		{
-			int id=Integer.parseInt(request.getParameter("idSocio"));
-			CtrlSocio cs=new CtrlSocio();
-			Socio s=cs.getOne(id);
-			if(s == null)
+			try
 			{
-				String msj = "No existe el socio con el id "+id;
-				request.setAttribute("errorDev", msj);
-				request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
-			}
-			else 
-			{
-				//ver si posee libros pendientes de devolucion
+				int id=Integer.parseInt(request.getParameter("idSocio"));
+				CtrlSocio cs=new CtrlSocio();
+				Socio s=cs.getOne(id);
 				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
 				ArrayList<LineaDePrestamo> lineas=clp.getAll(id);
-				if(lineas.isEmpty())
-				{
-					String msj = "El socio con id "+id+ " No posee libros pendientes de devolucion";
-					request.setAttribute("errorDev", msj);
-					request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);				
-				}
-				else
-				{
-					request.getSession().setAttribute("lineasD",lineas);
-					request.getSession().setAttribute("socioD",s);
-					request.getRequestDispatcher("/WEB-INF/lib/devolverRegistrar.jsp").forward(request, response);
-				}
+				request.getSession().setAttribute("lineasD",lineas);
+				request.getSession().setAttribute("socioD",s);
+				request.getRequestDispatcher("/WEB-INF/lib/devolverRegistrar.jsp").forward(request, response);
 			}
+			catch(AppDataException ape)
+			{
+				request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("error",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/devolver.jsp").forward(request, response);
+			}	
 		}
+		
 		if(op.equals("Volver"))
 		{
 			request.getSession().setAttribute("socioD",null);
 			request.getSession().setAttribute("lineasD",null);
-			request.setAttribute("errorDev",null);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 		

@@ -15,7 +15,7 @@ public class DataUsuario
 		ResultSet rs= null; 
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios WHERE nombreUsuario=? and clave=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("SELECT * FROM usuarios left join socios on socios.idSocio=usuarios.idSocio WHERE nombreUsuario=? and clave=?");
 			stmt.setString(1,u);
 			stmt.setString(2,c);
 			rs=stmt.executeQuery();
@@ -28,12 +28,20 @@ public class DataUsuario
 					l.setClave(rs.getString("clave"));
 					l.setTipo(rs.getInt("tipo"));
 					Socio s=new Socio();
+					s.setApellido(rs.getString("apellido"));
+					s.setDni(rs.getString("dni"));
+					s.setDomicilio(rs.getString("domicilio"));
+					s.setEmail(rs.getString("email"));
+					s.setEstado(rs.getBoolean("estado"));
 					s.setIdSocio(rs.getInt("idSocio"));
+					s.setNombre(rs.getString("nombre"));
+					s.setTelefono(rs.getString("telefono"));	
 					l.setSocio(s);
 				}
 			} 
-			if(l==null) {
-				AppDataException ape = new AppDataException("No existe el usuario.");
+			if(l==null)
+			{
+				AppDataException ape = new AppDataException("No existe el usuario con ese usuario y/o contraseña.");
 				throw ape;
 			}
 		}

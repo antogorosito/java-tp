@@ -2,11 +2,12 @@ package database;
 
 import java.sql.*;
 import entidades.*;
+import util.AppDataException;
 
 
 public class DataLibro 
 {
-	public Libro getOne(String ISBN) 
+	public Libro getOne(String ISBN) throws AppDataException
 	{
 		Libro l=null;
 		PreparedStatement stmt=null;
@@ -32,7 +33,8 @@ public class DataLibro
 		} 
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos");
+			throw ape;
 		}
 		finally 
 		{
@@ -55,7 +57,8 @@ public class DataLibro
 		PreparedStatement stmt=null;
 		try
 		{
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO libros(titulo,ISBN,nroEdicion,fechaEdicion,cantDiasMaxPrestamo) VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO libros(titulo,ISBN,nroEdicion,fechaEdicion,cantDiasMaxPrestamo) "
+					+ "VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, l.getTitulo());
 			stmt.setString(2, l.getIsbn());
 			stmt.setInt(3, l.getNroEdicion());

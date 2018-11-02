@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import entidades.*;
 import negocio.*;
+import util.AppDataException;
 
 /**
  * Servlet implementation class devueltoUnoRegistrar
@@ -29,7 +30,6 @@ public class devueltoUnoRegistrar extends HttpServlet
     public devueltoUnoRegistrar() 
     {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -37,29 +37,30 @@ public class devueltoUnoRegistrar extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		HttpSession session = request.getSession();
 		String op = request.getParameter("opci");
 		if(op.equals("Registrar"))
-		{
-			HttpSession session = request.getSession();
+		{			
 			LineaDePrestamo l=(LineaDePrestamo)session.getAttribute("lineaPre");
 			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-			java.util.Date fecha = new  java.util.Date();
-			DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
-			String fechaActu=Formato.format(fecha);
-		 	String fechadev=Formato.format(l.getPrestamo().getFechaADevolver());
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		    try 
+			
+			java.util.Date fecha = new  java.util.Date();           			 //actual	
+			DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");     
+			String fechaActu=Formato.format(fecha);     						 // fecha actual con formato
+		 	String fechadev=Formato.format(l.getPrestamo().getFechaADevolver()); //paso a string la fecha a devolver
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		    
+			try 
 		    {
-		    	java.util.Date date1 = sdf.parse(fechaActu);
+		    	java.util.Date date1 = sdf.parse(fechaActu); //pasaje de string a date
 				java.util.Date date2=sdf.parse(fechadev);
 				// devuelve <0 si actual es menor a devolver
 				//devuelve 0 si son iguales
@@ -73,13 +74,11 @@ public class devueltoUnoRegistrar extends HttpServlet
 		        }
 				else if (date1.compareTo(date2) > 0) 
 				{
-		            //diferencia entre la fecha que habia que devolverla y hoy
-		            int diasDif=(int)((date1.getTime()-date2.getTime())/86400000);  
+		            int diasDif=(int)((date1.getTime()-date2.getTime())/86400000);  //diferencia entre la fecha que habia que devolverla y actual  
 		            CtrlSocio cs=new CtrlSocio();
 		            boolean est=false;
 		            Socio s=l.getPrestamo().getSocio();
 		            cs.update(s, est);
-		            //obtengo tiempo de sancion
 		            CtrlPoliticaSancion cps=new CtrlPoliticaSancion();
 		            PoliticaSancion ps=cps.getOne(diasDif);
 		            if(ps==null) // por si son mas dias de atraso que los que tienen la bd, lo sanciono por el maximo de dias cargado.
@@ -101,7 +100,9 @@ public class devueltoUnoRegistrar extends HttpServlet
 			} 
 		    catch (ParseException e) 
 		    {
-				e.printStackTrace();
+		    	AppDataException ape = new AppDataException(e, "Error en el pasaje de fechas");
+		    	request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/devueltoUno.jsp").forward(request, response);
 			}		
 
 		}

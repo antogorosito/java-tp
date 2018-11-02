@@ -15,7 +15,7 @@ public class CtrlSocio
 		ds=new DataSocio();
 	}
 	
-	public Socio getOne(int id)  
+	public Socio getOne(int id)  throws AppDataException
 	{
 		return ds.getOne(id);
 	}
@@ -29,7 +29,7 @@ public class CtrlSocio
 		ds.update(s,est);
 	}
 	
-	public Socio getOne(String dni)
+	public Socio getOne(String dni) throws AppDataException
 	{
 		return ds.getOne(dni);
 	}

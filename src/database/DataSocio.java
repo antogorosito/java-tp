@@ -12,11 +12,12 @@ public class DataSocio
 {
 	public void add(Socio s)   
 	{
-		ResultSet keyResultSet=null;//
+		ResultSet keyResultSet=null;
 		PreparedStatement stmt=null;
 		try
 		{
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO socios(apellido,nombre,email,domicilio,telefono,dni,estado) VALUES (?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("INSERT INTO socios(apellido,nombre,email,domicilio,telefono,dni,estado) "
+					+ "VALUES (?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, s.getApellido());
 			stmt.setString(2, s.getNombre());
 			stmt.setString(3, s.getEmail());
@@ -51,7 +52,7 @@ public class DataSocio
 	}
 	
 	
-	public Socio getOne(String dni) 
+	public Socio getOne(String dni) throws AppDataException
 	{
 		Socio s=null;
 		PreparedStatement stmt=null;
@@ -73,13 +74,17 @@ public class DataSocio
 					s.setEstado(rs.getBoolean("estado"));
 					s.setIdSocio(rs.getInt("idSocio"));
 					s.setNombre(rs.getString("nombre"));
-					s.setTelefono(rs.getString("telefono"));				
+					s.setTelefono(rs.getString("telefono"));		
+					
+					AppDataException ape = new AppDataException("Ya existe el socio con dni "+ dni+ " su id es "+ s.getIdSocio());
+					throw ape;			
 				}
 			}
 		}
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos");
+			throw ape;
 		}
 		finally 
 		{
@@ -97,7 +102,7 @@ public class DataSocio
 		return s;
 	}
 	
-	public Socio getOne(int id)  
+	public Socio getOne(int id)  throws AppDataException
 	{
 		Socio s=null;
 		PreparedStatement stmt=null;
@@ -122,10 +127,15 @@ public class DataSocio
 					s.setTelefono(rs.getString("telefono"));				
 				}
 			}
+			if(s==null) {
+				AppDataException ape = new AppDataException("No existe el socio con el id "+ id);
+				throw ape;
+			}
 		}
-		catch (Exception e) 
+		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos");
+			throw ape;
 		}
 		finally 
 		{
@@ -178,7 +188,10 @@ public class DataSocio
 		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios  inner join prestamos on prestamos.idSocio=socios.idSocio inner join lineas_de_prestamos on lineas_de_prestamos.idPrestamo=prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion is null and prestamos.fechaADevolver<current_date() and socios.estado=true group by socios.idSocio");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select socios.* from socios "
+					+ " inner join prestamos on prestamos.idSocio=socios.idSocio inner join lineas_de_prestamos on "
+					+ "lineas_de_prestamos.idPrestamo=prestamos.idPrestamo where lineas_de_prestamos.fechaDevolucion "
+					+ "is null and prestamos.fechaADevolver<current_date() and socios.estado=true group by socios.idSocio");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
@@ -224,7 +237,8 @@ public class DataSocio
 		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
 		{	
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *  from sanciones inner join socios on socios.idSocio=sanciones.idSancion where adddate(fechaSancionHasta,1)=current_date() and estado=false");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *  from sanciones inner join socios"
+					+ " on socios.idSocio=sanciones.idSancion where adddate(fechaSancionHasta,1)=current_date() and estado=false");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{

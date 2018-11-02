@@ -14,7 +14,9 @@ public class DataPrestamo
 		ResultSet rs= null; 
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select count(*) from  prestamos inner join lineas_de_prestamos on lineas_de_prestamos.idPrestamo=prestamos.idPrestamo where (fechaDevolucion is null) and prestamos.idSocio=? group by prestamos.idSocio");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select count(*) from  prestamos"
+					+ " inner join lineas_de_prestamos on lineas_de_prestamos.idPrestamo=prestamos.idPrestamo"
+					+ " where (fechaDevolucion is null) and prestamos.idSocio=? group by prestamos.idSocio");
 			stmt.setInt(1,id);
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next() ) 	
@@ -49,7 +51,8 @@ public class DataPrestamo
 		PreparedStatement stmt=null;
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into prestamos(fechaPrestamo,horaPrestamo,diasPrestamo,fechaADevolver,idSocio) values(?,?,null,null,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into prestamos(fechaPrestamo,horaPrestamo,diasPrestamo,fechaADevolver,idSocio) "
+					+ "values(?,?,null,null,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setDate(1, p.getFechaPrestamo());
 			stmt.setTime(2, p.getHoraPrestamo());
 			stmt.setInt(3,p.getSocio().getIdSocio());

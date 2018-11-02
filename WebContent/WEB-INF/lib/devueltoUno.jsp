@@ -45,7 +45,7 @@
       		<input type="text" name="idEjemplar">
       		<button class="btn btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Agregar">Agregar</button>
       		<button class="btn btn-info" type="submit" style="margin-right: 50px" name="opc" value="Volver">Volver</button>      	
-      		<%String msj=(String)request.getAttribute("errorDevUno");  
+      		<%String msj=(String)request.getAttribute("error");  
  			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>
  			<%}%>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import database.*;
 import entidades.*;
+import util.AppDataException;
 
 public class CtrlLineaDePrestamo 
 {
@@ -16,7 +17,7 @@ public class CtrlLineaDePrestamo
 		de=new DataLineaDePrestamo();
 	}
 	
-	public LineaDePrestamo getOne(Socio socio,int ejem)
+	public LineaDePrestamo getOne(Socio socio,int ejem) throws AppDataException
 	{
 		return de.getOne(socio, ejem);
 	}
@@ -24,15 +25,15 @@ public class CtrlLineaDePrestamo
 	{
 		de.add(lp);
 	}
-	public LineaDePrestamo existe(int id, Socio s)
+	public LineaDePrestamo existe(int id, Socio s) throws AppDataException
 	{
 		return de.existe(id,s);
 	}
-	public LineaDePrestamo buscarLinea(LineaDePrestamo lp)
+	public LineaDePrestamo buscarLinea(LineaDePrestamo lp) throws AppDataException
 	{
 		return de.buscarLinea(lp);
 	}
-	public ArrayList<LineaDePrestamo> getAll(Prestamo p)
+	public ArrayList<LineaDePrestamo> getAll(Prestamo p) throws AppDataException
 	{
 		return de.getAll(p);
 	}
@@ -41,7 +42,7 @@ public class CtrlLineaDePrestamo
 		return de.minimoDias(p);
 	}
 
-	public LineaDePrestamo getOne(int id)
+	public LineaDePrestamo getOne(int id) throws AppDataException
 	{
 		return de.getOne(id);
 	}
@@ -59,7 +60,7 @@ public class CtrlLineaDePrestamo
 		de.delete(lp);
 	}
 	
-	public ArrayList<LineaDePrestamo> getAll(int id)
+	public ArrayList<LineaDePrestamo> getAll(int id) throws AppDataException
 	{
 		return de.getAll(id);
 	}

@@ -45,7 +45,7 @@
      		<input type="number" name="idSocio" required="required">     		
       		<button class="btn btn-primary " type="submit" style="margin-right: 50px" name="opc" value="Buscar">Buscar</button>
       		<button class="btn btn-info " type="submit" style="margin-right: 50px" name="opc" value="Volver" formnovalidate>Volver</button>
-      		<%String msj=(String)request.getAttribute("errorDev");  
+      		<%String msj=(String)request.getAttribute("error");  
  			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>
  			<%}%>      	

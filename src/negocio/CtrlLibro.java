@@ -2,6 +2,7 @@ package negocio;
 
 import database.DataLibro;
 import entidades.Libro;
+import util.AppDataException;
 
 public class CtrlLibro 
 {
@@ -13,7 +14,7 @@ public class CtrlLibro
 		de=new DataLibro();
 	}
 	
-	public Libro getOne(String ISBN)
+	public Libro getOne(String ISBN) throws AppDataException
 	{
 		return de.getOne(ISBN);
 	}

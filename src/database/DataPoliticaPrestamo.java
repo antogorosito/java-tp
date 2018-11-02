@@ -1,6 +1,7 @@
 package database;
 
 import entidades.*;
+import util.AppDataException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 public class DataPoliticaPrestamo
 {
 
-	public PoliticaPrestamo getOne()
+	public PoliticaPrestamo getOne() throws AppDataException
 	{
 		PoliticaPrestamo p=null;
 		PreparedStatement stmt=null;
@@ -30,7 +31,8 @@ public class DataPoliticaPrestamo
 		} 
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos");
+			throw ape;
 		}
 		finally 
 		{
