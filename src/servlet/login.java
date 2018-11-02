@@ -47,12 +47,12 @@ public class login extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 			
-		
+		try 
+		{
 		String u=request.getParameter("usuario");
 		String c=request.getParameter("clave");
 		CtrlUsuario cu= new CtrlUsuario();
-		try 
-		{
+		
 		Usuario usuario= cu.getOne(u,c);
 	
 		
@@ -64,6 +64,9 @@ public class login extends HttpServlet
 		{
 			request.setAttribute("errorLogin",ape.getMessage());
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		}
+		catch (Exception e) {
+			
 		}
 	
 		

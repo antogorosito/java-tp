@@ -31,11 +31,15 @@ public class DataUsuario
 					s.setIdSocio(rs.getInt("idSocio"));
 					l.setSocio(s);
 				}
-			}		
+			} 
+			if(l==null) {
+				AppDataException ape = new AppDataException("No existe el usuario.");
+				throw ape;
+			}
 		}
 		catch (SQLException e )
 		{
-			AppDataException ape = new AppDataException(e, "No existe el usuario.");
+			AppDataException ape = new AppDataException(e, "Error en base de datos");
 			throw ape;
 		}
 		
