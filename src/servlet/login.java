@@ -22,6 +22,7 @@ import entidades.*;
 public class login extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,7 +30,7 @@ public class login extends HttpServlet
     public login() 
     {
         super();
-        // TODO Auto-generated constructor stub
+ 
     }
 
 	/**
@@ -49,13 +50,10 @@ public class login extends HttpServlet
 			
 		try 
 		{
-		String u=request.getParameter("usuario");
-		String c=request.getParameter("clave");
-		CtrlUsuario cu= new CtrlUsuario();
-		
-		Usuario usuario= cu.getOne(u,c);
-	
-		
+			String u=request.getParameter("usuario");
+			String c=request.getParameter("clave");
+			CtrlUsuario cu= new CtrlUsuario();		
+			Usuario usuario= cu.getOne(u,c);		
 			HttpSession session = request.getSession(); 
 			session.setAttribute("usuario", usuario);
 			request.getRequestDispatcher("/menu.jsp").forward(request, response);

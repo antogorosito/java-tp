@@ -1,5 +1,6 @@
 package util;
 
+
 public class AppDataException extends Exception
 {
 	private Throwable innerException;
@@ -13,10 +14,7 @@ public class AppDataException extends Exception
 	{
 		this.message=message;
 	}
-	public Throwable getInnerException()
-	{
-		return innerException;
-	}
+	
 	public AppDataException(Throwable e,String message)
 	{
 		this.innerException=e;
@@ -27,4 +25,5 @@ public class AppDataException extends Exception
 	{
 		this.setMessage(message);
 	}
+
 }
