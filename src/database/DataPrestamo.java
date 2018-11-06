@@ -1,6 +1,8 @@
 package database;
 
 import entidades.*;
+import util.AppDataException;
+
 import java.sql.*;
 import java.util.GregorianCalendar;
 
@@ -45,9 +47,9 @@ public class DataPrestamo
 		return cant;
 	
 	}
-	public void add(Prestamo p)
+	public void add(Prestamo p) throws AppDataException
 	{
-		ResultSet keyResultSet=null;//
+		ResultSet keyResultSet=null;
 		PreparedStatement stmt=null;
 		try 
 		{
@@ -64,7 +66,8 @@ public class DataPrestamo
 		}
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{
@@ -81,7 +84,7 @@ public class DataPrestamo
 		}
 	}
 	
-	public void update(Prestamo p,int di,Date sDate)
+	public void update(Prestamo p,int di,Date sDate) throws AppDataException
 	{
 		PreparedStatement stmt=null;
 		try 
@@ -94,7 +97,8 @@ public class DataPrestamo
 		}
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al modificar");
+			throw ape;
 		}
 		finally 
 		{
@@ -111,7 +115,7 @@ public class DataPrestamo
 	}
 	
 	
-	public void delete(Prestamo p) 
+	public void delete(Prestamo p) throws AppDataException
 	{
 		PreparedStatement stmt=null;
 		try 
@@ -122,7 +126,8 @@ public class DataPrestamo
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al eliminar");
+			throw ape;
 		}
 		finally 
 		{

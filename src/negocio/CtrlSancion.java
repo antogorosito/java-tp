@@ -2,6 +2,7 @@ package negocio;
 
 import database.DataSancion;
 import entidades.*;
+import util.AppDataException;
 
 public class CtrlSancion 
 {
@@ -13,7 +14,7 @@ public class CtrlSancion
 		ds=new DataSancion();
 	}
 	
-	public void add(Sancion s) 
+	public void add(Sancion s) throws AppDataException
 	{
 		ds.add(s);
 	}

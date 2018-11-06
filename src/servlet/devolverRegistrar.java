@@ -48,6 +48,7 @@ public class devolverRegistrar extends HttpServlet
 		String op=request.getParameter("op");
 		if(op.equals("Registrar"))
 		{
+			
 			ArrayList<LineaDePrestamo> lista=new ArrayList<LineaDePrestamo>();
 			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
 			String[] lin=request.getParameterValues("chk");
@@ -58,6 +59,7 @@ public class devolverRegistrar extends HttpServlet
 					LineaDePrestamo l=clp.obtener(Integer.parseInt(lin[i]));
 					lista.add(l);
 				}
+				
 				for(LineaDePrestamo ll:lista)
 				{
 					java.util.Date fecha = new  java.util.Date();
@@ -99,11 +101,15 @@ public class devolverRegistrar extends HttpServlet
 							clp.update(ll,sa);
 						}
 					} 
-					catch (ParseException e) 
+					catch(AppDataException ape)
 					{
-						AppDataException ape = new AppDataException(e, "Error en el pasaje de fechas");
-				    	request.setAttribute("error",ape.getMessage());
-						request.getRequestDispatcher("WEB-INF/lib/devueltoRegistrar.jsp").forward(request, response);
+						request.setAttribute("error",ape.getMessage());
+						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+					}
+					catch (Exception e) 
+					{
+						request.setAttribute("error",e.getMessage());
+						request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
 					}
 					int nro=5;
 					request.getSession().setAttribute("lineasD",null);

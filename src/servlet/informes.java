@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.*;
 import negocio.*;
+import util.AppDataException;
 /**
  * Servlet implementation class informes
  */
@@ -45,21 +46,39 @@ public class informes extends HttpServlet
 		String op=request.getParameter("op");
 		if(op.equals("informe1"))
 		{
-			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
-	   		ArrayList<LineaDePrestamo> lineas=clp.getAllPendiente();
-	   		request.setAttribute("listaPendiente",lineas);
-	   		request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
+			try 
+			{
+				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+				ArrayList<LineaDePrestamo> lineas=clp.getAllPendiente();
+				request.setAttribute("listaPendiente",lineas);
+				request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
+			}
+			catch(AppDataException ape)
+			{
+				request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("error",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/informe1.jsp").forward(request, response);
+			}
 		}
 		if(op.equals("informe2")) 
 		{
 			CtrlSocio cs=new CtrlSocio();
-	 		ArrayList<Socio> sociosI = cs.getAllInhabilitados();
-	 		request.setAttribute("listaInhabilitados",sociosI);
+			ArrayList<Socio> sociosI = cs.getAllInhabilitados();
+			request.setAttribute("listaInhabilitados",sociosI);
 			request.getRequestDispatcher("WEB-INF/lib/informe2.jsp").forward(request, response);
+				
 		}
 		if(op.equals("Volver"))
 		{
 			request.getRequestDispatcher("WEB-INF/lib/informes.jsp").forward(request, response);
+		}
+		if(op.equals("VolverI"))
+		{
+			request.getRequestDispatcher("/menu.jsp").forward(request, response);
 		}
 	}
 

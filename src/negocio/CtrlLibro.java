@@ -18,7 +18,7 @@ public class CtrlLibro
 	{
 		return de.getOne(ISBN);
 	}
-	public void add(Libro l) 
+	public void add(Libro l) throws AppDataException
 	{
 		de.add(l);
 	}

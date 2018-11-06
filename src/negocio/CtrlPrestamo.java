@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import database.DataPrestamo;
 import entidades.*;
+import util.AppDataException;
 
 public class CtrlPrestamo 
 {
@@ -18,17 +19,17 @@ public class CtrlPrestamo
 	{
 		return dp.obtenerCantidad(id);
 	}
-	public void add(Prestamo p) 
+	public void add(Prestamo p) throws AppDataException
 	{
 		dp.add(p);
 	}
 	
-	public void update(Prestamo p, int di,Date sDate)
+	public void update(Prestamo p, int di,Date sDate) throws AppDataException
 	{
-		dp.update(p,di,sDate);
+		dp.update(p,di,sDate); 
 	}
 	
-	public void delete(Prestamo p)
+	public void delete(Prestamo p) throws AppDataException
 	{
 		dp.delete(p);
 	}

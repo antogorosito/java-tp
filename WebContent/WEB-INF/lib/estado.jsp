@@ -44,10 +44,14 @@
 
     <div class="container">
     	<form class="form-bus" action="estados" method="post">
+    	<%String msj=(String)request.getAttribute("error");
+	 		if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
+ 			
     	<%ArrayList<Socio> sociosInhabilitar = (ArrayList<Socio>)session.getAttribute("sociosInhabilitar");
- 		if(sociosInhabilitar.isEmpty() ==true){%>
-			<label style="color:red;"><b> No hay socios para inhabilitar</b></label>
-   			<%}else{ %>
+ 		if(sociosInhabilitar.isEmpty() !=true){%>
+		
 			<label><b> SOCIOS A INHABILITAR:</b></label>
    			<table class="table">
    				<tr>
@@ -63,15 +67,16 @@
   		   </table>
    			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Inhabilitar">Inhabilitar</button>
    			
-   	 		<%}%>   	
+   	 		<%} else{%>
+   	 		<label style="color:red;"><b> No hay socios para inhabilitar</b></label>
+   	 		<%} %>
 		</form>
 	</div>
     <div class="container">
     	<form class="form-bus" action="estados" method="post">
     	<% 	ArrayList<Socio> sociosHabilitar =(ArrayList<Socio>)session.getAttribute("sociosHabilitar");
- 		if(sociosHabilitar.isEmpty() ==true){%>
-   			<label style="color:red;"> <b>No hay socios para habilitar</b></label>
-   		<%}else{ %>
+ 		if(sociosHabilitar.isEmpty() !=true){%>
+   		
      		<label><b> SOCIOS A HABILITAR:</b></label>
    			<table class="table">
    				<tr>
@@ -87,8 +92,10 @@
   		   </table>
    			<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Habilitar">Habilitar</button>
    			
-   	 	<%}%>   
-   	 		<p><button class="btn btn-info " style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button></p>	
+   	 	<%} else {%>
+   	 	   <label style="color:red;"><b> No hay socios para habilitar</b></label>
+   	 	   <%} %>
+   	 		<p><button class="btn btn-info " style="margin-top: 50px" type="submit" name="op" value="Volver">Volver</button></p>	
 		</form>
 	</div>
     <div class="container">

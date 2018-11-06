@@ -98,12 +98,16 @@ public class devueltoUnoRegistrar extends HttpServlet
 		            request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 		        }  
 			} 
-		    catch (ParseException e) 
-		    {
-		    	AppDataException ape = new AppDataException(e, "Error en el pasaje de fechas");
-		    	request.setAttribute("error",ape.getMessage());
-				request.getRequestDispatcher("WEB-INF/lib/devueltoUno.jsp").forward(request, response);
-			}		
+			catch(AppDataException ape)
+			{
+				request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("error",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}	
 
 		}
 		if(op.equals("Cancelar"))

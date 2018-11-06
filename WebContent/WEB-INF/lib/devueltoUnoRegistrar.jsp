@@ -48,6 +48,10 @@
 		 	<button class="btn btn-primary " type="submit" style="margin-right: 50px" name="opci" value="Registrar">Registrar</button>
  		 	<button class="btn btn-info" type="submit" style="margin-right: 50px" name="opci" value="Cancelar">Cancelar</button>
 		    <%} %>
+		    <%String msj=(String)request.getAttribute("error");  
+ 			if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
     	</form>
 	</div>
     <div class="container">

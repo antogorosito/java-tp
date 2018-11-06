@@ -51,7 +51,7 @@ public class DataLibro
 		}
 		return l;
 	}
-	public void add(Libro l)
+	public void add(Libro l) throws AppDataException
 	{
 		ResultSet keyResultSet=null;
 		PreparedStatement stmt=null;
@@ -72,7 +72,8 @@ public class DataLibro
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{

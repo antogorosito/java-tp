@@ -10,7 +10,7 @@ import database.FactoryConexion;
 
 public class DataSocio 
 {
-	public void add(Socio s)   
+	public void add(Socio s)   throws AppDataException
 	{
 		ResultSet keyResultSet=null;
 		PreparedStatement stmt=null;
@@ -34,7 +34,8 @@ public class DataSocio
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{
@@ -153,7 +154,7 @@ public class DataSocio
 		return s;
 	}
 	
-	public void update(Socio s,boolean est) 
+	public void update(Socio s,boolean est) throws AppDataException
 	{
 		PreparedStatement stmt=null;
 		try 
@@ -166,7 +167,8 @@ public class DataSocio
 		} 
 		catch (SQLException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al modificar");
+			throw ape;
 		}
 		finally 
 		{
@@ -208,7 +210,8 @@ public class DataSocio
 					s.setTelefono(rs.getString("telefono"));
 					socios.add(s);					
 				}
-			}		
+			}	
+		
 		}
 		catch(SQLException e)
 		{
@@ -237,8 +240,8 @@ public class DataSocio
 		ArrayList<Socio> socios=new ArrayList<Socio>();
 		try 
 		{	
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *  from sanciones inner join socios"
-					+ " on socios.idSocio=sanciones.idSancion where adddate(fechaSancionHasta,1)=current_date() and estado=false");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *   from sanciones  inner join socios on socios.idSocio=sanciones.idSocio"
+					+ " where adddate(fechaSancionHasta,1)=current_date() and estado=false");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
@@ -256,6 +259,7 @@ public class DataSocio
 					socios.add(s);	
 				}
 			}	
+		
 		}
 		catch(SQLException e)
 		{
@@ -278,7 +282,7 @@ public class DataSocio
 		
 	}
 	
-	public ArrayList<Socio> getAllInhabilitados() 
+	public ArrayList<Socio> getAllInhabilitados()
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
@@ -303,6 +307,7 @@ public class DataSocio
 					listaSocios.add(ss);	
 				}
 			}	
+
 		}
 		catch(SQLException e)
 		{

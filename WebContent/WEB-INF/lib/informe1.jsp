@@ -60,9 +60,12 @@
  				<td><%=lp.getPrestamo().getSocio().getNombre() +" "+lp.getPrestamo().getSocio().getApellido() %></td> 	
   			</tr>   <%} %>
    		</table> 
-	   	<%} else{ %>
-	   	<label>No hay libros pendientes de devolucion</label>
-	   	<%} %>
+	   	<%}  %>
+	   <%String msj=(String)request.getAttribute("error");
+	 		if (msj != null) {%>
+ 			<label style="color:red;"><%=msj %></label>
+ 			<%}%>
+ 			
 		<form class="form-bus" action="informes" method="post">
 			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Volver">Volver</button>
 		</form>

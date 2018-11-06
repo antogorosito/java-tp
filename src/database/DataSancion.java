@@ -1,6 +1,7 @@
 package database;
 
 import entidades.*;
+import util.AppDataException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,9 +11,9 @@ import java.sql.SQLException;
 public class DataSancion
 {
 
-	public void add(Sancion s)
+	public void add(Sancion s) throws AppDataException
 	{
-		ResultSet keyResultSet=null;//
+		ResultSet keyResultSet=null;
 		PreparedStatement stmt=null;
 		try 
 		{
@@ -28,7 +29,8 @@ public class DataSancion
 		}
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{

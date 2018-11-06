@@ -21,7 +21,7 @@ public class CtrlLineaDePrestamo
 	{
 		return de.getOne(socio, ejem);
 	}
-	public void add(LineaDePrestamo lp) 
+	public void add(LineaDePrestamo lp) throws AppDataException
 	{
 		de.add(lp);
 	}
@@ -46,11 +46,11 @@ public class CtrlLineaDePrestamo
 	{
 		return de.getOne(id);
 	}
-	public void update(LineaDePrestamo lp,Sancion s) throws ParseException
+	public void update(LineaDePrestamo lp,Sancion s) throws AppDataException,ParseException
 	{
 		de.update(lp,s);
 	}
-	public void update(LineaDePrestamo lp) throws ParseException
+	public void update(LineaDePrestamo lp) throws AppDataException,ParseException
 	{
 		de.update(lp);
 	}
@@ -69,7 +69,7 @@ public class CtrlLineaDePrestamo
 	{
 		return de.obtener(id);
 	}
-	public ArrayList<LineaDePrestamo> getAllPendiente()
+	public ArrayList<LineaDePrestamo> getAllPendiente() throws AppDataException
 	{
 		return de.getAllPendiente();
 	}

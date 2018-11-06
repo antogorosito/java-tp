@@ -28,7 +28,7 @@ CREATE TABLE `ejemplares` (
   PRIMARY KEY (`idEjemplar`),
   KEY `idLibro_fk` (`idLibro`),
   CONSTRAINT `idLibro_fk` FOREIGN KEY (`idLibro`) REFERENCES `libros` (`idlibro`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=411 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10003 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `ejemplares` (
 
 LOCK TABLES `ejemplares` WRITE;
 /*!40000 ALTER TABLE `ejemplares` DISABLE KEYS */;
-INSERT INTO `ejemplares` VALUES (101,1),(102,1),(103,1),(104,2),(105,2),(210,3),(211,4),(212,4),(213,4),(214,4),(321,5),(322,5),(323,6),(401,7),(402,7),(403,7),(404,7),(405,8),(409,9),(410,9);
+INSERT INTO `ejemplares` VALUES (1001,1),(1002,1),(1003,1),(2001,2),(2002,2),(2003,2),(3001,3),(3002,3),(4001,4),(4002,4),(4003,4),(5001,5),(6001,6),(6002,6),(7001,7),(7002,7),(8001,8),(8002,8),(8003,8),(8004,8),(9001,9),(10001,10),(10002,10);
 /*!40000 ALTER TABLE `ejemplares` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +56,7 @@ CREATE TABLE `libros` (
   `fechaEdicion` date NOT NULL,
   `cantDiasMaxPrestamo` int(11) NOT NULL,
   PRIMARY KEY (`idLibro`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `libros` (
 
 LOCK TABLES `libros` WRITE;
 /*!40000 ALTER TABLE `libros` DISABLE KEYS */;
-INSERT INTO `libros` VALUES (1,'9-226-154-05','Harry Potter y la piedra filosofal',226,'1997-06-26',5),(2,'9-227-784-07','Harry Potter y la camara secreta',227,'1998-07-02',4),(3,'9-425-450-11','Harry Potter y el prisionero de azkaban',425,'1999-07-08',7),(4,'9-223-784-14','It',223,'1990-11-18',4),(5,'9-332-456-22','El resplandor',332,'1977-01-28',3),(6,'9-754-895-21','Misery',754,'1987-06-08',5),(7,'9-478-125-89','Mr. Mercedes',478,'2014-06-03',6),(8,'9-652-852-41','The Maze Runner',652,'2009-10-21',4),(9,'9-995-526-04','El principito',995,'1943-04-06',3);
+INSERT INTO `libros` VALUES (1,'9-456-987-05','Harry Potter y la pierda filosofal',456,'1997-06-26',12),(2,'9-123-541-10','Harry Potter y la camara secreta',123,'1998-07-02',14),(3,'9-985-612-25','Harry Potter y el prisionero de azkaban',985,'1999-07-08',6),(4,'9-665-145-03','Harry Potter y el caliz de fuego',665,'2000-07-08',7),(5,'9-124-784-05','Harry Potter y la orden del fenix',124,'2003-06-21',7),(6,'9-951-368-27','Harry Potter y el misterio del principe',951,'2005-07-16',7),(7,'9-778-247-38','Harry Potter y las reliquias de la muerte',778,'2007-07-21',6),(8,'9-357-410-21','It',357,'1986-09-15',14),(9,'9-002-689-04','El resplandor',2,'1977-01-28',10),(10,'9-963-114-54','El principito',963,'1943-04-06',10);
 /*!40000 ALTER TABLE `libros` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `lineas_de_prestamos` (
   CONSTRAINT `idEjemplar_fk` FOREIGN KEY (`idEjemplar`) REFERENCES `ejemplares` (`idejemplar`) ON UPDATE CASCADE,
   CONSTRAINT `idPrestamo_fk` FOREIGN KEY (`idPrestamo`) REFERENCES `prestamos` (`idprestamo`) ON UPDATE CASCADE,
   CONSTRAINT `idSancion_fk` FOREIGN KEY (`idSancion`) REFERENCES `sanciones` (`idsancion`) ON UPDATE CASCADE
-  ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `lineas_de_prestamos` (
 
 LOCK TABLES `lineas_de_prestamos` WRITE;
 /*!40000 ALTER TABLE `lineas_de_prestamos` DISABLE KEYS */;
-INSERT INTO `lineas_de_prestamos` VALUES (1,'2018-08-05',1,NULL,1,101),(2,'2018-08-05',1,NULL,1,210),(3,'2018-07-28',1,2,2,210),(4,'2018-07-28',1,2,2,212),(5,'2018-07-22',1,NULL,3,410),(6,'2018-07-22',1,NULL,3,105),(7,NULL,0,NULL,4,405),(8,NULL,0,NULL,4,323),(9,'2018-08-24',1,NULL,5,322),(10,'2018-08-28',1,1,6,322),(11,NULL,0,NULL,7,101),(12,NULL,0,NULL,7,104),(13,NULL,0,NULL,8,103),(14,NULL,0,NULL,8,402);
+INSERT INTO `lineas_de_prestamos` VALUES (1,'2018-09-10',1,2,1,10001),(2,'2018-09-10',1,2,1,6002),(3,'2018-10-28',1,1,2,5001),(4,'2018-10-28',1,1,2,4003),(5,'2018-10-28',1,1,2,2001),(6,'2018-10-08',1,NULL,3,1003),(7,NULL,0,NULL,4,10001),(8,NULL,0,NULL,4,1003),(9,NULL,0,NULL,4,2002),(10,NULL,0,NULL,5,5001),(11,NULL,0,NULL,5,3002),(12,NULL,0,NULL,5,7002),(13,'2018-10-30',1,3,6,9001),(14,NULL,0,NULL,7,6002),(15,NULL,0,NULL,7,8004),(16,NULL,0,NULL,7,2003),(17,NULL,0,NULL,7,4001),(18,NULL,0,NULL,7,10002);
 /*!40000 ALTER TABLE `lineas_de_prestamos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `politica_sanciones` (
   `diasDeAtrasoHasta` int(11) NOT NULL,
   `diasDeSancion` int(11) NOT NULL,
   PRIMARY KEY (`idPoliticaSancion`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,7 @@ CREATE TABLE `politica_sanciones` (
 
 LOCK TABLES `politica_sanciones` WRITE;
 /*!40000 ALTER TABLE `politica_sanciones` DISABLE KEYS */;
-INSERT INTO `politica_sanciones` VALUES (1,1,3,7),(2,4,7,10),(3,8,11,14);
+INSERT INTO `politica_sanciones` VALUES (1,1,3,7),(2,4,7,10),(3,8,11,14),(4,12,15,21);
 /*!40000 ALTER TABLE `politica_sanciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `prestamos` (
 
 LOCK TABLES `prestamos` WRITE;
 /*!40000 ALTER TABLE `prestamos` DISABLE KEYS */;
-INSERT INTO `prestamos` VALUES (1,'2018-08-01','14:05:00',5,'2018-04-06',1),(2,'2018-07-18','11:45:21',4,'2018-06-22',2),(3,'2018-07-18','13:32:12',3,'2018-06-21',3),(4,'2018-08-20','16:55:45',4,'2018-08-24',4),(5,'2018-08-21','10:05:06',3,'2018-08-24',3),(6,'2018-08-24','11:04:05',3,'2018-08-27',3),(7,'2018-08-30','19:08:04',4,'2018-09-03',1),(8,'2018-09-04','11:57:00',5,'2018-09-09',2);
+INSERT INTO `prestamos` VALUES (1,'2018-09-03','15:00:01',6,'2018-09-09',2),(2,'2018-10-23','12:20:11',4,'2018-10-27',1),(3,'2018-11-03','09:15:10',6,'2018-10-09',3),(4,'2018-10-30','11:23:00',10,'2018-11-08',6),(5,'2018-10-31','12:45:53',6,'2018-11-05',5),(6,'2018-10-19','11:00:10',10,'2018-10-29',4),(7,'2018-11-05','10:34:05',7,'2018-11-12',2);
 /*!40000 ALTER TABLE `prestamos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `sanciones` (
   PRIMARY KEY (`idSancion`),
   KEY `idSocioSancion_fk` (`idSocio`),
   CONSTRAINT `idSocioSancion_fk` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idsocio`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `sanciones` (
 
 LOCK TABLES `sanciones` WRITE;
 /*!40000 ALTER TABLE `sanciones` DISABLE KEYS */;
-INSERT INTO `sanciones` VALUES (1,'2018-07-28','2018-08-07',2),(2,'2018-08-28','2018-08-31',3);
+INSERT INTO `sanciones` VALUES (1,'2018-10-28','2018-11-03',1),(2,'2018-09-10','2018-09-13',2),(3,'2018-10-30','2018-11-05',4);
 /*!40000 ALTER TABLE `sanciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,13 +223,13 @@ CREATE TABLE `socios` (
   `idSocio` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(30) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `domicilio` varchar(20) NOT NULL,
   `dni` varchar(8) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`idSocio`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `socios` (
 
 LOCK TABLES `socios` WRITE;
 /*!40000 ALTER TABLE `socios` DISABLE KEYS */;
-INSERT INTO `socios` VALUES (1,'Hernan','Romeno','antonellabj21@gmail.com','4235689','San Martin 456','35456789',0),(2,'Mauricio','Knazovic','isabri91@gmail.com','4551203','Alvear 1204','36587977',1),(3,'Ana','Lopez','antoo.-bj@hotmail.com','4785698','Eva Peron 6985','26894120',1),(4,'Ezequiel','Sanchez','sabri64_5@hotmail.com','4668956','Laprida 5142','39562140',0);
+INSERT INTO `socios` VALUES (1,'Alejandra','Perez','al4@hotmail.com','4258952','Ecuador 4567','25689754',0),(2,'Hernan','Romeno','antoo.-bj@hotmail.com','4567891','San Martin 455','33556210',1),(3,'Mauricio','Knazovic','isabri91@gmail.com','4110258','Pueryrredon 2487','24895001',1),(4,'Raul','Sanchez','raul_2018@hotmail.com','4158756','Salta 498','21456321',0),(5,'Marina','Rodriguez','antonellabj21@gmail.com','Moreno 758','4982245','37894201',1),(6,'Sebastian','Romero','sabri64_5@hotmail.com','Santiago 104','4581004','31663895',0);
 /*!40000 ALTER TABLE `socios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,10 +252,10 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `nombreUsuario` varchar(20) NOT NULL,
   `clave` varchar(20) NOT NULL,
-   `tipo` int(1) NOT NULL,
-    `idSocio` int(11)  NULL,
+  `tipo` int(1) NOT NULL,
+  `idSocio` int(11) DEFAULT NULL,
   PRIMARY KEY (`nombreUsuario`),
-    KEY `idSocioUsuario_fk` (`idSocio`),
+  KEY `idSocioUsuario_fk` (`idSocio`),
   CONSTRAINT `idSocioUsuario_fk` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idsocio`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -266,7 +266,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('antonella','anto123',0,null),('sabrina','sabri123',0,null),('35456789','Romeno',1,1),('36587977','Knazovic',1,2),('26894120','Lopez',1,3),('39562140','Sanchez',1,4);
+INSERT INTO `usuarios` VALUES ('21456321','Sanchez',1,4),('24895001','Knazovic',1,3),('25689754','Perez',1,1),('31663895','Romero',1,6),('33556210','Romeno',1,2),('37894201','Rodriguez',1,5),('antonella','anto123',0,NULL),('sabrina','sabri123',0,NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-05 20:03:47
+-- Dump completed on 2018-11-06 14:41:08

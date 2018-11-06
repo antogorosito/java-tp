@@ -51,7 +51,7 @@ public class prestamos extends HttpServlet
 				Socio s=cs.getOne(id);
 				if(s.getEstado()==false)
 				{
-					AppDataException ape = new AppDataException("El socio esta inhabilitado"+ id);
+					AppDataException ape = new AppDataException("El socio esta inhabilitado");
 					throw ape;
 				}
 				else
@@ -62,9 +62,8 @@ public class prestamos extends HttpServlet
 					PoliticaPrestamo pp=cpp.getOne();
 					if(pp.getCantMaxLibrosPend()<=cant)
 					{
-						String msj = "El socio "+id+" ya saco el tope de libros permitidos";
-						request.setAttribute("errorPre", msj);
-						request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+						AppDataException ape = new AppDataException("El socio ya saco el tope de libros");
+						throw ape;
 					}
 					else
 					{		

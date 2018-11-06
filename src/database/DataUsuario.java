@@ -67,7 +67,7 @@ public class DataUsuario
 		return l;
 	
 	}
-	public void add(Usuario u,int id)
+	public void add(Usuario u,int id) throws AppDataException
 	{
 		PreparedStatement stmt=null;
 		try
@@ -81,7 +81,8 @@ public class DataUsuario
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{

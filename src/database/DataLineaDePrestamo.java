@@ -101,7 +101,7 @@ public class DataLineaDePrestamo
 		}
 		return l;
 	}
-	public void add(LineaDePrestamo lp)
+	public void add(LineaDePrestamo lp) throws AppDataException
 	{
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet=null;
@@ -121,7 +121,8 @@ public class DataLineaDePrestamo
 		}
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{
@@ -344,7 +345,7 @@ public class DataLineaDePrestamo
 		}
 		return lp;
 	}
-	public void update(LineaDePrestamo lp,Sancion s) throws ParseException 
+	public void update(LineaDePrestamo lp,Sancion s) throws AppDataException, ParseException 
 	{
 		PreparedStatement stmt=null;
 		try 
@@ -370,7 +371,8 @@ public class DataLineaDePrestamo
 		} 
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al modificar");
+			throw ape;
 		}
 		finally 
 		{
@@ -385,7 +387,7 @@ public class DataLineaDePrestamo
 			} 
 		}
 	}
-	public void update(LineaDePrestamo lp) throws ParseException 
+	public void update(LineaDePrestamo lp) throws AppDataException,ParseException 
 	{
 		PreparedStatement stmt=null;
 		try 
@@ -402,7 +404,8 @@ public class DataLineaDePrestamo
 		} 
 		catch (SQLException e) 
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos al agregar");
+			throw ape;
 		}
 		finally 
 		{
@@ -574,7 +577,7 @@ public class DataLineaDePrestamo
 		}
 		return lp;
 	}
-	public ArrayList<LineaDePrestamo> getAllPendiente()
+	public ArrayList<LineaDePrestamo> getAllPendiente() throws AppDataException
 	{
 		PreparedStatement stmt=null;
 		ResultSet rs= null;
@@ -610,11 +613,17 @@ public class DataLineaDePrestamo
 					lineas.add(lp);
 				}
 			}
+			if(lineas.isEmpty()==true)
+			{
+				AppDataException ape = new AppDataException("No hay libros pendientes");
+				throw ape;
+			}
 			
 		}
 		catch(SQLException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException(e, "Error en base de datos");
+			throw ape;
 		}
 		finally 
 		{

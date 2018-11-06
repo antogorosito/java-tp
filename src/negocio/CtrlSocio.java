@@ -20,11 +20,11 @@ public class CtrlSocio
 		return ds.getOne(id);
 	}
 	
-	public void add(Socio s) 
+	public void add(Socio s) throws AppDataException
 	{
 		ds.add(s);
 	}
-	public void update(Socio s,boolean est)
+	public void update(Socio s,boolean est)throws AppDataException
 	{
 		ds.update(s,est);
 	}
@@ -38,11 +38,11 @@ public class CtrlSocio
 	{
 		return ds.getAllAInhabilitar();
 	}
-	public ArrayList<Socio> getAllAHabilitar()
+	public ArrayList<Socio> getAllAHabilitar() 
 	{
 		return ds.getAllAHabilitar();
 	}
-	public ArrayList<Socio> getAllInhabilitados()
+	public ArrayList<Socio> getAllInhabilitados()  
 	{
 	
 		return ds.getAllInhabilitados();

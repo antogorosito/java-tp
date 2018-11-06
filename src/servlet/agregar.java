@@ -106,61 +106,88 @@ public class agregar extends HttpServlet
 		
 		if (op.equals("Guardar")) 
 		{
-			int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
-			int min=(Integer)session.getAttribute("dias");
-			Prestamo pre = (Prestamo) session.getAttribute("prestamo");
-			CtrlPrestamo cp=new CtrlPrestamo();
-			if(di>min)
+			try 
 			{
-				Calendar calendar=Calendar.getInstance();
-				calendar.setTime(pre.getFechaPrestamo());
-				calendar.add(Calendar.DAY_OF_YEAR,min);
-				java.sql.Date sDate = convertUtilToSql(calendar.getTime());
-				
-				cp.update(pre, min,sDate);
-				int nro=3;
-				Socio s=(Socio)request.getSession().getAttribute("socio");
-				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ min+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
-				Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
-				request.setAttribute("opc",nro);
-				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
+				int di = Integer.parseInt(request.getParameter("diasMaximoPrestamo"));
+				int min=(Integer)session.getAttribute("dias");
+				Prestamo pre = (Prestamo) session.getAttribute("prestamo");
+				CtrlPrestamo cp=new CtrlPrestamo();
+				if(di>min)
+				{
+					Calendar calendar=Calendar.getInstance();
+					calendar.setTime(pre.getFechaPrestamo());
+					calendar.add(Calendar.DAY_OF_YEAR,min);
+					java.sql.Date sDate = convertUtilToSql(calendar.getTime());
+					
+					cp.update(pre, min,sDate);
+					int nro=3;
+					Socio s=(Socio)request.getSession().getAttribute("socio");
+					String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ min+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
+					Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
+					request.setAttribute("opc",nro);
+					request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);	
+				}
+				else
+				{
+					Calendar calendar=Calendar.getInstance();
+					calendar.setTime(pre.getFechaPrestamo());
+					calendar.add(Calendar.DAY_OF_YEAR,di);
+					java.sql.Date sDate = convertUtilToSql(calendar.getTime());
+					
+					cp.update(pre, di,sDate);
+					int nro=4;
+					Socio s=(Socio)request.getSession().getAttribute("socio");
+					String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ di+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
+					Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
+					request.setAttribute("opc",nro);
+					request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
+				}
+				session.setAttribute("prestamo",null);
+				session.setAttribute("lineas",null);
 			}
-			else
+			catch(AppDataException ape)
 			{
-				Calendar calendar=Calendar.getInstance();
-				calendar.setTime(pre.getFechaPrestamo());
-				calendar.add(Calendar.DAY_OF_YEAR,di);
-				java.sql.Date sDate = convertUtilToSql(calendar.getTime());
+				request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("error",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}		
 			
-				cp.update(pre, di,sDate);
-				int nro=4;
-				Socio s=(Socio)request.getSession().getAttribute("socio");
-				String msj="Se informa que se ha registrado el prestamo nro "+pre.getIdPrestamo()+" para el socio "+s.getApellido()+" "+s.getNombre()+".\n El mismo es por "+ di+" dias y la fecha de devolucion es el "+sDate+".\n Atte. Biblioteca Rosario";
-				Emailer.getInstance().send(s.getEmail(),"Confirmacion prestamo",msj);
-				request.setAttribute("opc",nro);
-				request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
-			}
-			session.setAttribute("prestamo",null);
-			session.setAttribute("lineas",null);
 		}
 		
 		if(op.equals("Cancelar"))
 		{	
-			CtrlLineaDePrestamo clp= new CtrlLineaDePrestamo();
-			ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");
-			if(li != null) 
+			try
 			{
-				for(LineaDePrestamo ll:li) 
+				CtrlLineaDePrestamo clp= new CtrlLineaDePrestamo();
+				ArrayList<LineaDePrestamo> li= (ArrayList<LineaDePrestamo>)session.getAttribute("lineas");
+				if(li != null) 
 				{
-					clp.delete(ll);
+					for(LineaDePrestamo ll:li) 
+					{
+						clp.delete(ll);
+					}
+					CtrlPrestamo cp = new CtrlPrestamo();
+					Prestamo ap = (Prestamo) session.getAttribute("prestamo");
+					cp.delete(ap);
 				}
-				CtrlPrestamo cp = new CtrlPrestamo();
-				Prestamo ap = (Prestamo) session.getAttribute("prestamo");
-				cp.delete(ap);
+				session.setAttribute("prestamo",null);
+				session.setAttribute("lineas",null);
+				request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
 			}
-			session.setAttribute("prestamo",null);
-			session.setAttribute("lineas",null);
-			request.getRequestDispatcher("WEB-INF/lib/prestamos.jsp").forward(request, response);
+			catch(AppDataException ape)
+			{
+				request.setAttribute("error",ape.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}
+			catch (Exception e) 
+			{
+				request.setAttribute("error",e.getMessage());
+				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+			}		
 		}
 
 	}

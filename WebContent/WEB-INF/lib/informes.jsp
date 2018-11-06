@@ -52,6 +52,9 @@
 			        <button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="informe2">Ir</button>
        			</div>
     		</div>
+    	
+			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="VolverI">Volver</button>
+		
   		</form>
 	</div>
     <div class="container">

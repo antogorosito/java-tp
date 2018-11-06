@@ -17,7 +17,7 @@ public class CtrlUsuario
 	{
 		return du.getOne(u,c);
 	}
-	public void add(Usuario u, int id) 
+	public void add(Usuario u, int id) throws AppDataException
 	{
 		du.add(u,id);
 	}

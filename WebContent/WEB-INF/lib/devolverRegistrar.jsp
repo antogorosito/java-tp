@@ -30,7 +30,7 @@
       	</div>
     </div>
     <div class="container">
-	    <%Socio s=(Socio)session.getAttribute("socioD");if(s!=null){ %>
+	    <%Socio s=(Socio)session.getAttribute("socioD");%>
 	    <label>Apellido y nombre: <%=s.getApellido()%>  <%=s.getNombre() %></label>   
     	<form class="form-bus" action="devolverRegistrar" method="post">
 	     	<%ArrayList<LineaDePrestamo>lineas=(ArrayList<LineaDePrestamo>)session.getAttribute("lineasD"); %>
@@ -51,14 +51,14 @@
  			</table>
 	     	<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Registrar">Registrar</button>
      		<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="Cancelar">Cancelar</button>
-     			<%String msj=(String)request.getAttribute("error");  
+     	
+			<%}%>
+			<%String msj=(String)request.getAttribute("error");  
  			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>
  			<%}%>
-			<%}%>
-					
 	    </form>
-	    <%}%>
+	 
 	</div>
     <div class="container">
    		<footer>
