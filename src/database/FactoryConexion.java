@@ -1,8 +1,5 @@
 package database;
 import java.sql.*;
-import java.util.Properties;
-
-
 
 public class FactoryConexion {
 	
@@ -42,27 +39,11 @@ public class FactoryConexion {
 		
 		if(conn==null || conn.isClosed()){
 		
-		//	conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=America/Argentina/Buenos_Aires",user,pass);
-			Properties prop=new Properties();
-			String password=prop.getProperty("password").toString();
-			String username=prop.getProperty("username").toString();
-			String host=prop.getProperty("host").toString();
-			conn=DriverManager.getConnection(host,username,password);
-		}
-		return conn;
-	}
-/*	public Connection getConn() {
-		
-		Connection conn=null;
-		try{
-		
 			conn = DriverManager.getConnection("jdbc:"+dbType+"://"+host+":"+port+"/"+db+"?&useSSL=false&serverTimezone=America/Argentina/Buenos_Aires",user,pass);
-			
+	
 		}
-		catch(SQLException){e.printStackTrace();}
 		return conn;
 	}
-	*/
 	
 	public void releaseConn(){
 		try{
