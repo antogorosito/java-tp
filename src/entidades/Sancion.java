@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Sancion
@@ -11,6 +12,7 @@ public class Sancion
 	private int idSancion;
 	private Date fechaSancion;
 	private Date fechaSancionHasta;
+	private boolean activo;
 	private Socio socio;
 	
 	public Sancion(){}
@@ -34,15 +36,17 @@ public class Sancion
 		{
 			e.printStackTrace();
 		}
-		GregorianCalendar fechaa = new GregorianCalendar();
-		fechaa.setTime(this.fechaSancion);
-		fechaa.add(fechaa.DATE, d);
-		java.sql.Date sDate = convertUtilToSql(fechaa.getTime());
+		
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(this.fechaSancion);
+		calendar.add(Calendar.DAY_OF_YEAR,d);
+		java.sql.Date sDate = convertUtilToSql(calendar.getTime());
+		
 		this.fechaSancionHasta=sDate;
+		this.activo=true;
 		this.socio=s;
 	}
 
-	
 	public int getIdSancion() 
 	{
 		return idSancion;
@@ -63,9 +67,17 @@ public class Sancion
 	{
 		this.fechaSancionHasta=fechaSancionHasta;
 	}
+	public void setActivo(boolean activo)
+	{
+		this.activo=activo;
+	}
 	public Date getFechaSancionHasta()
 	{
 		return fechaSancionHasta;
+	}
+	public boolean getActivo()
+	{
+		return activo;
 	}
 	public Socio getSocio() 
 	{

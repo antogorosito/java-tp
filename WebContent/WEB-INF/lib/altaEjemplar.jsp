@@ -38,7 +38,7 @@
       	</div>
     </div>
     <div class="container">   			 
-   		<form class="form" action="altaEjemplar" method="post">
+   		<form class="form-bus" action="altaEjemplar" method="post">
    			<%String msj=(String)request.getAttribute("error");
    			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>
@@ -52,6 +52,7 @@
    			<input name="ISBN"type="text" required="required" value=<%=l.getIsbn()%>></p>
    		 	<% }%>
    	     	<button class="btn btn-primary " style="margin-right: 50px" type="submit" name="op" value="Buscar">Buscar</button>
+   	     	<button class="btn btn-info " style="margin-right: 50px" type="submit" name="op" value="Cancelar" formnovalidate>Volver</button>
    		 
  			<%Libro li=(Libro)session.getAttribute("L");
    			if(li!=null) {%>

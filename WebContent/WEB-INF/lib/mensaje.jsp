@@ -47,11 +47,9 @@
          	<h1 class="display-3">Se ha registrado el prestamo con exito </h1>
          	<%}  else if(nro==5){%>
          	<h1 class="display-3">Se ha registrado la devolucion con exito </h1>
-         	<%}  else if(nro==6){%>
-         	<h1 class="display-3">Se ha registrado la devolucion con exito y se ha sancionado al socio </h1>
-         	<%} else if(nro==7){%>
+            <%} else if(nro==6){%>
          	<h1 class="display-3">Se ha registrado la inhabilitacion de los socios con exito </h1>
-         	<%} else if(nro==8){%>
+         	<%} else if(nro==7){%>
          	<h1 class="display-3">Se ha registrado la habilitacion de los socios con exito </h1>
          	<%}  %>
 		</div>

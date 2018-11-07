@@ -37,7 +37,7 @@
       	</div>
     </div>
     <div class="container">
-    	<form class="form" action="altaLibro" method="post">
+    	<form class="form-bus" action="altaLibro" method="post">
     	<%String msj=(String)request.getAttribute("error");
  			if (msj != null) {%>
  			<label style="color:red;"><%=msj %></label>

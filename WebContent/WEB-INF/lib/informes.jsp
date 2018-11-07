@@ -53,7 +53,7 @@
        			</div>
     		</div>
     	
-			<button class="btn btn-info" style="margin-right: 50px" type="submit" name="op" value="VolverI">Volver</button>
+			<button class="btn btn-info" style="margin-top: 50px" type="submit" name="op" value="VolverI">Volver</button>
 		
   		</form>
 	</div>

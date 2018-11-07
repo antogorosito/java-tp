@@ -17,10 +17,11 @@ public class DataSancion
 		PreparedStatement stmt=null;
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into sanciones(fechaSancion,fechaSancionHasta,idSocio) values(?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into sanciones(fechaSancion,fechaSancionHasta,idSocio,activo) values(?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setDate(1,s.getFechaSancion());
 			stmt.setDate(2, s.getFechaSancionHasta());
 			stmt.setInt(3, s.getSocio().getIdSocio());
+			stmt.setBoolean(4, s.getActivo());
 			stmt.executeUpdate();		
 			keyResultSet=stmt.getGeneratedKeys();
 			if(keyResultSet!=null && keyResultSet.next()){
@@ -67,6 +68,7 @@ public class DataSancion
 				s.setIdSancion(rs.getInt("idSancion"));
 				s.setFechaSancion(rs.getDate("fechaSancion"));
 				s.setFechaSancionHasta(rs.getDate("fechaSancionHasta"));
+				s.setActivo(rs.getBoolean("activo"));
 				Socio ss=new Socio();
 				ss.setIdSocio(rs.getInt("idSocio"));
 				s.setSocio(ss);

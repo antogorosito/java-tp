@@ -76,6 +76,7 @@ public class altaLibro extends HttpServlet
 				request.setAttribute("error",e.getMessage());
 				request.getRequestDispatcher("WEB-INF/lib/altaLibro.jsp").forward(request, response);
 			}		
+			
 		}
 		
 		if(op.equals("Cancelar"))

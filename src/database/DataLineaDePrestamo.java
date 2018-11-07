@@ -286,7 +286,7 @@ public class DataLineaDePrestamo
 		ResultSet rs= null; 
 		try 
 		{
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idLineaPrestamo,socios.idSocio,socios.apellido,socios.nombre,"
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idLineaPrestamo,socios.idSocio,socios.apellido,socios.email,socios.nombre,"
 					+ "ejemplares.idEjemplar,prestamos.idPrestamo,fechaPrestamo,diasPrestamo,fechaADevolver,titulo  from lineas_de_prestamos "
 					+ "inner join prestamos on prestamos.idPrestamo=lineas_de_prestamos.idPrestamo inner join ejemplares on "
 					+ "lineas_de_prestamos.idEjemplar=ejemplares.idEjemplar inner join libros on libros.idLibro=ejemplares.idLibro "
@@ -315,6 +315,7 @@ public class DataLineaDePrestamo
 					so.setIdSocio(rs.getInt("socios.idSocio"));
 					so.setApellido(rs.getString("socios.apellido"));
 					so.setNombre(rs.getString("socios.nombre"));
+					so.setEmail(rs.getString("socios.email"));
 					pr.setSocio(so);
 					lp.setPrestamo(pr);
 				}

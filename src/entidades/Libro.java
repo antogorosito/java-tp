@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import util.AppDataException;
+
 public class Libro 
 {
 	private int idLibro;
@@ -24,7 +26,7 @@ public class Libro
 		return sDate;
 	}
 	
-	public Libro(String t, String i,int n,String f,int m) 
+	public Libro(String t, String i,int n,String f,int m) throws AppDataException
 	{
 		this.isbn=i;
 		this.titulo=t;
@@ -36,7 +38,8 @@ public class Libro
 		} 
 		catch (ParseException e)
 		{
-			e.printStackTrace();
+			AppDataException ape = new AppDataException("Error en la fecha ingresada " + t);
+			throw ape;
 		}
 		this.cantDiasMaxPrestamo=m;
 	}

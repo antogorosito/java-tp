@@ -196,6 +196,7 @@ CREATE TABLE `sanciones` (
   `fechaSancion` date NOT NULL,
   `fechaSancionHasta` date NOT NULL,
   `idSocio` int(11) NOT NULL,
+   `activo`  tinyint(1) NOT NULL,
   PRIMARY KEY (`idSancion`),
   KEY `idSocioSancion_fk` (`idSocio`),
   CONSTRAINT `idSocioSancion_fk` FOREIGN KEY (`idSocio`) REFERENCES `socios` (`idsocio`) ON UPDATE CASCADE
@@ -208,7 +209,7 @@ CREATE TABLE `sanciones` (
 
 LOCK TABLES `sanciones` WRITE;
 /*!40000 ALTER TABLE `sanciones` DISABLE KEYS */;
-INSERT INTO `sanciones` VALUES (1,'2018-10-28','2018-11-03',1),(2,'2018-09-10','2018-09-13',2),(3,'2018-10-30','2018-11-05',4);
+INSERT INTO `sanciones` VALUES (1,'2018-10-28','2018-11-03',1,0),(2,'2018-09-10','2018-09-13',2,0),(3,'2018-10-30','2018-11-05',4,1);
 /*!40000 ALTER TABLE `sanciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 14:41:08
+-- Dump completed on 2018-11-05 19:54:00

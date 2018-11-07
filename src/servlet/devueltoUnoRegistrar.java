@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import entidades.*;
 import negocio.*;
 import util.AppDataException;
+import util.Emailer;
 
 /**
  * Servlet implementation class devueltoUnoRegistrar
@@ -48,18 +49,18 @@ public class devueltoUnoRegistrar extends HttpServlet
 		HttpSession session = request.getSession();
 		String op = request.getParameter("opci");
 		if(op.equals("Registrar"))
-		{			
-			LineaDePrestamo l=(LineaDePrestamo)session.getAttribute("lineaPre");
-			CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+		{	
 			
-			java.util.Date fecha = new  java.util.Date();           			 //actual	
-			DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");     
-			String fechaActu=Formato.format(fecha);     						 // fecha actual con formato
-		 	String fechadev=Formato.format(l.getPrestamo().getFechaADevolver()); //paso a string la fecha a devolver
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		    
-			try 
-		    {
+				LineaDePrestamo l=(LineaDePrestamo)session.getAttribute("lineaPre");
+				CtrlLineaDePrestamo clp=new CtrlLineaDePrestamo();
+			
+				java.util.Date fecha = new  java.util.Date();           			 //actual	
+				DateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");     
+				String fechaActu=Formato.format(fecha);     						 // fecha actual con formato
+				String fechadev=Formato.format(l.getPrestamo().getFechaADevolver()); //paso a string la fecha a devolver
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				try 
+			    {
 		    	java.util.Date date1 = sdf.parse(fechaActu); //pasaje de string a date
 				java.util.Date date2=sdf.parse(fechadev);
 				// devuelve <0 si actual es menor a devolver
@@ -93,7 +94,10 @@ public class devueltoUnoRegistrar extends HttpServlet
 		            	css.add(sa);
 		            }
 		            clp.update(l,sa);
-		            int nro=6;
+		          
+		            String msj="Se informa que se ha registrado la devolucion del ejemplar nro "+l.getEjemplar().getIdEjemplar()+".\n Se lo sanciono hasta la fecha: "+sa.getFechaSancionHasta()+".\n Atte. Biblioteca Rosario";
+					Emailer.getInstance().send(s.getEmail(),"Confirmacion devolucion de prestamo",msj);
+		            int nro=5;
 					request.setAttribute("opc",nro);
 		            request.getRequestDispatcher("WEB-INF/lib/mensaje.jsp").forward(request, response);
 		        }  
@@ -101,12 +105,12 @@ public class devueltoUnoRegistrar extends HttpServlet
 			catch(AppDataException ape)
 			{
 				request.setAttribute("error",ape.getMessage());
-				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/lib/devueltoUnoRegistrar.jsp").forward(request, response);
 			}
 			catch (Exception e) 
 			{
 				request.setAttribute("error",e.getMessage());
-				request.getRequestDispatcher("WEB-INF/lib/agregar.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/lib/devueltoUnoRegistrar.jsp").forward(request, response);
 			}	
 
 		}

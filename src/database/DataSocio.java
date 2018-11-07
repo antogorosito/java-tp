@@ -241,7 +241,7 @@ public class DataSocio
 		try 
 		{	
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(" select *   from sanciones  inner join socios on socios.idSocio=sanciones.idSocio"
-					+ " where adddate(fechaSancionHasta,1)=current_date() and estado=false");
+					+ " where adddate(fechaSancionHasta,1)<=current_date() and estado=false and activo=true");
 			rs=stmt.executeQuery();
 			if(rs!=null) 	
 			{
